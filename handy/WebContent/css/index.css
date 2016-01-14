@@ -1,0 +1,13 @@
+@CHARSET "EUC-KR";
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body *{
+	font-family: '³ª´®°íµñ', 'Nanum Gothic', sans-serif;
+}
+
+#main{
+	padding: 5px;
+	
+	
+}
