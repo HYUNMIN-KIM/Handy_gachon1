@@ -47,8 +47,7 @@
 
 		<div id="heart">
 
-<<<<<<< HEAD
-TEST: ${user.name}
+
 
 </div>
 <div>
@@ -59,7 +58,7 @@ TEST: ${user.name}
 
 
 </div>
-=======
+
 			<div id="heart_title">
 				<img alt="dot" src="image/dot.png"> 
 				<span> ½ÉÆóµî±Þ : </span> 
