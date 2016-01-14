@@ -22,24 +22,31 @@ img {
 
 
 #condition_title, #heart_title{
-	font-size: 16pt;
+	font-size: 18pt;
 	padding : 3px;
 	margin-bottom: 10px;
 	width: 90%;
 }
 
-#straTap{
+.tap{
 	font-size: 16pt;
 	padding-left: 3px;
+	padding-top: 15px;
 	padding-bottom: 6px;
 }
 
+.tapSub{
+	padding-left: 10px;
+	
+}
 
-.stra{
+
+.subPart{
+	font-size: 10pt;
 	padding : 5px;
 }
 
-.stra_title{
+.subPart_title{
 	font-size: 14pt;
 	padding-left : 10px;
 	padding-bottom: 5px;
@@ -57,6 +64,6 @@ img {
 }
 
 
-.stra_subtitle{
+.subPart_subtitle{
 	margin-left:24px;
 }

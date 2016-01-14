@@ -78,29 +78,29 @@
 
 	<!-- 이상빈도지수 -->
 	
-		<div id="straTap">
+		<div class="tap">
 		<img alt="dot" src="image/dot.png">
-		<span>이상빈도지수</span>
+		<span>이상빈도 지수</span>
 		</div>
 		
 		
 		<div id="stra_detail">
-		<!-- 여기에 이상빈도지수 맥박 차트 / 표 -->
+		<!-- 여기에 이상빈도지수 차트 / 표 -->
 		</div>
 
 
-		<div class="stra">
+		<div class="subPart">
 
-			<div class="stra_title">
+			<div class="subPart_title">
 				<img alt="dot" src="image/dot.png"> 
 				<span> 체온 : </span> 
-				<span id="stra_temperature_title_grade" class="stra_title_grade"></span>
+				<span id="stra_temperature_title_grade" class="subPart_title_grade"></span>
 			</div>
 
-			<div class="stra_subtitle">
-				<div class="stra_subtitleComment">
+			<div class="subPart_subtitle">
+				<div class="subPart_subtitleComment">
 					<img alt="dot" src="image/dot.png"> 
-					<span id="stra_temperature_subtitleComment_text" class="stra_subtitleComment_text"></span>
+					<span id="stra_temperature_subtitleComment_text" class="subPart_subtitleComment_text"></span>
 				</div>
 			</div>
 
@@ -108,20 +108,169 @@
 
 
 
-		<div class="stra">
+		<div class="subPart">
 
-			<div class="stra_title">
+			<div class="subPart_title">
 				<img alt="dot" src="image/dot.png"> 
 				<span> 맥박 : </span> 
-				<span id="stra_pulse_title_grade" class="stra_title_grade"></span>
+				<span id="stra_pulse_title_grade" class="subPart_title_grade"></span>
 			</div>
 
-			<div class="stra_subtitle">
-				<div class="stra_subtitleComment">
+			<div class="subPart_subtitle">
+				<div class="subPart_subtitleComment">
 					<img alt="dot" src="image/dot.png"> 
-					<span id="stra_pulse_subtitleComment_text" class="stra_subtitleComment_text"></span>
+					<span id="stra_pulse_subtitleComment_text" class="subPart_subtitleComment_text"></span>
 				</div>
 		</div>
+
+
+
+
+
+	<!-- 싱크로 지수 -->
+	
+		<div class="tap">
+		<img alt="dot" src="image/dot.png">
+		<span>싱크로 지수 : </span>
+		<span id="sync_title_grade"></span>
+		</div>
+		<div class="tapSub">
+		<img alt="dot" src="image/dot.png">
+		<span id="sync_sub_description"></span>
+		</div>
+		
+		<div id="sync_detail">
+		<!-- 여기에 싱크로지수 차트 / 표 -->
+		</div>
+		
+		
+
+
+
+	<!-- 변동 지수 -->
+	
+		<div class="tap">
+		<img alt="dot" src="image/dot.png">
+		<span>변동 지수</span>
+		</div>
+		
+		
+		<div id="sync_detail">
+		<!-- 여기에 변동지수 차트 / 표 -->
+		</div>
+		
+				<div class="subPart">
+
+			<div class="subPart_title">
+				<img alt="dot" src="image/dot.png"> 
+				<span> 체온 : </span> 
+				<span id="chan_temperature_title_grade" class="subPart_title_grade"></span>
+			</div>
+
+			<div class="subPart_subtitle">
+				<div class="subPart_subtitleComment">
+					<img alt="dot" src="image/dot.png"> 
+					<span id="chan_temperature_subtitleComment_text" class="subPart_subtitleComment_text"></span>
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<div class="subPart">
+
+			<div class="subPart_title">
+				<img alt="dot" src="image/dot.png"> 
+				<span> 맥박 : </span> 
+				<span id="chan_pulse_title_grade" class="subPart_title_grade"></span>
+			</div>
+
+			<div class="subPart_subtitle">
+				<div class="subPart_subtitleComment">
+					<img alt="dot" src="image/dot.png"> 
+					<span id="chan_pulse_subtitleComment_text" class="subPart_subtitleComment_text"></span>
+				</div>
+		</div>
+		
+		
+		
+
+
+
+
+	<!-- 리듬 지수 -->
+	
+		<div class="tap">
+		<img alt="dot" src="image/dot.png">
+		<span>리듬 지수</span>
+		</div>
+		
+		
+		<div id="sync_detail">
+		<!-- 여기에 리듬지수 차트 / 표 -->
+		</div>
+		
+				<div class="subPart">
+
+			<div class="subPart_title">
+				<img alt="dot" src="image/dot.png"> 
+				<span> 체온 : </span> 
+				<span id="ryt_temperature_title_grade" class="subPart_title_grade"></span>
+			</div>
+
+			<div class="subPart_subtitle">
+				<div class="subPart_subtitleComment">
+					<img alt="dot" src="image/dot.png"> 
+					<span id="ryt_temperature_subtitleComment_text" class="subPart_subtitleComment_text"></span>
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<div class="subPart">
+
+			<div class="subPart_title">
+				<img alt="dot" src="image/dot.png"> 
+				<span> 맥박 : </span> 
+				<span id="ryt_pulse_title_grade" class="subPart_title_grade"></span>
+			</div>
+
+			<div class="subPart_subtitle">
+				<div class="subPart_subtitleComment">
+					<img alt="dot" src="image/dot.png"> 
+					<span id="ryt_pulse_subtitleComment_text" class="subPart_subtitleComment_text"></span>
+				</div>
+		</div>
+		
+		
+		
+		
+
+
+
+	<!-- 행위 지수 -->
+	
+		<div class="tap">
+		<img alt="dot" src="image/dot.png">
+		<span>행위 지수</span>
+		</div>
+		
+		
+		<div id="sync_detail">
+		<!-- 여기에 행위지수 차트 / 표 -->
+		</div>
+
+
+		<div class="subPart">
+
+			<div class="subPart_title">
+				<img alt="dot" src="image/dot.png"> 
+				<span id="act_pulse_title_grade" class="subPart_title_grade"></span>
+			</div>
+
 
 
 

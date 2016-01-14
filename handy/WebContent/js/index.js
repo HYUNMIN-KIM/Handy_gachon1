@@ -1,19 +1,29 @@
 	var mainConditionGrade = 4;
 	var heartConditionGrade = 4;
-	var stra_temperatureConditionPoint = 90;
-	var stra_temperatureConditionGrade = 1;
+	
+	
+	var stra_temperatureConditionPoint = 90;//이상빈도체온점수
+	var stra_temperatureConditionGrade = 1;//이상빈도체온등급
 	var stra_temperatureConditionDescription = "지난 일주일의 평균에 비해 ()점 좋습니다.";
+	
+	
 	var pointDescription = "100점이 가장 좋으며 0점이 가장 나쁩니다.";
 	var stra_pulseConditionGrade = 0;
 	
 	
+	
+	var syncGrade = 0; //싱크로 등급
+	var syncDescription = "하루 중 맥박과 체온의 오르고 내리는 변화양상이 반대인 경우가 ()% 관찰됩니다. %가 높을수록 나쁩니다.";
+	
+	
+	
 		$(document).ready(function() {
 
-			getMainConditionJSON();
-			getHeartConditionJSON();
-			getStraTemperatureConditionJSON();
-			getStraPulseConditionJSON();
-			
+			getMainConditionJSON(); //메인컨디션
+			getHeartConditionJSON(); //심박
+			getStraTemperatureConditionJSON(); // 이상빈도 체온
+			getStraPulseConditionJSON(); //이상빈도 맥박
+			getSyncJSON(); //싱크로지수
 			
 			
 		});
@@ -83,5 +93,14 @@
 			});
 		}
 		
+		
+		function getSyncJSON(){
+			$.getJSON("json/sync.json", function(json){
+				$("#sync_title_grade").text(json.sync[syncGrade].grade);
+				$("#sync_sub_description").text(syncDescription);
+				
+			});
+			
+		}
 		
 		
