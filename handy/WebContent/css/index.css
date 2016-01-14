@@ -15,23 +15,34 @@ img {
 	
 }
 
-#condition, #heart{
+#condition, #heart, #stra_temperature{
 	margin: 5px;
 	margin-bottom: 20px;
 }
 
 
-#condition_title{
-	font-size: 14pt;
+#condition_title, #heart_title{
+	font-size: 16pt;
 	padding : 3px;
 	margin-bottom: 10px;
 	width: 90%;
 }
 
-#heart_title{
+#straTap{
+	font-size: 16pt;
+	padding-left: 3px;
+	padding-bottom: 6px;
+}
+
+
+.stra{
+	padding : 5px;
+}
+
+.stra_title{
 	font-size: 14pt;
-	padding : 3px;
-	margin-bottom: 3px;
+	padding-left : 10px;
+	padding-bottom: 5px;
 }
 
 
@@ -41,7 +52,11 @@ img {
 
 
 #condition_subtitle, #heart_subtitle{
-	margin-left: 10px;
+	margin-left: 18px;
 	
-	
+}
+
+
+.stra_subtitle{
+	margin-left:24px;
 }

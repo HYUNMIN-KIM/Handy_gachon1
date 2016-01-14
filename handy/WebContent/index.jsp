@@ -6,61 +6,12 @@
 <head>
 <link type="text/css" rel="stylesheet" href="css/index.css" />
 <script type="text/javascript" src="lib/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>View</title>
 </head>
 <body>
 	<%@include file="header.jspf"%>
-
-
-
-	<script>
-	var mainConditionGrade = 8;
-	var heartConditionGrade = 6;
-	
-	
-		$(document).ready(function() {
-
-			getMainConditionJSON();
-			getHeartConditionJSON();
-			
-		});
-
-		function getMainConditionJSON() {
-
-			$.getJSON("json/mainCondition.json", function(json) {
-				//set content data
-				$("#condition_title_grade").text(json.mainCondition[mainConditionGrade].grade);
-				$("#condition_title_grade_detail").text("(" + json.mainCondition[mainConditionGrade].comment + ")" );
-				$("#condition_subtitle_conditionComment_text").text(
-						json.mainCondition[mainConditionGrade].conditionComment);
-				$("#condition_subtitle_recipeComment_text").text(
-						json.mainCondition[mainConditionGrade].recipeComment);
-
-				//bottom border
-				$("#condition_title").css("border-bottom", "4px solid");
-				$("#condition_title").css("border-bottom-color",
-						json.mainCondition[mainConditionGrade].color);
-
-			});
-
-		}
-		
-		
-		function getHeartConditionJSON(){
-			$.getJSON("json/heartCondition.json", function(json) {
-				$("#heart_title_grade").text(json.heartCondition[heartConditionGrade].grade);
-				$("#heart_title_grade_detail").text("(" + json.heartCondition[heartConditionGrade].comment + ")" );
-				$("#heart_subtitle_conditionComment_text").text(
-						json.heartCondition[heartConditionGrade].conditionComment);
-				$("#heart_subtitle_recipeComment_text").text(
-						json.heartCondition[heartConditionGrade].recipeComment);
-			});
-			
-		}
-		
-		
-	</script>
 
 	<div id="main">
 		
@@ -121,6 +72,58 @@
 			</div>
 
 		</div>
+
+
+
+
+	<!-- 이상빈도지수 -->
+	
+		<div id="straTap">
+		<img alt="dot" src="image/dot.png">
+		<span>이상빈도지수</span>
+		</div>
+		
+		
+		<div id="stra_detail">
+		<!-- 여기에 이상빈도지수 맥박 차트 / 표 -->
+		</div>
+
+
+		<div class="stra">
+
+			<div class="stra_title">
+				<img alt="dot" src="image/dot.png"> 
+				<span> 체온 : </span> 
+				<span id="stra_temperature_title_grade" class="stra_title_grade"></span>
+			</div>
+
+			<div class="stra_subtitle">
+				<div class="stra_subtitleComment">
+					<img alt="dot" src="image/dot.png"> 
+					<span id="stra_temperature_subtitleComment_text" class="stra_subtitleComment_text"></span>
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<div class="stra">
+
+			<div class="stra_title">
+				<img alt="dot" src="image/dot.png"> 
+				<span> 맥박 : </span> 
+				<span id="stra_pulse_title_grade" class="stra_title_grade"></span>
+			</div>
+
+			<div class="stra_subtitle">
+				<div class="stra_subtitleComment">
+					<img alt="dot" src="image/dot.png"> 
+					<span id="stra_pulse_subtitleComment_text" class="stra_subtitleComment_text"></span>
+				</div>
+		</div>
+
+
 
 
 
