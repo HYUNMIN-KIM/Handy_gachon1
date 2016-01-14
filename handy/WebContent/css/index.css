@@ -6,8 +6,42 @@ body *{
 	font-family: '³ª´®°íµñ', 'Nanum Gothic', sans-serif;
 }
 
+img {
+	 vertical-align: text-top;
+}
+
 #main{
 	padding: 5px;
+	
+}
+
+#condition, #heart{
+	margin: 5px;
+	margin-bottom: 20px;
+}
+
+
+#condition_title{
+	font-size: 14pt;
+	padding : 3px;
+	margin-bottom: 10px;
+	width: 90%;
+}
+
+#heart_title{
+	font-size: 14pt;
+	padding : 3px;
+	margin-bottom: 3px;
+}
+
+
+#condition_title_grade_detail, #heart_title_grade_detail{
+	font-size: 10pt;
+}
+
+
+#condition_subtitle, #heart_subtitle{
+	margin-left: 10px;
 	
 	
 }
