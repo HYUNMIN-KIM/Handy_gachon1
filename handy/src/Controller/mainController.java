@@ -2,6 +2,8 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,9 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Dao.DaoGetInfo;
+import bean.SensorValueBean;
 import bean.UserBean;
+import bean.UserExtraBean;
 
 /**
  * Servlet implementation class mainController
@@ -19,14 +24,14 @@ import bean.UserBean;
 @WebServlet("/mainController")
 public class mainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public mainController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public mainController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,18 +46,12 @@ public class mainController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DaoGetInfo db = new DaoGetInfo();
-		int totalcount=0;
-		totalcount = db.getUser_seq();
-		db.getUser(1);
-		UserBean user = new UserBean();
-			
-		request.setAttribute("user", user);
-	    RequestDispatcher dispatcher = request.getRequestDispatcher
-	            ("/index.jsp");
-	        dispatcher.forward(request, response);
+		
+		
+	
+	    
 
-       
+
 
 	}
 

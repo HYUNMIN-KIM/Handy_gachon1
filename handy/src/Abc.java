@@ -13,13 +13,14 @@ public class Abc {
 		
 		DaoGetInfo db = new DaoGetInfo();
 		int totalcount;
-		totalcount = db.getUser_seq();
+		totalcount = db.getUser_seq("test001");
+		System.out.println(totalcount);
 		
-		
-		
-			UserBean a = db.getUser(2);
-			UserExtraBean b = db.getExtraUser(2);
-			List<SensorValueBean> c = db.getSensor(2);
+			//String abc = db.getUser_Id();
+			//System.out.println(abc);
+			UserBean a = db.getUser(totalcount);
+			UserExtraBean b = db.getExtraUser(totalcount);
+			List<SensorValueBean> c = db.getSensor(totalcount);
 			String name = a.getName();
 			String id = a.getUser_id();
 			String gender = b.getGender();

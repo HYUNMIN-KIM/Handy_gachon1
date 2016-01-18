@@ -16,7 +16,7 @@ public class DaoGetInfo {
 	private ResultSet rs = null;
 	private PreparedStatement pstmt = null;
 	
-	
+	/*
 	public int getUser_seq()
 	{
 		int result = 0;
@@ -29,6 +29,42 @@ public class DaoGetInfo {
 			rs.next();
 			
 			result = rs.getInt("count(*)");
+		}catch(SQLException e){
+    		System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	*/
+	public int getUser_seq(String user_id)
+	{
+		int result = 0;
+		
+		try{
+			String query = "select USER_SEQ FROM COMM_USER WHERE USER_ID = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			result = rs.getInt("USER_SEQ");
+		}catch(SQLException e){
+    		System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
+	public String getUser_Id()
+	{
+		String result = null;
+		
+		try{
+			String query = "select USER_SEQ,USER_ID FROM COMM_USER";
+			pstmt = conn.prepareStatement(query);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			result = rs.getString("USER_ID");
 		}catch(SQLException e){
     		System.out.println(e.getMessage());
 		}
@@ -76,7 +112,7 @@ public class DaoGetInfo {
 		}
 		return user;
 	}
-	
+
 	
 
 	public UserExtraBean getExtraUser(int user_seq)
