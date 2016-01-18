@@ -5,6 +5,11 @@ public class UserExtraBean {
 	private String gender;
 	private int age;
 	private int height;
+	private int weight;
+	private int avg_heart_rate;
+	
+	
+	
 	public UserExtraBean(String gender, int age, int height, int weight,
 			int avg_heart_rate) {
 		super();
@@ -14,8 +19,7 @@ public class UserExtraBean {
 		this.weight = weight;
 		this.avg_heart_rate = avg_heart_rate;
 	}
-	private int weight;
-	private int avg_heart_rate;
+
 	
 	
 	public String getGender() {

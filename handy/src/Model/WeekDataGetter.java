@@ -7,7 +7,7 @@ import bean.UserWeekData;
 
 import java.util.Calendar;
 
-public class WeekDataModel
+public class WeekDataGetter
 {
   public static UserWeekData[] getWeekData(String id)
   {

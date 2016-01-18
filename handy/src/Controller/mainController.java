@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.WeekDataModel;
+import Model.WeekDataGetter;
 import bean.UserWeekData;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,7 +35,7 @@ public class mainController
     userid = request.getParameter("userid");
     if (userid != null)
     {
-      UserWeekData[] data = WeekDataModel.getWeekData(userid);
+      UserWeekData[] data = WeekDataGetter.getWeekData(userid);
       request.setAttribute("data", data);
       try
       {
