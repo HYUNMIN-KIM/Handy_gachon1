@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.SIHMSSensingData;
 import bean.SensorValueBean;
 import bean.UserBean;
 import bean.UserExtraBean;
@@ -37,9 +38,9 @@ public class DaoGetInfo {
 	*/
 	
 	
-	 public ArrayList<SensorValueBean> getSensorValue_YearWeek(int user_seq, int year, int month, int day)
+	 public ArrayList<SIHMSSensingData> getSensorValue_YearWeek(int user_seq, int year, int month, int day)
 	  {
-	    ArrayList<SensorValueBean> sensorInfo = new ArrayList();
+	    ArrayList<SIHMSSensingData> sensorInfo = new ArrayList();
 	    try
 	    {
 	      String query = "select LOG_DT,TEMPERATURE,HEART_RATE,STEPS from GB_SENSING_DATA WHERE REG_USER_SEQ=? AND YEAR=? AND MONTH=? AND DAY=?";
@@ -51,7 +52,14 @@ public class DaoGetInfo {
 	      this.pstmt.setInt(4, day);
 	      this.rs = this.pstmt.executeQuery();
 	      while (this.rs.next()) {
-	        sensorInfo.add(new SensorValueBean(this.rs.getInt("HEART_RATE"), this.rs.getDouble("TEMPERATURE"), this.rs.getInt("STEPS"), this.rs.getDate("LOG_DT")));
+	    	  SIHMSSensingData s = new SIHMSSensingData();
+	    	  s.setHeart_rate(this.rs.getInt("HEART_RATE"));
+	    	  s.setTemperature(this.rs.getFloat("TEMPERATURE"));
+	    	  s.setSteps(this.rs.getInt("STEPS"));
+	    	  s.setLog_date(this.rs.getDate("LOG_DT"));
+	    	  
+	    	  sensorInfo.add(s);
+//	        sensorInfo.add(new SensorValueBean(this.rs.getInt("HEART_RATE"), this.rs.getDouble("TEMPERATURE"), this.rs.getInt("STEPS"), this.rs.getDate("LOG_DT")));
 	      }
 	    }
 	    catch (SQLException e)
@@ -144,7 +152,7 @@ public class DaoGetInfo {
 
 	public UserExtraBean getExtraUser(int user_seq)
 	{
-		UserExtraBean userExtra = new UserExtraBean();
+		UserExtraBean userExtra = null;
 
 		try{
 			String query = "select GENDER,HEIGHT,WEIGHT FROM GB_USER_EXTRA_INFO WHERE REG_USER_SEQ = ?";
@@ -154,7 +162,9 @@ public class DaoGetInfo {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				userExtra = new UserExtraBean(rs.getString("GENDER"),rs.getDouble("HEIGHT"),rs.getDouble("WEIGHT"));
+				//TODO age, avg_heart_ 없음
+				//String gender, int age, int height, int weight,int avg_heart_rate
+				userExtra = new UserExtraBean(rs.getString("GENDER"), 30, rs.getInt("HEIGHT"), rs.getInt("WEIGHT"), 80);	
 			}
 		}catch(SQLException e){
 			System.out.println(e.getMessage());

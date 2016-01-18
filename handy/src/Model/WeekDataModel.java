@@ -1,7 +1,10 @@
 package Model;
 
 import Dao.DaoGetInfo;
+import bean.SIHMConditionCalc;
+import bean.UserExtraBean;
 import bean.UserWeekData;
+
 import java.util.Calendar;
 
 public class WeekDataModel
@@ -32,10 +35,23 @@ public class WeekDataModel
       data[i].setDate(year + "/" + month + "/" + day);
       data[i].setValueList(
         daoGetInfo.getSensorValue_YearWeek(userSeq, year, month, day));
+    
+      
+      //TODO : user extra
+      
+      
+      //String gender, int age, int height, int weight, int avg_heart_rate
+      	UserExtraBean ux = daoGetInfo.getExtraUser(userSeq);
+    		  
+      	data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux.getAge(), ux.getHeight(), ux.getWeight(), ux.getAvg_heart_rate()));
+      	data[i].getConditionCalc().calcPoints(data[i].getValueList());
+      
       
 
-      c.add(5, 1);
+      c.add(Calendar.DAY_OF_MONTH, 1);
     }
+    
+	
     return data;
   }
 }

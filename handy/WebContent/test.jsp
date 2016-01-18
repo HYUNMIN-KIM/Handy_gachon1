@@ -8,9 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-UserWeekData[] data = (UserWeekData[])request.getAttribute("data");
 
+
+<%
+	UserWeekData[] data = (UserWeekData[])request.getAttribute("data");
 %>
 
 
@@ -20,7 +21,6 @@ for(int i=0; i<7; i++){
 	out.print(" : " + data[i].getValueList().size());
 	out.print("<br>");
 }
-
 %>
 
 
