@@ -9,6 +9,8 @@ public class SIHMSSensingData {
 	float temperature = 0;
 	int heart_rate = 0;
 	int steps = 0;
+	
+	
 	public Date getLog_date() {
 		return log_date;
 	}
