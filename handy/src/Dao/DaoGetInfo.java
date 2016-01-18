@@ -35,6 +35,33 @@ public class DaoGetInfo {
 		return result;
 	}
 	*/
+	
+	
+	 public ArrayList<SensorValueBean> getSensorValue_YearWeek(int user_seq, int year, int month, int day)
+	  {
+	    ArrayList<SensorValueBean> sensorInfo = new ArrayList();
+	    try
+	    {
+	      String query = "select LOG_DT,TEMPERATURE,HEART_RATE,STEPS from GB_SENSING_DATA WHERE REG_USER_SEQ=? AND YEAR=? AND MONTH=? AND DAY=?";
+	      
+	      this.pstmt = conn.prepareStatement(query);
+	      this.pstmt.setInt(1, user_seq);
+	      this.pstmt.setInt(2, year);
+	      this.pstmt.setInt(3, month);
+	      this.pstmt.setInt(4, day);
+	      this.rs = this.pstmt.executeQuery();
+	      while (this.rs.next()) {
+	        sensorInfo.add(new SensorValueBean(this.rs.getInt("HEART_RATE"), this.rs.getDouble("TEMPERATURE"), this.rs.getInt("STEPS"), this.rs.getDate("LOG_DT")));
+	      }
+	    }
+	    catch (SQLException e)
+	    {
+	      System.out.println(e.getMessage());
+	    }
+	    return sensorInfo;
+	  }
+	
+	
 	public int getUser_seq(String user_id)
 	{
 		int result = 0;
