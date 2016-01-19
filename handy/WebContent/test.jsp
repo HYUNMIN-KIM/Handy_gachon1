@@ -1,74 +1,64 @@
+<%@page import="Model.SIHMSSensingData"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ page import="bean.*" %>
+	pageEncoding="EUC-KR"%>
+<%@ page import="bean.*"%>
+<%@ page import="java.text.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript" src="lib/jquery-1.12.0.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 
 
-<%
-	UserWeekData[] data = (UserWeekData[])request.getAttribute("data");
-%>
+	<%
+		UserWeekData[] data = (UserWeekData[]) request.getAttribute("data");
+		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("hh:mm:ss");
+	%>
 
 
-<%
-for(int i=0; i<7; i++){
-	out.print(data[i].getDate());
-	out.print(" : " + data[i].getValueList().size());
-	out.print("<br>");
-}
-%>
-
-<pre>
-JSON---
-"data" : [
-	{
-	"date" : "2016/1/1",
-	"conditionData" : {
-						"tempPoint" : "-25.0",
-						"hrPoint" : "-75.0",
-						"tempDeductPoint" : "10.0",
-						"hrDeductPoint" : "14.0",
-						"abnormalSynchroCnt" : "0",
-						"abnormalTempChangeCnt" : "0",
-						"abnormalHrChangeCnt" : "0",
-						"synchroDeductPoint" : "0.0",
-						"tempChangeDeductPoint" : "0.0",
-						"hrChangeDeductPoint" : "0.0",
-						"tempRhythmPoint" : "0.0",
-						"hrRhythmPoint" : "0.0",
-						"activityPoint" : "-3.0",
-						"conditionPoint" : "-53.0"
-					},
-					
-	"sensingData" : [
-						{"log_date" : "2016/1/1 12:00:00", "temperature" : "0", "heart_rate" : "0", "step" : "0"},
-						{"log_date" : "2016/1/1 12:01:00", "temperature" : "0", "heart_rate" : "0", "step" : "0"}
-					]
-	}
-	
-	]
-</pre>
 <script>
-
-var data;
-
-
-
-data = "[
-         <% for(int i=0; i<data.length; i++){ %>
-	        	{	
-	        	 'date' : '<%=data[i].getDate()%>'
-	        	}<% if(i < data.length-1){out.append(",");}%>
-         <% } %>
-         ]";
-
-
-
+         
+$(document).ready(function (){
+	
+	// attribute로 받은것 JSON으로
+	var data = new Array;
+	<% for(int i=0; i<data.length; i++){ %>
+		data[<%=i%>] = new Object;
+		data[<%=i%>].date = '<%=data[i].getDate()%>';
+		
+		data[<%=i%>].conditionData = new Object;
+		data[<%=i%>].conditionData.tempPoint = '<%=data[i].getConditionCalc().getTempPoint()%>';
+		data[<%=i%>].conditionData.hrPoint = '<%=data[i].getConditionCalc().getHrPoint()%>';
+		data[<%=i%>].conditionData.tempDeductPoint = '<%=data[i].getConditionCalc().getTempChangeDeductPoint()%>';
+		data[<%=i%>].conditionData.hrDeductPoint = '<%=data[i].getConditionCalc().getHrChangeDeductPoint()%>';
+		data[<%=i%>].conditionData.synchroDeductPoint =  '<%=data[i].getConditionCalc().getSynchroDeductPoint()%>';
+		data[<%=i%>].conditionData.tempChangeDeductPoint = '<%=data[i].getConditionCalc().getTempChangeDeductPoint()%>';
+		data[<%=i%>].conditionData.hrChangeDeductPoint =  '<%=data[i].getConditionCalc().getHrChangeDeductPoint()%>';
+		data[<%=i%>].conditionData.tempRhythmPoint =  '<%=data[i].getConditionCalc().getTempRhythmPoint()%>';
+		data[<%=i%>].conditionData.hrRhythmPoint = '<%=data[i].getConditionCalc().getHrRhythmPoint()%>';
+		data[<%=i%>].conditionData.activityPoint = '<%=data[i].getConditionCalc().getActivityPoint()%>';
+		data[<%=i%>].conditionData.conditionPoint = '<%=data[i].getConditionCalc().getConditionPoint()%>';
+		
+		data[<%=i%>].sensingData = new Array;
+		<% for(int j=0 ; j < data[i].getValueList().size(); j++){ %>
+			data[<%=i%>].sensingData[<%=j%>] = new Object;
+			data[<%=i%>].sensingData[<%=j%>].log_date = '<%=hmsDateFormat.format(data[i].getValueList().get(j).getLog_date())%>';
+			data[<%=i%>].sensingData[<%=j%>].temperature = '<%=data[i].getValueList().get(j).getTemperature()%>';
+			data[<%=i%>].sensingData[<%=j%>].heart_rate = '<%=data[i].getValueList().get(j).getHeart_rate()%>';
+			data[<%=i%>].sensingData[<%=j%>].step = '<%=data[i].getValueList().get(j).getSteps()%>';
+		<%}%>
+		
+	<%}%>
+	
+	
+	var ob = JSON.stringify(data);
+	alert(ob);
+});
+         
+         
 </script>
 
 

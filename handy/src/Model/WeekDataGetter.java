@@ -37,15 +37,16 @@ public class WeekDataGetter
         daoGetInfo.getSensorValue_YearWeek(userSeq, year, month, day));
     
       
-      //TODO : user extra
-      
-      
+      //TODO : user extra 데이터 입력받아와야함.
       //String gender, int age, int height, int weight, int avg_heart_rate
       	UserExtraBean ux = daoGetInfo.getExtraUser(userSeq);
-    		  
-      	data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux.getAge(), ux.getHeight(), ux.getWeight(), ux.getAvg_heart_rate()));
-      	data[i].getConditionCalc().calcPoints(data[i].getValueList());
-      
+      // data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux.getAge(), ux.getHeight(), ux.getWeight(), ux.getAvg_heart_rate()));
+      	
+      	
+      	data[i].setConditionCalc(new SIHMConditionCalc("M", 35, 180, 70, 75));
+      	// FIXME 센싱데이터가 0개면 NaN 출력됨
+      	if(data[i].getValueList().size() > 0)
+      		data[i].getConditionCalc().calcPoints(data[i].getValueList());
       
 
       c.add(Calendar.DAY_OF_MONTH, 1);
