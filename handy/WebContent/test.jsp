@@ -55,7 +55,7 @@ $(document).ready(function (){
 	
 	
 	var ob = JSON.stringify(data);
-	alert(ob);
+	console.log(ob);
 });
          
          
