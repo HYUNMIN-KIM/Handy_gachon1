@@ -16,8 +16,8 @@ public class Abc {
 		totalcount = db.getUser_seq("test001");
 		System.out.println(totalcount);
 		
-			//String abc = db.getUser_Id();
-			//System.out.println(abc);
+			String abc = db.getUser_Id();
+			System.out.println(abc);
 			UserBean a = db.getUser(totalcount);
 			UserExtraBean b = db.getExtraUser(totalcount);
 			List<SensorValueBean> c = db.getSensor(totalcount);
@@ -32,7 +32,7 @@ public class Abc {
 			Date date = c.get(3).getDate();
 			
 			System.out.println("Name : "+name +" User ID : " + id);
-			System.out.println("Gender : " + gender +" height/weight : "+height +" / " + weight);
+			//System.out.println("Gender : " + gender +" height/weight : "+height +" / " + weight);
 			System.out.println("temperature : " + temperature + " Heart rate : " +heartrate + " Steps : " + steps);
 			System.out.println("Date : " +date);
 			

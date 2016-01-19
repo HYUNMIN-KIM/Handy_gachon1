@@ -41,6 +41,7 @@ public class DataAnalysis extends HttpServlet {
 				,"HeartRateChange_","HeartRateRhythm_","Synchronization_","Activity_"};
 		
 		//out.println(Data(name[8],1));
+		out.println(Data("ConditionDetail_",10));
 		//out.println(PrintAnalysisData(1,1,1,1,1,1,1,1,1).get(i));
 		
 		

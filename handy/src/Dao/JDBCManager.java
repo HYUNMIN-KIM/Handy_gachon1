@@ -15,9 +15,10 @@ public class JDBCManager {
 
 	private static Connection conn = null;
 
-	 private JDBCManager()
-	 {};
-	public static synchronized Connection getInstance() {
+	private JDBCManager()
+	{}
+
+	public static Connection getInstance() {
 
 
 
@@ -37,5 +38,18 @@ public class JDBCManager {
 			} 
 		}
 		return conn;
+	}
+
+	public static void close(){
+
+		if(conn==null)
+			return;
+		try{
+			if(!conn.isClosed())
+				conn.close();
+		}catch(Exception e){
+
+		}
+		conn=null;
 	}
 }
