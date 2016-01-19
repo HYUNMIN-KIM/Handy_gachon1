@@ -37,7 +37,17 @@ public class DaoGetInfo {
 	}
 	*/
 	
-	
+	   public void close()
+	    {
+	      
+	        try {
+	            conn.close();
+	        } catch (SQLException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	            System.out.println("error/con");
+	            	        }
+	    }
 	 public ArrayList<SIHMSSensingData> getSensorValue_YearWeek(int user_seq, int year, int month, int day)
 	  {
 	    ArrayList<SIHMSSensingData> sensorInfo = new ArrayList();
