@@ -1,5 +1,6 @@
 var chart;
 var chartSub;
+var charData2;
 var charData = [ {
 	date: "2016-01-01",
 	condition: 10,
@@ -210,6 +211,13 @@ AmCharts.ready(function() {
 			chart.dataProvider = charData;
 			chart.dataDateFormat = "YYYY-MM-DD";
 			chart.categoryField = "date";
+			chart.creditsPosition = "top-right";
+			
+			chartSub = new AmCharts.AmSerialChart();
+			chartSub.dataProvider = charData2;
+			chartSub.dataDateFormat = "YYYY-MM-DD HH";
+			chartSub.categoryField = "time";
+			
 
 			// AXES
 			// categoryAxis
@@ -220,7 +228,16 @@ AmCharts.ready(function() {
 			categoryAxis.minorGridAlpha = 0.1;
 			categoryAxis.axisAlpha = 0;
 			categoryAxis.minorGridEnabled = true;
-			categoryAxis.inside = true;
+			categoryAxis.inside = false; // x axis
+
+			var categoryAxis2 = chartSub.categoryAxis;
+			categoryAxis2.parseDates = true;
+			categoryAxis2.minPeriod = "hh";
+			categoryAxis2.gridAlpha = 0.1;
+			categoryAxis2.minorGridAlpha = 0.1;
+			categoryAxis2.axisAlpha = 0;
+			categoryAxis2.minorGridEnabled = true;
+			categoryAxis2.inside = false; // x axis
 
 			// valueAxis
 			var valueAxis = new AmCharts.ValueAxis();
@@ -235,139 +252,54 @@ AmCharts.ready(function() {
 			var graph_cond = new AmCharts.AmGraph();
 			graph_cond.type = "column", graph_cond.lineColor = "#9932CC";
 			graph_cond.valueField = "condition";
-			graph_cond.fillAlphas = 1;
+			graph_cond.fillAlphas = 0.7;
 			graph_cond.balloonText = "<b><span style='font-size:14px;'>[[condition]]</span></b>";
 			chart.addGraph(graph_cond);
 
 			// graph_temp
-//			var graph_temp = new AmCharts.AmGraph();
-//			graph_temp.lineColor = "#00CC00";
-//			graph_temp.valueField = "temp";
-//			graph_temp.dashLength = 3;
-//			graph_temp.balloonText = "<b><span style='font-size:14px;'>[[temp]]</span></b>";
-//			graph_temp.bullet = "round";
-//			chart.addGraph(graph_temp);
-//
-//			// graph_momentum
-//			var graph_momentum = new AmCharts.AmGraph();
-//			graph_momentum.type = "column";
-//			graph_momentum.lineColor = "#770055";
-//			graph_momentum.valueField = "momentum";
-//			graph_momentum.fixedColumnWidth = 2;
-//			graph_momentum.fillAlphas = 1;
-//			graph_momentum.balloonText = "<b><span style='font-size:14px;'>[[momentum]]</span></b>";
-//			chart.addGraph(graph_momentum);
+			var graph_temp = new AmCharts.AmGraph();
+			graph_temp.lineColor = "#00CC00";
+			graph_temp.valueField = "temp";
+			graph_temp.dashLength = 3;
+			graph_temp.balloonText = "<b><span style='font-size:14px;'>[[temp]]</span></b>";
+			graph_temp.bullet = "round";
+			chartSub.addGraph(graph_temp);
+
+			// graph_momentum
+			var graph_momentum = new AmCharts.AmGraph();
+			graph_momentum.type = "column";
+			graph_momentum.lineColor = "#770055";
+			graph_momentum.valueField = "momentum";
+			graph_momentum.fixedColumnWidth = 5;
+			graph_momentum.fillAlphas = 0.7;
+			graph_momentum.balloonText = "<b><span style='font-size:14px;'>[[momentum]]</span></b>";
+			chartSub.addGraph(graph_momentum);
 
 			// CURSOR
 			// chartCursor
 			var chartCursor = new AmCharts.ChartCursor();
 			chartCursor.categoryBalloonDateFormat = "YYYY-MM-DD";
 			chartCursor.cursorColor = "#00CC00";
-			chart.addChartCursor(chartCursor);
+			//			chart.addChartCursor(chartCursor);
 			chart.mouseWheelZoomEnabled = true;
 
+			chart.addListener("clickGraphItem", function(event) {
+				
+				chartSub.creditsPosition = "top-right";
+				chartSub.dataProvider = event.item.dataContext.subdata;
+				chartSub.addLabel(40, 20, "<< Go back to condition graph", undefined, 15,
+						undefined, undefined, undefined, true,
+						'javascript:resetChart();');				
+				chartSub.write("condition_detail");
+			});
 
 			chart.write("condition_detail");
 		});
 
-chart.addListener("clickGraphItem", function(event) {
-	chartSub = new AmCharts.AmSerialChart();
-	chartSub.dataProvider = charData;
-	chartSub.dataDateFormat = "YYYY-MM-DD HH";
-	chartSub.categoryField = "time";
+function resetChart() {
+	chart.dataProvider = chartData;
+	chart.allLabels = [];
 
-	var categoryAxis = chartSub.categoryAxis;
-	categoryAxis.parseDates = true;
-	categoryAxis.minPeriod = "hh";
-	categoryAxis.gridAlpha = 0.1;
-	categoryAxis.minorGridAlpha = 0.1;
-	categoryAxis.axisAlpha = 0;
-	categoryAxis.minorGridEnabled = true;
-	categoryAxis.inside = true;
-
-	var valueAxis = new AmCharts.ValueAxis();
-	valueAxis.tickLength = 0;
-	valueAxis.axisAlpha = 0;
-	valueAxis.showFirstLabel = false;
-	valueAxis.showLastLabel = false;
-
-	chartSub.addValueAxis(valueAxis);
-
-	var graph_temp = new AmCharts.AmGraph();
-	graph_temp.lineColor = "#00CC00";
-	graph_temp.valueField = "temp";
-	graph_temp.dashLength = 3;
-	graph_temp.balloonText = "<b><span style='font-size:14px;'>[[temp]]</span></b>";
-	graph_temp.bullet = "round";
-
-	chartSub.addGraph(graph_temp);
-
-	var graph_momentum = new AmCharts.AmGraph();
-	graph_momentum.type = "column";
-	graph_momentum.lineColor = "#770055";
-	graph_momentum.valueField = "momentum";
-	graph_momentum.fixedColumnWidth = 2;
-	graph_momentum.fillAlphas = 1;
-	graph_momentum.balloonText = "<b><span style='font-size:14px;'>[[momentum]]</span></b>";
-
-	chartSub.addGraph(graph_momentum);
-
-	var chartCursor = new AmCharts.ChartCursor();
-	chartCursor.categoryBalloonDateFormat = "MM-DD HH:00";
-	chartCursor.cursorColor = "#00CC00";
-	chartSub.addChartCursor(chartCursor);
-	chartSub.mouseWheelZoomEnabled = true;
-
-	chartSub.write("condition_detail");
-});
-
-//function makeTempChart(data) {
-//	chart = new AmCharts.AmSerialChart();
-//	chart.dataProvider = charData;
-//	chart.dataDateFormat = "YYYY-MM-DD HH";
-//	chart.categoryField = "time";
-//
-//	var categoryAxis = chart.categoryAxis;
-//	categoryAxis.parseDates = true;
-//	categoryAxis.minPeriod = "hh";
-//	categoryAxis.gridAlpha = 0.1;
-//	categoryAxis.minorGridAlpha = 0.1;
-//	categoryAxis.axisAlpha = 0;
-//	categoryAxis.minorGridEnabled = true;
-//	categoryAxis.inside = true;
-//
-//	var valueAxis = new AmCharts.ValueAxis();
-//	valueAxis.tickLength = 0;
-//	valueAxis.axisAlpha = 0;
-//	valueAxis.showFirstLabel = false;
-//	valueAxis.showLastLabel = false;
-//
-//	chart.addValueAxis(valueAxis);
-//
-//	var graph_temp = new AmCharts.AmGraph();
-//	graph_temp.lineColor = "#00CC00";
-//	graph_temp.valueField = "temp";
-//	graph_temp.dashLength = 3;
-//	graph_temp.balloonText = "<b><span style='font-size:14px;'>[[temp]]</span></b>";
-//	graph_temp.bullet = "round";
-//
-//	chart.addGraph(graph_temp);
-//
-//	var graph_momentum = new AmCharts.AmGraph();
-//	graph_momentum.type = "column";
-//	graph_momentum.lineColor = "#770055";
-//	graph_momentum.valueField = "momentum";
-//	graph_momentum.fixedColumnWidth = 2;
-//	graph_momentum.fillAlphas = 1;
-//	graph_momentum.balloonText = "<b><span style='font-size:14px;'>[[momentum]]</span></b>";
-//
-//	chart.addGraph(graph_momentum);
-//
-//	var chartCursor = new AmCharts.ChartCursor();
-//	chartCursor.categoryBalloonDateFormat = "MM-DD HH:00";
-//	chartCursor.cursorColor = "#00CC00";
-//	chart.addChartCursor(chartCursor);
-//	chart.mouseWheelZoomEnabled = true;
-//
-//	chart.write("condition_detail");
-//}
+	chart.validateData();
+	chart.animateAgain();
+}

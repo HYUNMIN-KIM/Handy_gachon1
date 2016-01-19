@@ -40,7 +40,7 @@
 			</div>
 			
 			<!-- 여기에 컨디션 차트 / 표 -->
-			<div id="condition_detail" style="width: 65%; height: 300px; background-color: #FFFFFF;"></div>		
+			<div id="condition_detail" style="width: 85%; height: 375px; background-color: #FFFFFF;"></div>		
 			
 		</div>
 		
