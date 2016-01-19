@@ -97,8 +97,7 @@ var charData = [ {
 	momentum : 41
 } ];
 
-AmCharts
-		.ready(function() {
+AmCharts.ready(function() {
 			chart = new AmCharts.AmSerialChart();
 			chart.dataProvider = charData;
 			chart.dataDateFormat = "YYYY-MM-DD HH";

@@ -8,7 +8,7 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="lib/amcharts/amcharts.js"></script>
 <script type="text/javascript" src="lib/amcharts/serial.js"></script>
-<script type="text/javascript" src="js/subCondition.js"></script>
+<script type="text/javascript" src="js/mainCondition.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>View</title>
@@ -40,7 +40,7 @@
 			</div>
 			
 			<!-- 여기에 컨디션 차트 / 표 -->
-			<div id="condition_detail" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>		
+			<div id="condition_detail" style="width: 65%; height: 300px; background-color: #FFFFFF;"></div>		
 			
 		</div>
 		
