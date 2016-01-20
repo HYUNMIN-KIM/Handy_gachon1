@@ -5,15 +5,40 @@
 <head>
 <link type="text/css" rel="stylesheet" href="css/index.css" />
 <script type="text/javascript" src="lib/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+
 <script type="text/javascript" src="lib/amcharts/amcharts.js"></script>
 <script type="text/javascript" src="lib/amcharts/serial.js"></script>
-<script type="text/javascript" src="js/mainCondition.js"></script>
+<script type="text/javascript" src="js/graphicChart.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>View</title>
 </head>
 <body>
+
+	<script>
+		var data = new Array;
+		dataInfo = new Object();
+
+		dataInfo.date = "2016/01/01";
+		dataInfo.conditionPoint = 10;
+		
+		dataInfo.conditionData = new Array;
+		
+		dataInfo2 = new Object();
+		
+		dataInfo2.log_date = "2016/01/01 12"
+		dataInfo2.tempPoint = 36.5;
+		dataInfo2.hrPoint = 125;
+		dataInfo2.step = 180;
+		
+		dataInfo.conditionData.push(dataInfo2);
+		data.push(dataInfo);
+
+		var ob = JSON.stringify(data);
+		console.log(ob);
+	</script>
+
+
 	<%@include file="header.jspf"%>
 	
 	<div id="main">
