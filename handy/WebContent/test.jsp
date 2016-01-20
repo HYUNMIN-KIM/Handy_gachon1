@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="Model.SIHMSSensingData"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
@@ -15,20 +16,19 @@
 
 	<%
 		UserWeekData[] data = (UserWeekData[]) request.getAttribute("data");
-		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("hh:mm:ss");
+		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("HH:mm:ss");
 	%>
-
 
 <script>
          
 $(document).ready(function (){
+	
 	
 	// attribute로 받은것 JSON으로
 	var data = new Array;
 	<% for(int i=0; i<data.length; i++){ %>
 		data[<%=i%>] = new Object;
 		data[<%=i%>].date = '<%=data[i].getDate()%>';
-		
 		data[<%=i%>].conditionData = new Object;
 		data[<%=i%>].conditionData.tempPoint = '<%=data[i].getConditionCalc().getTempPoint()%>';
 		data[<%=i%>].conditionData.hrPoint = '<%=data[i].getConditionCalc().getHrPoint()%>';
@@ -41,7 +41,6 @@ $(document).ready(function (){
 		data[<%=i%>].conditionData.hrRhythmPoint = '<%=data[i].getConditionCalc().getHrRhythmPoint()%>';
 		data[<%=i%>].conditionData.activityPoint = '<%=data[i].getConditionCalc().getActivityPoint()%>';
 		data[<%=i%>].conditionData.conditionPoint = '<%=data[i].getConditionCalc().getConditionPoint()%>';
-		
 		data[<%=i%>].sensingData = new Array;
 		<% for(int j=0 ; j < data[i].getValueList().size(); j++){ %>
 			data[<%=i%>].sensingData[<%=j%>] = new Object;
@@ -50,9 +49,7 @@ $(document).ready(function (){
 			data[<%=i%>].sensingData[<%=j%>].heart_rate = '<%=data[i].getValueList().get(j).getHeart_rate()%>';
 			data[<%=i%>].sensingData[<%=j%>].step = '<%=data[i].getValueList().get(j).getSteps()%>';
 		<%}%>
-		
 	<%}%>
-	
 	
 	var ob = JSON.stringify(data);
 	console.log(ob);
