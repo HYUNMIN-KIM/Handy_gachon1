@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +17,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import Dao.DaoGetInfo;
+import Model.WeekDataGetter;
 import bean.UserWeekData;
 
 /**
@@ -24,7 +27,7 @@ import bean.UserWeekData;
 @WebServlet("/DataAnalysis")
 public class DataAnalysis extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String [] contents = null;
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -40,28 +43,49 @@ public class DataAnalysis extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
-		//PrintWriter out = response.getWriter();
-		String name[] = {"ConditionDetail_","Temperature_","TemperatureChange_","TemperatureRhythm_","Heart-lung"
-				,"HeartRateChange_","HeartRateRhythm_","Synchronization_","Activity_"};
+		String userid;
+		 userid = request.getParameter("userid");
+		 //userid= "hsp201509161@handysoft.co.kr";
+		//String dataContents = null;
+		//dataContents = request.getParameter("analysis");
+		 PrintWriter out = response.getWriter();
 
-		//out.println(Data(name[8],1));
-		//out.println(Data("ConditionDetail_",10));
-		//out.println(PrintAnalysisData(1,1,1,1,1,1,1,1,1).get(i));
-		String dataContents = null;
-		dataContents = request.getParameter("analysis");
-		if(dataContents != null)
+		if(userid != null)
 		{
+			UserWeekData[] data = WeekDataGetter.getWeekData(userid);
+			float[] point = {1,1,1,1,1,1,1,1,1};
+			int date =1 ;
+			List contents = new ArrayList();
+			point[0] = data[date].getConditionCalc().getConditionPoint();
+					//getConditionCalc().getTempPoint(); 
+			point[1] = data[date].getConditionCalc().getConditionPoint();
+			point[2] = data[date].getConditionCalc().getTempChangeDeductPoint();
+			point[3] = data[date].getConditionCalc().getTempRhythmPoint();
+			point[4] = data[date].getConditionCalc().getHrPoint();
+			point[5] = data[date].getConditionCalc().getHrChangeDeductPoint();
+			point[6] = data[date].getConditionCalc().getHrRhythmPoint();
+			point[7] = data[date].getConditionCalc().getSynchroDeductPoint();
+			point[8] = data[date].getConditionCalc().getActivityPoint();
+			for(int i=0;i<9;i++)
+				out.println("point : " + point[i]);
 			
-			float [] point = getPoint();
-			contents[0] = Data(name[0],Condition_point(point[0]));
-			contents[1] = Data(name[1],Temp_Hr_point(point[1]));
-			contents[2] = Data(name[2],Sync_TempChange_point(point[2]));
-			contents[3] = Data(name[3],Rhythm_point(point[3]));
-			contents[4] = Data(name[4],Temp_Hr_point(point[4]));
-			contents[5] = Data(name[5],HrChange_point(point[5]));
-			contents[6] = Data(name[6],Rhythm_point(point[6]));
-			contents[7] = Data(name[7],Sync_TempChange_point(point[7]));
-			contents[8] = Data(name[8],Activity_point(point[8]));
+			String name[] = {"ConditionDetail_","Temperature_","TemperatureChange_","TemperatureRhythm_","Heart-lung"
+					,"HeartRateChange_","HeartRateRhythm_","Synchronization_","Activity_"};
+		
+			
+			contents.add(Data(name[0],Condition_point(point[0])));
+			
+			contents.add(Data(name[1],Temp_Hr_point(point[1])));
+			contents.add(Data(name[2],Sync_TempChange_point(point[2])));
+			contents.add(Data(name[3],Rhythm_point(point[3])));
+			contents.add(Data(name[4],Temp_Hr_point(point[4])));
+			contents.add(Data(name[5],HrChange_point(point[5])));
+			contents.add(Data(name[6],Rhythm_point(point[6])));
+			contents.add(Data(name[7],Sync_TempChange_point(point[7])));
+			contents.add(Data(name[8],Activity_point(point[8])));
+			System.out.println(contents.size());
+			
+			
 			request.setAttribute("data", contents);
 			try
 			{
@@ -99,42 +123,10 @@ public class DataAnalysis extends HttpServlet {
 
 
 	}
-	/*
-	public String PrintAnalysisData(String s,int point)
-	{
-		String str ="";
-
-		str = Data(s,point);
-
-		return str;
-	}
-	 */
-	/*
-	public ArrayList PrintAnalysisData(int condition, int temp, int tempChange, int tempRhythm, int heartStable,
-			int heartChange, int heartRhythm, int sync, int exer )
-	{
-
-		ArrayList userContents = new ArrayList();
-		String name[] = {"ConditionDetail_","Temperature_","TemperatureChange_","TemperatureRhythm_","Heart-lung"
-				,"HeartRateChange_","HeartRateRhythm_","Synchronization_","Activity_"};
-
-		userContents.add(Data(name[0],condition));
-		userContents.add(Data(name[1],temp));
-		userContents.add(Data(name[2],tempChange));
-		userContents.add(Data(name[3],tempRhythm));
-		userContents.add(Data(name[4],heartStable));
-		userContents.add(Data(name[5],heartChange));
-		userContents.add(Data(name[6],heartRhythm));
-		userContents.add(Data(name[7],sync));
-		userContents.add(Data(name[8],exer));
-
-		return userContents;
-	}
-	 */
 	public String Data(String sub, int num)
 	{
-
-		String content = null;
+		
+		String anal = "";
 		Document doc = null;
 		try {
 			doc = Jsoup.connect("http://123.212.190.35/tiki-index_raw.php?page="+sub+num+"&full&format=jqs5").timeout(0).get();
@@ -145,16 +137,18 @@ public class DataAnalysis extends HttpServlet {
 
 		for(Element c: contents) {
 			String text = c.text(); // 원하는 부분은 Elements형태로 되어 있으므로 이를 String 형태로
-			System.out.println(text);
-			content=text;
+			//System.out.println(text);
+			anal+=text;
 
 		}
-
-		return content;
+		
+		return anal;
 	}
+	
 	public int Condition_point(float con_p)
 	{
 		int num=0;
+		
 		if(con_p>=90)
 			num=1;
 		else if(con_p<90 && con_p>=80)
@@ -247,26 +241,27 @@ public class DataAnalysis extends HttpServlet {
 
 		return num;
 	}
-	public float[] getPoint()
+	/*
+	public float[] getPoint(int date)
 	{
 		float point[] = {0,};
 		
-		UserWeekData uwd = new UserWeekData();
-		point[1] = uwd.getConditionCalc().getTempPoint(); 
-		point[0] = uwd.getConditionCalc().getConditionPoint();
-		point[2] = uwd.getConditionCalc().getTempChangeDeductPoint();
-		point[3] = uwd.getConditionCalc().getTempRhythmPoint();
-		point[4] = uwd.getConditionCalc().getHrPoint();
-		point[5] = uwd.getConditionCalc().getHrChangeDeductPoint();
-		point[6] = uwd.getConditionCalc().getHrRhythmPoint();
-		point[7] = uwd.getConditionCalc().getSynchroDeductPoint();
-		point[8] = uwd.getConditionCalc().getActivityPoint();
+		DaoGetInfo db = new DaoGetInfo();
+		String userid = db.getUser_Id();
+
+		
+		point[0] = data[date].getConditionCalc().getTempPoint(); 
+		point[1] = data[date].getConditionCalc().getConditionPoint();
+		point[2] = data[date].getConditionCalc().getTempChangeDeductPoint();
+		point[3] = data[date].getConditionCalc().getTempRhythmPoint();
+		point[4] = data[date].getConditionCalc().getHrPoint();
+		point[5] = data[date].getConditionCalc().getHrChangeDeductPoint();
+		point[6] = data[date].getConditionCalc().getHrRhythmPoint();
+		point[7] = data[date].getConditionCalc().getSynchroDeductPoint();
+		point[8] = data[date].getConditionCalc().getActivityPoint();
 		
 		return point;
 		
 	}
-	public String[] getContents()
-	{
-		return contents;
-	}
+*/
 }

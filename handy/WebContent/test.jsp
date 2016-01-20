@@ -20,7 +20,7 @@
 
 
 <script>
-         
+        
 $(document).ready(function (){
 	
 	// attribute로 받은것 JSON으로
@@ -60,7 +60,6 @@ $(document).ready(function (){
          
          
 </script>
-
 
 
 

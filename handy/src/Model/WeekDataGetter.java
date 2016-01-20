@@ -12,6 +12,7 @@ public class WeekDataGetter
   public static UserWeekData[] getWeekData(String id)
   {
     DaoGetInfo daoGetInfo = new DaoGetInfo();
+    UserExtraBean ux = null;
     UserWeekData[] data = new UserWeekData[7];
     float result = 0;
 	int sum=0;
@@ -27,7 +28,8 @@ public class WeekDataGetter
 
 
     int userSeq = daoGetInfo.getUser_seq(id);
-    
+ 
+  	
     for(int i=0;i<7;i++)
     	data[i] = new UserWeekData();
     
@@ -46,8 +48,7 @@ public class WeekDataGetter
       
       //TODO : user extra 데이터 입력받아와야함.
       //String gender, int age, int height, int weight, int avg_heart_rate
-      	UserExtraBean ux = daoGetInfo.getExtraUser(userSeq);
-          	
+       ux = daoGetInfo.getExtraUser(userSeq);
       	// data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux.getAge(), ux.getHeight(), ux.getWeight(), ux.getAvg_heart_rate()));
     
       	for(int j=0;j<data[i].getValueList().size();j++)
@@ -69,7 +70,7 @@ public class WeekDataGetter
     for(int i=0;i<data.length;i++)
     {
       	
-      	data[i].setConditionCalc(new SIHMConditionCalc("M", 35, 180, 70, (int)result));
+      	data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux.getAge(), ux.getHeight(), ux.getWeight(), (int)result));
       	// FIXME 센싱데이터가 0개면 NaN 출력됨
       	if(data[i].getValueList().size() > 0)
       		data[i].getConditionCalc().calcPoints(data[i].getValueList());
