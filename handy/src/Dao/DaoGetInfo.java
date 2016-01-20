@@ -1,8 +1,15 @@
 package Dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 import Model.SIHMSSensingData;
 import bean.SensorValueBean;
@@ -40,24 +47,35 @@ public class DaoGetInfo {
 	
 	 public ArrayList<SIHMSSensingData> getSensorValue_YearWeek(int user_seq, int year, int month, int day)
 	  {
-	    ArrayList<SIHMSSensingData> sensorInfo = new ArrayList();
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    ArrayList<SIHMSSensingData> sensorInfo = new ArrayList<SIHMSSensingData>();
 	    Connection conn = JDBCManager.getInstance();
 	    try
 	    {
-	      String query = "select LOG_DT,TEMPERATURE,HEART_RATE,STEPS from GB_SENSING_DATA WHERE REG_USER_SEQ=? AND YEAR=? AND MONTH=? AND DAY=?";
+	      String query = "select TO_CHAR(LOG_DT, 'yyyy-mm-dd hh24:mi:ss') as LOG_DT, TEMPERATURE,HEART_RATE,STEPS from GB_SENSING_DATA WHERE REG_USER_SEQ=? AND YEAR=? AND MONTH=? AND DAY=?";
 	      
-	      this.pstmt = conn.prepareStatement(query);
-	      this.pstmt.setInt(1, user_seq);
-	      this.pstmt.setInt(2, year);
-	      this.pstmt.setInt(3, month);
-	      this.pstmt.setInt(4, day);
-	      this.rs = this.pstmt.executeQuery();
-	      while (this.rs.next()) {
+	      pstmt = conn.prepareStatement(query);
+	      pstmt.setInt(1, user_seq);
+	      pstmt.setInt(2, year);
+	      pstmt.setInt(3, month);
+	      pstmt.setInt(4, day);
+	      rs = pstmt.executeQuery();
+	      
+	      
+	      while (rs.next()) {
 	    	  SIHMSSensingData s = new SIHMSSensingData();
-	    	  s.setHeart_rate(this.rs.getInt("HEART_RATE"));
-	    	  s.setTemperature(this.rs.getFloat("TEMPERATURE"));
-	    	  s.setSteps(this.rs.getInt("STEPS"));
-	    	  s.setLog_date(this.rs.getDate("LOG_DT"));
+	    	  
+	    	  try {
+	    		  Date date = sdf.parse(rs.getString("LOG_DT"));
+	    		  s.setLog_date(date);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	  s.setHeart_rate(rs.getInt("HEART_RATE"));
+	    	  s.setTemperature(rs.getFloat("TEMPERATURE"));
+	    	  s.setSteps(rs.getInt("STEPS"));
+	    	  
 	    	  
 	    	  sensorInfo.add(s);
 //	        sensorInfo.add(new SensorValueBean(this.rs.getInt("HEART_RATE"), this.rs.getDouble("TEMPERATURE"), this.rs.getInt("STEPS"), this.rs.getDate("LOG_DT")));

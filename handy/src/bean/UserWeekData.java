@@ -20,7 +20,7 @@ public class UserWeekData {
 	}
 
 	public UserWeekData() {
-		this.valueList = new ArrayList();
+		//this.valueList = new ArrayList();
 	}
 
 	public String getDate() {

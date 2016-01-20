@@ -4,7 +4,6 @@ package Model;
 import java.util.Date;
 
 public class SIHMSSensingData {
-	
 	Date log_date = null;
 	float temperature = 0;
 	int heart_rate = 0;
