@@ -272,9 +272,9 @@ AmCharts.ready(function() {
 			// graph_temp
 			var graph_temp = new AmCharts.AmGraph();
 			graph_temp.lineColor = "#00CC00";
-			graph_temp.valueField = "tempPoint";
+			graph_temp.valueField = "temperature";
 			graph_temp.dashLength = 3;
-			graph_temp.balloonText = "<b><span style='font-size:14px;'>[[tempPoint]]</span></b>";
+			graph_temp.balloonText = "<b><span style='font-size:14px;'>[[temperature]]</span></b>";
 			graph_temp.bullet = "round";
 			chartSub.addGraph(graph_temp);
 
