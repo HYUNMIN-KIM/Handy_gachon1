@@ -224,14 +224,23 @@ AmCharts.ready(function() {
 			chart.dataProvider = data;
 			chart.dataDateFormat = "YYYY/MM/DD";
 			chart.categoryField = "date";
-			chart.creditsPosition = "top-right";
+			chart.creditsPosition = "top-left";
 			
 			chartSub = new AmCharts.AmSerialChart();
 			chartSub.dataProvider = charData2;
-			chartSub.dataDateFormat = "YYYY/MM/DD HH";
+			chartSub.dataDateFormat = "HH:NN:SS";
 			chartSub.categoryField = "log_date";
+			chartSub.creditsPosition = "top-left";
 			
-
+			// LEGEND
+			var legend = new AmCharts.AmLegend();
+			legend.useGraphSettings = true;
+			var legendSub = new AmCharts.AmLegend();
+			legendSub.useGraphSettings = false;
+			
+			chart.addLegend(legend);
+			chartSub.addLegend(legend);
+			
 			// AXES
 			// categoryAxis
 			var categoryAxis = chart.categoryAxis;
@@ -245,7 +254,7 @@ AmCharts.ready(function() {
 
 			var categoryAxis2 = chartSub.categoryAxis;
 			categoryAxis2.parseDates = true;
-			categoryAxis2.minPeriod = "hh";
+			categoryAxis2.minPeriod = "mm";
 			categoryAxis2.gridAlpha = 0.1;
 			categoryAxis2.minorGridAlpha = 0.1;
 			categoryAxis2.axisAlpha = 0;
@@ -253,17 +262,30 @@ AmCharts.ready(function() {
 			categoryAxis2.inside = false; // x axis
 
 			// valueAxis
+			// chart
 			var valueAxis = new AmCharts.ValueAxis();
+			valueAxis.title = "Condition Index"
 			valueAxis.tickLength = 0;
 			valueAxis.axisAlpha = 0;
 			valueAxis.showFirstLabel = false;
-			valueAxis.showLastLabel = false;
+			valueAxis.showLastLabel = false;	
 			chart.addValueAxis(valueAxis);
+			
+			// chartSub
+			var valueAxis2 = new AmCharts.ValueAxis();
+			valueAxis2.title = "Temp / Heart / Step"
+			valueAxis2.tickLength = 0;
+			valueAxis2.axisAlpha = 0;
+			valueAxis2.showFirstLabel = false;
+			valueAxis2.showLastLabel = false;	
+			chartSub.addValueAxis(valueAxis2);
 
 			// GRAPHS
 			// graph_cond
 			var graph_cond = new AmCharts.AmGraph();
-			graph_cond.type = "column", graph_cond.lineColor = "#9932CC";
+			graph_cond.type = "column";
+			graph_cond.title = "condition";
+			graph_cond.lineColor = "#00CC00";
 			graph_cond.valueField = "conditionPoint";
 			graph_cond.fillAlphas = 0.7;
 			graph_cond.balloonText = "<b><span style='font-size:14px;'>[[conditionPoint]]</span></b>";
@@ -271,19 +293,35 @@ AmCharts.ready(function() {
 
 			// graph_temp
 			var graph_temp = new AmCharts.AmGraph();
+			graph_temp.type = "line";
+			graph_temp.lineThickness = 2.5;
+			graph_temp.title = "temperature";
 			graph_temp.lineColor = "#00CC00";
 			graph_temp.valueField = "temperature";
-			graph_temp.dashLength = 3;
+//			graph_temp.dashLength = 3;
 			graph_temp.balloonText = "<b><span style='font-size:14px;'>[[temperature]]</span></b>";
-			graph_temp.bullet = "round";
+//			graph_temp.bullet = "round";
 			chartSub.addGraph(graph_temp);
+			
+			// graph_temp
+			var graph_hr = new AmCharts.AmGraph();
+			graph_hr.type = "line";
+			graph_hr.lineThickness = 2.5;
+			graph_hr.title = "heart rate";
+			graph_hr.lineColor = "#FF8600";
+			graph_hr.valueField = "heart_rate";
+//			graph_hr.dashLength = 3;
+			graph_hr.balloonText = "<b><span style='font-size:14px;'>[[heart_rate]]</span></b>";
+//			graph_hr.bullet = "round";
+			chartSub.addGraph(graph_hr);
 
-			// graph_momentum
+			// graph_step
 			var graph_step = new AmCharts.AmGraph();
 			graph_step.type = "column";
+			graph_step.title = "step";
 			graph_step.lineColor = "#770055";
 			graph_step.valueField = "step";
-			graph_step.fixedColumnWidth = 5;
+//			graph_step.fixedColumnWidth = 5;
 			graph_step.fillAlphas = 0.7;
 			graph_step.balloonText = "<b><span style='font-size:14px;'>[[step]]</span></b>";
 			chartSub.addGraph(graph_step);
@@ -291,24 +329,34 @@ AmCharts.ready(function() {
 			// CURSOR
 			// chartCursor
 			var chartCursor = new AmCharts.ChartCursor();
-			chartCursor.categoryBalloonDateFormat = "YYYY-MM-DD";
-			chartCursor.cursorColor = "#00CC00";
-			//			chart.addChartCursor(chartCursor);
+			chartCursor.categoryBalloonDateFormat = "YYYY/MM/DD";
+			chartCursor.cursorColor = "#CC0000";
+			chart.addChartCursor(chartCursor);
 			chart.mouseWheelZoomEnabled = true;
 
-			chart.addListener("clickGraphItem", function(event) {			
-				chartSub.creditsPosition = "top-right";
-				chartSub.dataProvider = event.item.dataContext.sensingData;		
-				chartSub.write("condition_detail");
+			chart.addListener("clickGraphItem", function(event) {
+				chartSub.addLabel(625, 315, "Go back", "left", undefined,
+						undefined, undefined, undefined, true,
+						'javascript:resetChart();');
+				
+				// CURSOR
+				// chartCursorSub
+				var chartCursorSub = new AmCharts.ChartCursor();
+				chartCursorSub.categoryBalloonDateFormat = "HH:NN:SS";
+				chartCursorSub.cursorColor = "#CC0000";
+				chartSub.addChartCursor(chartCursorSub);
+				chartSub.mouseWheelZoomEnabled = true;
+				
+				chartSub.dataProvider = event.item.dataContext.sensingData;
+				chartSub.mouseWheelZoomEnabled = true;
+				chartSub.write("chartdiv");
 			});
-
-			chart.write("condition_detail");
+			chart.write("chartdiv");
 		});
-
 function resetChart() {
-	chart.dataProvider = chartData;
+	chart.dataProvider = data;
+	
+	// remove the "Go back" label
 	chart.allLabels = [];
-
-	chart.validateData();
-	chart.animateAgain();
+	chart.write("chartdiv");
 }

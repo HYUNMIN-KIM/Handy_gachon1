@@ -4,7 +4,7 @@
 	pageEncoding="EUC-KR"%>
 <%@ page import="bean.*"%>
 <%@ page import="java.text.*"%>
-<%@ page import="util.*"%>
+
 <%@ page errorPage="errorpage.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,23 +13,9 @@
 <script type="text/javascript" src="lib/amcharts/amcharts.js"></script>
 <script type="text/javascript" src="lib/amcharts/serial.js"></script>
 <script type="text/javascript" src="js/graphicChart.js"></script>
-<script type="text/javascript" src="js/condition.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>GRAPH PAGE</title>
-
-<style>
-
-#chartdiv{
-	width:70%;
-	margin : 0 auto;
-	height: 375px; 
-	background-color: #FFFFFF;
-}
-
-
-</style>
-
-
 </head>
 <body>
 
@@ -44,10 +30,12 @@ var data = new Array;
 $(document).ready(function (){
 	
 	
+	// attribute로 받은것 JSON으로
+	
 	<% for(int i=0; i<data.length; i++){ %>
 		data[<%=i%>] = new Object;
 		data[<%=i%>].date = '<%=data[i].getDate()%>';
-		data[<%=i%>].conditionPoint = '<%=FloatFormat.format(data[i].getConditionCalc().getConditionPoint())%>';
+		data[<%=i%>].conditionPoint = '<%=data[i].getConditionCalc().getConditionPoint()%>';
 		data[<%=i%>].conditionData = new Object;
 		
 		data[<%=i%>].conditionData.tempPoint = '<%=data[i].getConditionCalc().getTempPoint()%>';
@@ -79,7 +67,7 @@ $(document).ready(function (){
 </script>
 
 
-<div id="chartdiv"></div>
+<div id="chartdiv" style="width: 70%; height: 375px; background-color: #FFFFFF;"></div>
 
 
 
