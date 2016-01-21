@@ -67,9 +67,7 @@ $(document).ready(function (){
 </script>
 
 
-<div id="condition_detail" style="width: 85%; height: 375px; background-color: #FFFFFF;"></div>	
-
-<div id="chartdiv" style="width: 100%; height: 375px; background-color: #FFFFFF;"></div>
+<div id="chartdiv" style="width: 70%; height: 375px; background-color: #FFFFFF;"></div>
 
 
 
