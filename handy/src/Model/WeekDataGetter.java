@@ -62,6 +62,7 @@ public class WeekDataGetter
 			}
 		}
     
+      	c.add(Calendar.DAY_OF_MONTH, 1);
     }
     
     result = sum/(float)cnt;
