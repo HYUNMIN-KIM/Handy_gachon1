@@ -4,8 +4,8 @@
 	pageEncoding="EUC-KR"%>
 <%@ page import="bean.*"%>
 <%@ page import="java.text.*"%>
-
-<%@ page errorPage="errorpage.jsp" %>
+<%@ page import="util.*"%>
+<%@ page errorPage="errorpage.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,9 +13,19 @@
 <script type="text/javascript" src="lib/amcharts/amcharts.js"></script>
 <script type="text/javascript" src="lib/amcharts/serial.js"></script>
 <script type="text/javascript" src="js/graphicChart.js"></script>
-<script type="text/javascript" src="js/condition.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>GRAPH PAGE</title>
+
+<style>
+#chartdiv {
+	margin: 0 auto;
+	width: 70%;
+	height: 375px;
+	background-color: #FFFFFF;
+}
+</style>
+
 </head>
 <body>
 
@@ -25,17 +35,18 @@
 		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("HH:mm:ss");
 	%>
 
-<script>
+	<script>
 var data = new Array;
 $(document).ready(function (){
 	
 	
 	// attribute로 받은것 JSON으로
 	
-	<% for(int i=0; i<data.length; i++){ %>
+	<%for (int i = 0; i < data.length; i++) {%>
 		data[<%=i%>] = new Object;
 		data[<%=i%>].date = '<%=data[i].getDate()%>';
-		data[<%=i%>].conditionPoint = '<%=data[i].getConditionCalc().getConditionPoint()%>';
+		data[<%=i%>].conditionPoint = '<%=FloatFormat.format(data[i].getConditionCalc()
+						.getConditionPoint())%>';
 		data[<%=i%>].conditionData = new Object;
 		
 		data[<%=i%>].conditionData.tempPoint = '<%=data[i].getConditionCalc().getTempPoint()%>';
@@ -50,24 +61,24 @@ $(document).ready(function (){
 		data[<%=i%>].conditionData.activityPoint = '<%=data[i].getConditionCalc().getActivityPoint()%>';
 		
 		data[<%=i%>].sensingData = new Array;
-		<% for(int j=0 ; j < data[i].getValueList().size(); j++){ %>
+		<%for (int j = 0; j < data[i].getValueList().size(); j++) {%>
 			data[<%=i%>].sensingData[<%=j%>] = new Object;
-			data[<%=i%>].sensingData[<%=j%>].log_date = '<%=hmsDateFormat.format(data[i].getValueList().get(j).getLog_date())%>';
+			data[<%=i%>].sensingData[<%=j%>].log_date = '<%=hmsDateFormat.format(data[i].getValueList()
+							.get(j).getLog_date())%>';
 			data[<%=i%>].sensingData[<%=j%>].temperature = '<%=data[i].getValueList().get(j).getTemperature()%>';
 			data[<%=i%>].sensingData[<%=j%>].heart_rate = '<%=data[i].getValueList().get(j).getHeart_rate()%>';
-			data[<%=i%>].sensingData[<%=j%>].step = '<%=data[i].getValueList().get(j).getSteps()%>';
-		<%}%>
+			data[<%=i%>].sensingData[<%=j%>].step = '<%=data[i].getValueList().get(j).getSteps()%>
+		';
 	<%}%>
-	
-	var ob = JSON.stringify(data);
-	console.log(ob);
-});
-         
-         
-</script>
+		
+	<%}%>
+		var ob = JSON.stringify(data);
+							console.log(ob);
+						});
+	</script>
 
 
-<div id="chartdiv" style="width: 70%; height: 375px; background-color: #FFFFFF;"></div>
+	<div id="chartdiv"></div>
 
 
 
