@@ -44,7 +44,7 @@ public class WeekDataGetter
       data[i].setDate(year + "/" + month + "/" + day);
       data[i].setValueList(
         daoGetInfo.getSensorValue_YearWeek(userSeq, year, month, day));
-    
+     
       
       //TODO : user extra 데이터 입력받아와야함.
       //String gender, int age, int height, int weight, int avg_heart_rate
@@ -62,7 +62,7 @@ public class WeekDataGetter
 			}
 		}
     
-      	c.add(Calendar.DAY_OF_MONTH, 1);
+      	 c.add(Calendar.DAY_OF_MONTH, 1);
     }
     
     result = sum/(float)cnt;
@@ -76,8 +76,6 @@ public class WeekDataGetter
       	if(data[i].getValueList().size() > 0)
       		data[i].getConditionCalc().calcPoints(data[i].getValueList());
       
-
-      c.add(Calendar.DAY_OF_MONTH, 1);
     }
     
 	
