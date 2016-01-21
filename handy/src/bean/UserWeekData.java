@@ -31,6 +31,7 @@ public class UserWeekData {
 		this.date = date;
 	}
 
+	
 	public List<SIHMSSensingData> getValueList() {
 		return this.valueList;
 	}
