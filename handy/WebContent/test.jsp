@@ -16,6 +16,20 @@
 <script type="text/javascript" src="js/condition.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>GRAPH PAGE</title>
+
+<style>
+
+#chartdiv{
+	width:70%;
+	margin : 0 auto;
+	height: 375px; 
+	background-color: #FFFFFF;
+}
+
+
+</style>
+
+
 </head>
 <body>
 
@@ -23,15 +37,12 @@
 	<%
 		UserWeekData[] data = (UserWeekData[]) request.getAttribute("data");
 		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("HH:mm:ss");
-
 	%>
 
 <script>
 var data = new Array;
 $(document).ready(function (){
 	
-	
-	// attribute로 받은것 JSON으로
 	
 	<% for(int i=0; i<data.length; i++){ %>
 		data[<%=i%>] = new Object;
@@ -68,7 +79,7 @@ $(document).ready(function (){
 </script>
 
 
-<div id="chartdiv" style="width: 70%; height: 375px; background-color: #FFFFFF;"></div>
+<div id="chartdiv"></div>
 
 
 
