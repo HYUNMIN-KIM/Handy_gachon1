@@ -13,6 +13,7 @@
 <script type="text/javascript" src="lib/amcharts/amcharts.js"></script>
 <script type="text/javascript" src="lib/amcharts/serial.js"></script>
 <script type="text/javascript" src="js/graphicChart.js"></script>
+<script type="text/javascript" src="js/condition.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>GRAPH PAGE</title>
 </head>
@@ -68,6 +69,7 @@ $(document).ready(function (){
 
 <div id="condition_detail" style="width: 85%; height: 375px; background-color: #FFFFFF;"></div>	
 
+<div id="chartdiv" style="width: 100%; height: 375px; background-color: #FFFFFF;"></div>
 
 
 
