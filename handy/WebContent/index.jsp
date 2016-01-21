@@ -22,7 +22,7 @@
 		dataInfo.date = "2016/01/01";
 		dataInfo.conditionPoint = 10;
 		
-		dataInfo.conditionData = new Array;
+		dataInfo.sensingData = new Array;
 		
 		dataInfo2 = new Object();
 		
@@ -31,7 +31,7 @@
 		dataInfo2.hrPoint = 125;
 		dataInfo2.step = 180;
 		
-		dataInfo.conditionData.push(dataInfo2);
+		dataInfo.sensingData.push(dataInfo2);
 		data.push(dataInfo);
 
 		var ob = JSON.stringify(data);

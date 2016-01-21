@@ -221,7 +221,7 @@ var charData = [ {
 
 AmCharts.ready(function() {
 			chart = new AmCharts.AmSerialChart();
-			chart.dataProvider = charData;
+			chart.dataProvider = data;
 			chart.dataDateFormat = "YYYY/MM/DD";
 			chart.categoryField = "date";
 			chart.creditsPosition = "top-right";
@@ -298,7 +298,7 @@ AmCharts.ready(function() {
 
 			chart.addListener("clickGraphItem", function(event) {			
 				chartSub.creditsPosition = "top-right";
-				chartSub.dataProvider = event.item.dataContext.conditionData;		
+				chartSub.dataProvider = event.item.dataContext.sensingData;		
 				chartSub.write("condition_detail");
 			});
 
