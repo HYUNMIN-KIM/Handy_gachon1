@@ -4,7 +4,7 @@
 	pageEncoding="EUC-KR"%>
 <%@ page import="bean.*"%>
 <%@ page import="java.text.*"%>
-
+<%@ page import="util.*"%>
 <%@ page errorPage="errorpage.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,6 +23,7 @@
 	<%
 		UserWeekData[] data = (UserWeekData[]) request.getAttribute("data");
 		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("HH:mm:ss");
+
 	%>
 
 <script>
@@ -35,7 +36,7 @@ $(document).ready(function (){
 	<% for(int i=0; i<data.length; i++){ %>
 		data[<%=i%>] = new Object;
 		data[<%=i%>].date = '<%=data[i].getDate()%>';
-		data[<%=i%>].conditionPoint = '<%=data[i].getConditionCalc().getConditionPoint()%>';
+		data[<%=i%>].conditionPoint = '<%=FloatFormat.format(data[i].getConditionCalc().getConditionPoint())%>';
 		data[<%=i%>].conditionData = new Object;
 		
 		data[<%=i%>].conditionData.tempPoint = '<%=data[i].getConditionCalc().getTempPoint()%>';

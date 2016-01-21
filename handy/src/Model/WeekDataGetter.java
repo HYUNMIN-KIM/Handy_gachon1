@@ -1,13 +1,13 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import util.FloatFormat;
 import Dao.DaoGetInfo;
 import bean.SIHMConditionCalc;
 import bean.UserExtraBean;
 import bean.UserWeekData;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class WeekDataGetter {
 	public static UserWeekData[] getWeekData(String id) {
@@ -40,20 +40,12 @@ public class WeekDataGetter {
 			data[i].setValueList(daoGetInfo.getSensorValue_YearWeek(userSeq,
 					year, month, day));
 
-			// TODO : user extra 데이터 입력받아와야함.
-			// String gender, int age, int height, int weight, int
-			// avg_heart_rate
+			// 유저정보 및 평균심박수를 구한다
 			ux = daoGetInfo.getExtraUser(userSeq);
-			// data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(),
-			// ux.getAge(), ux.getHeight(), ux.getWeight(),
-			// ux.getAvg_heart_rate()));
 
 			for (int j = 0; j < data[i].getValueList().size(); j++) {
 				if (data[i].getValueList().get(j).steps <= 75) {
 					sum += data[i].getValueList().get(j).heart_rate;
-
-					// System.out.println(data[i].getValueList().get(j).log_date+
-					// "ab" + data[i].getValueList().get(j).heart_rate);
 					cnt++;
 				}
 			}
@@ -86,7 +78,7 @@ public class WeekDataGetter {
 			stepTotal = 0;
 			temperatureTotal = 0;
 			
-			
+			//10분동안 센서 정보들의 평균값만을 포함한다
 			ArrayList<SIHMSSensingData> list = new ArrayList<>();
 			for (int j = 0; j < data[i].getValueList().size(); j++) {
 				
@@ -136,7 +128,7 @@ public class WeekDataGetter {
 					if(stepTotal != 0)
 						sData.setSteps(stepTotal / cnt);
 					if(temperatureTotal != 0)
-						sData.setTemperature(temperatureTotal / cnt);
+						sData.setTemperature(Float.parseFloat(FloatFormat.format(temperatureTotal / cnt)));
 					
 					
 					list.add(sData);
