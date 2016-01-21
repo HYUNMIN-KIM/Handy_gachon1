@@ -63,7 +63,7 @@ public class WeekDataGetter {
 
 		result = sum / (float) cnt;
 
-		int hour, heartTotal, stepTotal, size;
+		int minute, firstMinute, heartTotal, stepTotal, size;
 		float temperatureTotal;
 
 		for (int i = 0; i < data.length; i++) {
@@ -79,14 +79,69 @@ public class WeekDataGetter {
 
 			
 			
+			firstMinute = 0;
+			minute = 0;
+			cnt = 0;
+			heartTotal = 0;
+			stepTotal = 0;
+			temperatureTotal = 0;
 			
 			
-			
-			
-			//일단 10분정도만 얻어옴
 			ArrayList<SIHMSSensingData> list = new ArrayList<>();
-			for (int j = 0; j < data[i].getValueList().size(); j+=10) {
-				list.add(data[i].getValueList().get(j));
+			for (int j = 0; j < data[i].getValueList().size(); j++) {
+				
+				if(cnt == 0){
+					firstMinute = minute = data[i].getValueList().get(j).getLog_date().getMinutes();
+					heartTotal = data[i].getValueList().get(j).getHeart_rate();
+					stepTotal = data[i].getValueList().get(j).getSteps();
+					temperatureTotal = data[i].getValueList().get(j).getTemperature();
+					cnt = 1;
+					
+				}else if(cnt < 9){
+					
+					//이전 정보와 시간 차이가 2분을 넘어간경우 그때까지 정보만 평균값으로 넣음
+					if(minute +2 > data[i].getValueList().get(j).getLog_date().getMinutes()){
+						heartTotal += data[i].getValueList().get(j).getHeart_rate();
+						stepTotal += data[i].getValueList().get(j).getSteps();
+						temperatureTotal += data[i].getValueList().get(j).getTemperature();
+						cnt++;
+						minute = data[i].getValueList().get(j).getLog_date().getMinutes();
+						
+					}else if(cnt > 0){
+						SIHMSSensingData sData = new SIHMSSensingData();
+						sData.setLog_date(data[i].getValueList().get(j).getLog_date());
+						sData.getLog_date().setSeconds(0);
+						sData.getLog_date().setMinutes(firstMinute);
+						
+						if(heartTotal != 0)
+							sData.setHeart_rate(heartTotal / cnt);
+						if(stepTotal != 0)
+							sData.setSteps(stepTotal / cnt);
+						if(temperatureTotal != 0)
+							sData.setTemperature(temperatureTotal / cnt);
+						
+						
+						list.add(sData);
+						cnt = 0;
+					}
+					
+				}else{
+					SIHMSSensingData sData = new SIHMSSensingData();
+					sData.setLog_date(data[i].getValueList().get(j).getLog_date());
+					sData.getLog_date().setSeconds(0);
+					sData.getLog_date().setMinutes(firstMinute);
+					
+					if(heartTotal != 0)
+						sData.setHeart_rate(heartTotal / cnt);
+					if(stepTotal != 0)
+						sData.setSteps(stepTotal / cnt);
+					if(temperatureTotal != 0)
+						sData.setTemperature(temperatureTotal / cnt);
+					
+					
+					list.add(sData);
+					cnt = 0;
+				}
 			}
 			data[i].getValueList().clear();
 			data[i].getValueList().addAll(list);
