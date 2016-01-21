@@ -4,6 +4,8 @@
 	pageEncoding="EUC-KR"%>
 <%@ page import="bean.*"%>
 <%@ page import="java.text.*"%>
+
+<%@ page errorPage="errorpage.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +14,7 @@
 <script type="text/javascript" src="lib/amcharts/serial.js"></script>
 <script type="text/javascript" src="js/graphicChart.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>GRAPH PAGE</title>
 </head>
 <body>
 
