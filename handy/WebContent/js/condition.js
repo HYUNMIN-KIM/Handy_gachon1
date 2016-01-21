@@ -1,67 +1,69 @@
 var chart;
-/*
 
+AmCharts.ready(function() {
 //평균값 구하기
 var sum1,sum2,sum3 ;
-for(var x in chartData){
-sum1=0,sum2=0,sum3=0;
-	for(var y in chartData[x].subSet){
-  sum1+=chartData[x].subSet[y].temperature;// sum of temperature.
-  sum2+=chartData[x].subSet[y].heartRate;// sum of heartRate.
-  sum3+=chartData[x].subSet[y].step;// sum of step.
+for(var x in data){
+sum1=0;
+sum2=0;
+sum3=0;
+	for(var y in data[x].sensingData){
+  sum1+=data[x].sensingData[y].temperature;// sum of temperature.
+  sum2+=data[x].sensingData[y].heart_rate;// sum of heart_rate.
+  sum3+=data[x].sensingData[y].step;// sum of step.
   
   }
- for(var y in chartData[x].subSet){
-  chartData[x].subSet[y].avagTemp = sum1 / chartData[x].subSet.length; //average temperature.
-  chartData[x].subSet[y].avagHeart = sum2 / chartData[x].subSet.length;// average heartRate.
-  chartData[x].subSet[y].avagStep = sum3 / chartData[x].subSet.length;// average step.
+ for(var y in data[x].sensingData){
+  data[x].sensingData[y].avagTemp = data[x].sensingData[111].temperature;//sum1 / (data[x].sensingData.length); //average temperature.
+  data[x].sensingData[y].avagHeart = sum2 / (data[x].sensingData.length);// average heart_rate.
+  data[x].sensingData[y].avagStep = sum3 /(data[x].sensingData.length);// average step.
   }
-  }
+ }
 //최고 최저값 구하기
 
 var HTemp,LTemp,HHeart,LHeart,HStep,LStep;
-for(var x in chartData){
-HTemp=chartData[x].subSet[0].temperature;
-LTemp=chartData[x].subSet[0].temperature;
-HHeart=chartData[x].subSet[0].heartRate;
-LHeart=chartData[x].subSet[0].heartRate;
-HStep=chartData[x].subSet[0].step;
-LStep=chartData[x].subSet[0].step;
-	for(var y in chartData[x].subSet){
-  if(chartData[x].subSet[y].temperature > HTemp) {
- HTemp=chartData[x].subSet[y].temperature;
+for(var x in data){
+HTemp=data[x].sensingData[0].temperature;
+LTemp=data[x].sensingData[0].temperature;
+HHeart=data[x].sensingData[0].heart_rate;
+LHeart=data[x].sensingData[0].heart_rate;
+HStep=data[x].sensingData[0].step;
+LStep=data[x].sensingData[0].step;
+	for(var y in data[x].sensingData){
+  if(data[x].sensingData[y].temperature > HTemp) {
+ HTemp=data[x].sensingData[y].temperature;
   }
-  if(chartData[x].subSet[y].temperature < LTemp) {
- LTemp=chartData[x].subSet[y].temperature;
+  if(data[x].sensingData[y].temperature < LTemp) {
+ LTemp=data[x].sensingData[y].temperature;
   }
-  if(chartData[x].subSet[y].heartRate >HHeart)  {
-  HHeart=chartData[x].subSet[y].heartRate;
+  if(data[x].sensingData[y].heart_rate >HHeart)  {
+  HHeart=data[x].sensingData[y].heart_rate;
   }
-  if(chartData[x].subSet[y].heartRate <LHeart)  {
-  LHeart=chartData[x].subSet[y].heartRate;
+  if(data[x].sensingData[y].heart_rate <LHeart)  {
+  LHeart=data[x].sensingData[y].heart_rate;
   }
-  if(chartData[x].subSet[y].step >HStep)  {
-  HStep=chartData[x].subSet[y].step;
+  if(data[x].sensingData[y].step >HStep)  {
+  HStep=data[x].sensingData[y].step;
   }
-  if(chartData[x].subSet[y].step <LStep)  {
-  LStep=chartData[x].subSet[y].step;
-  }
-  }
-  
-  for(var y in chartData[x].subSet){
-    chartData[x].subSet[y].highTemp = HTemp; //high temperature.
-  chartData[x].subSet[y].highHeart =HHeart//high heartRate.
-  chartData[x].subSet[y].highStep = HStep// high step.
-    chartData[x].subSet[y].lowTemp = LTemp; //low temperature.
-  chartData[x].subSet[y].lowHeart =LHeart//low heartRate.
-  chartData[x].subSet[y].lowStep = LStep// low step.
+  if(data[x].sensingData[y].step <LStep)  {
+  LStep=data[x].sensingData[y].step;
   }
   }
   
- */
+  for(var y in data[x].sensingData){
+    data[x].sensingData[y].highTemp = HTemp; //high temperature.
+  data[x].sensingData[y].highHeart =HHeart//high heart_rate.
+  data[x].sensingData[y].highStep = HStep// high step.
+    data[x].sensingData[y].lowTemp = LTemp; //low temperature.
+  data[x].sensingData[y].lowHeart =LHeart//low heart_rate.
+  data[x].sensingData[y].lowStep = LStep// low step.
+  }
+  }
+  
+ 
 var chartData2;
 
-AmCharts.ready(function() {
+
     // SERIAL CHART
     chart = new AmCharts.AmSerialChart();
     chart.dataProvider = data;
@@ -137,8 +139,8 @@ AmCharts.ready(function() {
         var graph2 = new AmCharts.AmGraph();
     graph2.valueField = "temperature";
  //  graph2.legendPeriodValueText ="[[value.count]]";
-   // graph2.balloonText = "[[category]]: <b>[[value]]</b> , average :[[avagTemp]], <br/>high : [[highTemp]], low : [[lowTemp]]";
-    graph2.balloonText="<b><span style='font-size:14px;'>[[temperature]]</span></b>";
+    graph2.balloonText = "[[category]]: <b>[[value]]</b> , average :[[avagTemp]], <br/>high : [[highTemp]], low : [[lowTemp]]";
+    //graph2.balloonText="<b><span style='font-size:14px;'>[[temperature]]</span></b>";
     graph2.type = "line";
    // graph.lineAlpha = 0;
     graph2.fillAlphas = 0;
@@ -147,20 +149,29 @@ AmCharts.ready(function() {
   
      var graph3 = new AmCharts.AmGraph();
     graph3.valueField = "heart_rate";
- //  graph3.balloonText = "[[log_date]], <b>[[value]]</b>, <br/>average :[[avagHeart]], <br/>high : [[highHeart]], <br/>low : [[lowHeart]]";
-    graph3.balloonText = "<b><span style='font-size:14px;'>[[heart_rate]]</span></b>";
-	
+    
     graph3.type = "line";
    // graph.lineAlpha = 0;
     graph3.fillAlphas = 0;
     graph3.bullet="round";
+    graph3.bulletBorderColor="#FFFFFF";
+    graph3.bulletBorderAlpha=1;
     graph3.lineColor ="#0000FF";
-  
+    graph3.lineThickness=2;
+   graph3.hideBulletsCount=1;
+  //  graph3.balloonText = "<b><span style='font-size:14px;'>[[value]]</span></b>";
+   graph3.balloonText = "[[log_date]], <b>[[value]]</b>, <br/>average :[[avagHeart]], <br/>high : [[highHeart]], <br/>low : [[lowHeart]]";
+   
+	
+    
+	var chartCursor = new AmCharts.ChartCursor();
+	chartCursor.fullWidth=true;
+	chartCursor.cursorAlpha=0.1;
     
        var graph4 = new AmCharts.AmGraph();
     graph4.valueField = "step";
-   // graph4.balloonText = "[[log_date]], <b>[[value]]</b>, <br/>average :[[avagStep]], <br/>high : [[highStep]], <br/>low : [[lowStep]]";
-    graph4.balloonText = "<b><span style='font-size:14px;'>[[step]]</span></b>";
+    graph4.balloonText = "[[log_date]], <b>[[value]]</b>, <br/>average :[[avagStep]], <br/>high : [[highStep]], <br/>low : [[lowStep]]";
+  //  graph4.balloonText = "<b><span style='font-size:14px;'>[[step]]</span></b>";
     graph4.type = "column";
    // graph.lineAlpha = 0;
     graph4.fillAlphas = 0.8;
@@ -174,7 +185,7 @@ AmCharts.ready(function() {
     
     chart.addListener("clickGraphItem", function (event) {
    chart2.addLabel(
-   						 "25", 50, 
+   						40, 50, 
             "Go back ",
             "left", 
             undefined, 
@@ -185,7 +196,7 @@ AmCharts.ready(function() {
             'javascript:resetChart();');
    
             chart2.dataProvider = event.item.dataContext.sensingData;
-            chart2.validateData();
+            //chart2.validateData();
          chart2.write("chartdiv");
     });
 
@@ -198,7 +209,7 @@ function resetChart() {
     // remove the "Go back" label
     chart.allLabels = [];
     
-    chart.validateData();
-    chart.animateAgain();
+   // chart.validateData();
+  //  chart.animateAgain();
     chart.write("chartdiv");
 }
