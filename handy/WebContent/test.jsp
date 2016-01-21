@@ -8,6 +8,9 @@
 <html>
 <head>
 <script type="text/javascript" src="lib/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="lib/amcharts/amcharts.js"></script>
+<script type="text/javascript" src="lib/amcharts/serial.js"></script>
+<script type="text/javascript" src="js/graphicChart.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
@@ -20,16 +23,18 @@
 	%>
 
 <script>
-        
+var data = new Array;
 $(document).ready(function (){
 	
 	
 	// attribute로 받은것 JSON으로
-	var data = new Array;
+	
 	<% for(int i=0; i<data.length; i++){ %>
 		data[<%=i%>] = new Object;
 		data[<%=i%>].date = '<%=data[i].getDate()%>';
+		data[<%=i%>].conditionPoint = '<%=data[i].getConditionCalc().getConditionPoint()%>';
 		data[<%=i%>].conditionData = new Object;
+		
 		data[<%=i%>].conditionData.tempPoint = '<%=data[i].getConditionCalc().getTempPoint()%>';
 		data[<%=i%>].conditionData.hrPoint = '<%=data[i].getConditionCalc().getHrPoint()%>';
 		data[<%=i%>].conditionData.tempDeductPoint = '<%=data[i].getConditionCalc().getTempChangeDeductPoint()%>';
@@ -40,7 +45,7 @@ $(document).ready(function (){
 		data[<%=i%>].conditionData.tempRhythmPoint =  '<%=data[i].getConditionCalc().getTempRhythmPoint()%>';
 		data[<%=i%>].conditionData.hrRhythmPoint = '<%=data[i].getConditionCalc().getHrRhythmPoint()%>';
 		data[<%=i%>].conditionData.activityPoint = '<%=data[i].getConditionCalc().getActivityPoint()%>';
-		data[<%=i%>].conditionData.conditionPoint = '<%=data[i].getConditionCalc().getConditionPoint()%>';
+		
 		data[<%=i%>].sensingData = new Array;
 		<% for(int j=0 ; j < data[i].getValueList().size(); j++){ %>
 			data[<%=i%>].sensingData[<%=j%>] = new Object;
@@ -59,7 +64,7 @@ $(document).ready(function (){
 </script>
 
 
-
+<div id="condition_detail" style="width: 85%; height: 375px; background-color: #FFFFFF;"></div>	
 
 
 
