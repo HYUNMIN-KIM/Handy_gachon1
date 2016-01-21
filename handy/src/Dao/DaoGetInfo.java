@@ -43,8 +43,6 @@ public class DaoGetInfo {
 		return result;
 	}
 	*/
-	
-	
 	 public ArrayList<SIHMSSensingData> getSensorValue_YearWeek(int user_seq, int year, int month, int day)
 	  {
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -52,7 +50,7 @@ public class DaoGetInfo {
 	    Connection conn = JDBCManager.getInstance();
 	    try
 	    {
-	      String query = "select TO_CHAR(LOG_DT, 'yyyy-mm-dd hh24:mi:ss') as LOG_DT, TEMPERATURE,HEART_RATE,STEPS from GB_SENSING_DATA WHERE REG_USER_SEQ=? AND YEAR=? AND MONTH=? AND DAY=?";
+	      String query = "select TO_CHAR(LOG_DT, 'yyyy-mm-dd hh24:mi:ss') as LOG_DT, TEMPERATURE,HEART_RATE,STEPS from GB_SENSING_DATA WHERE REG_USER_SEQ=? AND YEAR=? AND MONTH=? AND DAY=? ORDER BY LOG_DT ";
 	      
 	      pstmt = conn.prepareStatement(query);
 	      pstmt.setInt(1, user_seq);
@@ -129,6 +127,8 @@ public class DaoGetInfo {
 		return result;
 	}
 	
+	
+	/*
 	    public ArrayList<SensorValueBean> getSensor(int user_seq)
 	    {
 	    	ArrayList<SensorValueBean> sensorInfo = new ArrayList<SensorValueBean>();
@@ -149,7 +149,8 @@ public class DaoGetInfo {
 	    	JDBCManager.close();
 			return sensorInfo;
 	    }
-
+*/
+	
 
 	public UserBean getUser(int user_seq)
 	{

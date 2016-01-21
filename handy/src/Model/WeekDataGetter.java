@@ -67,6 +67,7 @@ public class WeekDataGetter
     result = sum/(float)cnt;
     System.out.println("result: " + result );
     System.out.println(cnt);
+    
     for(int i=0;i<data.length;i++)
     {
       	
