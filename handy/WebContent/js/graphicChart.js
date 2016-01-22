@@ -352,7 +352,7 @@ AmCharts.ready(function() {
 				
 				chartSub.validateData();
 				chartSub.animateAgain();
-				
+				chartSub.invalidateSize();
 				chartSub.write("chartdiv");
 			});
 			chart.write("chartdiv");
@@ -362,7 +362,7 @@ function resetChart() {
 	
 	chart.validateData();
 	chart.animateAgain();
-	
+	chart.invalidateSize();
 	// remove the "Go back" label
 	chart.allLabels = [];
 	chart.write("chartdiv");
