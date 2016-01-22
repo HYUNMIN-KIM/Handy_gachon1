@@ -349,12 +349,19 @@ AmCharts.ready(function() {
 				
 				chartSub.dataProvider = event.item.dataContext.sensingData;
 				chartSub.mouseWheelZoomEnabled = true;
+				
+				chartSub.validateData();
+				chartSub.animateAgain();
+				
 				chartSub.write("chartdiv");
 			});
 			chart.write("chartdiv");
 		});
 function resetChart() {
 	chart.dataProvider = data;
+	
+	chart.validateData();
+	chart.animateAgain();
 	
 	// remove the "Go back" label
 	chart.allLabels = [];
