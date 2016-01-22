@@ -1,21 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <link type="text/css" rel="stylesheet" href="css/header.css" />
-<div id="headerBar"></div>
+
+
+<div id="headerBar">
+</div>
 
 <div id="header">
-<span id="headerTitle">
-</span>
-
-
-
-
-
-
-
-<span id="buttons">
-<button id="cellButton" >표</button>
-<button id="graphButton" >그래프</button>
-</span>
 
 </div>

@@ -59,7 +59,6 @@ public class DaoGetInfo {
 	      pstmt.setInt(4, day);
 	      rs = pstmt.executeQuery();
 	      
-	      
 	      while (rs.next()) {
 	    	  SIHMSSensingData s = new SIHMSSensingData();
 	    	  

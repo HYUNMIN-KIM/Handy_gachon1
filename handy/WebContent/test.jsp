@@ -18,6 +18,7 @@
 <title>GRAPH PAGE</title>
 
 <style>
+
 #chartdiv{
 	width: 70%; 
 	height: 375px; 
@@ -29,7 +30,7 @@
 
 </head>
 <body>
-
+	<%@include file="header.jspf"%>
 
 	<%
 		UserWeekData[] data = (UserWeekData[]) request.getAttribute("data");
@@ -71,17 +72,22 @@ $(document).ready(function (){
 	<%}%>
 	
 	var ob = JSON.stringify(data);
-	console.log(ob);
+	//console.log(ob);
 });
          
          
 </script>
 
 
-<div id="chartdiv"></div>
+
+<div id="chartdiv">
+</div>
+
+<ul>
+<li>컨디션 지수 : </li>
 
 
-
+</ul>
 
 
 </body>

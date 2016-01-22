@@ -45,6 +45,7 @@ public class WeekDataGetter {
 			data[i].setValueList(daoGetInfo.getSensorValue_YearWeek(userSeq,
 					year, month, day));
 
+			
 			// 유저정보 및 평균심박수를 구한다
 			ux = daoGetInfo.getExtraUser(userSeq);
 
@@ -94,7 +95,7 @@ public class WeekDataGetter {
 					temperatureTotal = data[i].getValueList().get(j).getTemperature();
 					cnt = 1;
 					
-				}else if(cnt < 9){
+				}else if(cnt < 4){
 					
 					//이전 정보와 시간 차이가 2분을 넘어간경우 그때까지 정보만 평균값으로 넣음
 					if(minute +2 > data[i].getValueList().get(j).getLog_date().getMinutes()){
