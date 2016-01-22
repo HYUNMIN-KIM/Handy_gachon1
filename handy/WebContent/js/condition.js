@@ -1,65 +1,66 @@
 var chart;
 
+  
 AmCharts.ready(function() {
 //평균값 구하기
-var sum1,sum2,sum3 ;
-for(var x in data){
-sum1=0;
-sum2=0;
-sum3=0;
-	for(var y in data[x].sensingData){
-  sum1+=data[x].sensingData[y].temperature;// sum of temperature.
-  sum2+=data[x].sensingData[y].heart_rate;// sum of heart_rate.
-  sum3+=data[x].sensingData[y].step;// sum of step.
-  
-  }
- for(var y in data[x].sensingData){
-  data[x].sensingData[y].avagTemp = data[x].sensingData[111].temperature;//sum1 / (data[x].sensingData.length); //average temperature.
-  data[x].sensingData[y].avagHeart = sum2 / (data[x].sensingData.length);// average heart_rate.
-  data[x].sensingData[y].avagStep = sum3 /(data[x].sensingData.length);// average step.
-  }
- }
-//최고 최저값 구하기
+	var sum1,sum2,sum3 ;
 
-var HTemp,LTemp,HHeart,LHeart,HStep,LStep;
-for(var x in data){
-HTemp=data[x].sensingData[0].temperature;
-LTemp=data[x].sensingData[0].temperature;
-HHeart=data[x].sensingData[0].heart_rate;
-LHeart=data[x].sensingData[0].heart_rate;
-HStep=data[x].sensingData[0].step;
-LStep=data[x].sensingData[0].step;
-	for(var y in data[x].sensingData){
-  if(data[x].sensingData[y].temperature > HTemp) {
- HTemp=data[x].sensingData[y].temperature;
-  }
-  if(data[x].sensingData[y].temperature < LTemp) {
- LTemp=data[x].sensingData[y].temperature;
-  }
-  if(data[x].sensingData[y].heart_rate >HHeart)  {
-  HHeart=data[x].sensingData[y].heart_rate;
-  }
-  if(data[x].sensingData[y].heart_rate <LHeart)  {
-  LHeart=data[x].sensingData[y].heart_rate;
-  }
-  if(data[x].sensingData[y].step >HStep)  {
-  HStep=data[x].sensingData[y].step;
-  }
-  if(data[x].sensingData[y].step <LStep)  {
-  LStep=data[x].sensingData[y].step;
-  }
-  }
-  
-  for(var y in data[x].sensingData){
-    data[x].sensingData[y].highTemp = HTemp; //high temperature.
-  data[x].sensingData[y].highHeart =HHeart//high heart_rate.
-  data[x].sensingData[y].highStep = HStep// high step.
-    data[x].sensingData[y].lowTemp = LTemp; //low temperature.
-  data[x].sensingData[y].lowHeart =LHeart//low heart_rate.
-  data[x].sensingData[y].lowStep = LStep// low step.
-  }
-  }
-  
+	for(var x in data){
+	sum1=0;
+	sum2=0;
+	sum3=0;
+	 for(var y in data[x].sensingData){
+	  sum1+=parseFloat(data[x].sensingData[y].temperature);// sum of temperature.
+	  sum2+=parseInt(data[x].sensingData[y].heart_rate);// sum of heart_rate.
+	  sum3+=parseInt(data[x].sensingData[y].step);// sum of step.
+	  
+	  }
+	 for(var y in data[x].sensingData){
+	  data[x].sensingData[y].avagTemp =parseFloat( sum1 / (data[x].sensingData.length)).toFixed(2); //average temperature.
+	  data[x].sensingData[y].avagHeart = parseInt(sum2 / (data[x].sensingData.length));// average heart_rate.
+	  data[x].sensingData[y].avagStep = parseInt(sum3 /(data[x].sensingData.length));// average step.
+	  }
+	 }
+	//최고 최저값 
+
+	var HTemp,LTemp,HHeart,LHeart,HStep,LStep;
+	for(var x in data){
+	HTemp=parseFloat(data[x].sensingData[0].temperature).toFixed(2);
+	LTemp=parseFloat(data[x].sensingData[0].temperature).toFixed(2);
+	HHeart=parseInt(data[x].sensingData[0].heart_rate);
+	LHeart=parseInt(data[x].sensingData[0].heart_rate);
+	HStep=parseInt(data[x].sensingData[0].step);
+	LStep=parseInt(data[x].sensingData[0].step);
+		for(var y in data[x].sensingData){
+	  if(data[x].sensingData[y].temperature > HTemp) {
+	 HTemp=parseFloat(data[x].sensingData[y].temperature).toFixed(2);
+	  }
+	  if(data[x].sensingData[y].temperature < LTemp) {
+	 LTemp=parseFloat(data[x].sensingData[y].temperature).toFixed(2);
+	  }
+	  if(data[x].sensingData[y].heart_rate >HHeart)  {
+	  HHeart=parseInt(data[x].sensingData[y].heart_rate);
+	  }
+	  if(data[x].sensingData[y].heart_rate <LHeart)  {
+	  LHeart=parseInt(data[x].sensingData[y].heart_rate);
+	  }
+	  if(data[x].sensingData[y].step >HStep)  {
+	  HStep=parseInt(data[x].sensingData[y].step);
+	  }
+	  if(data[x].sensingData[y].step <LStep)  {
+	  LStep=parseInt(data[x].sensingData[y].step);
+	  }
+	  }
+	  
+	  for(var y in data[x].sensingData){
+	    data[x].sensingData[y].highTemp = HTemp; //high temperature.
+	  data[x].sensingData[y].highHeart =HHeart//high heart_rate.
+	  data[x].sensingData[y].highStep = HStep// high step.
+	    data[x].sensingData[y].lowTemp = LTemp; //low temperature.
+	  data[x].sensingData[y].lowHeart =LHeart//low heart_rate.
+	  data[x].sensingData[y].lowStep = LStep// low step.
+	  }
+	  }
  
 var chartData2;
 
@@ -158,7 +159,7 @@ var chartData2;
     graph3.bulletBorderAlpha=1;
     graph3.lineColor ="#0000FF";
     graph3.lineThickness=2;
-   graph3.hideBulletsCount=1;
+   //graph3.hideBulletsCount=1;
   //  graph3.balloonText = "<b><span style='font-size:14px;'>[[value]]</span></b>";
    graph3.balloonText = "[[log_date]], <b>[[value]]</b>, <br/>average :[[avagHeart]], <br/>high : [[highHeart]], <br/>low : [[lowHeart]]";
    
@@ -196,20 +197,25 @@ var chartData2;
             'javascript:resetChart();');
    
             chart2.dataProvider = event.item.dataContext.sensingData;
-            //chart2.validateData();
-         chart2.write("chartdiv");
+            chart2.validateData();
+            chart2.invalidateSize();
+            //chart2.animateAgain();
+       chart2.write("chartdiv");
+       var data =chart2.dataProvider;
+
+       var div = document.getElementById("tablediv");
+       div.innerHTML = data.avagTemp;
     });
 
     chart.write("chartdiv");
 });
 function resetChart() {
     chart.dataProvider = data;
-    //chart.titles[0].text = 'Yearly data';
-    
+
     // remove the "Go back" label
     chart.allLabels = [];
     
-   // chart.validateData();
+  // chart.validateData();
   //  chart.animateAgain();
-    chart.write("chartdiv");
+  chart.write("chartdiv");
 }
