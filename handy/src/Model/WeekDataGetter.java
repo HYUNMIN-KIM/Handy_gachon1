@@ -35,8 +35,13 @@ public class WeekDataGetter {
 			int year = c.get(1);
 			int month = c.get(2) + 1;
 			int day = c.get(5);
+			String strDate = year + "/";
+			if(month < 10)
+				strDate += 0;
+			strDate += month + "/" + day;
 
-			data[i].setDate(year + "/" + month + "/" + day);
+			
+			data[i].setDate(strDate);
 			data[i].setValueList(daoGetInfo.getSensorValue_YearWeek(userSeq,
 					year, month, day));
 
@@ -99,7 +104,7 @@ public class WeekDataGetter {
 						cnt++;
 						minute = data[i].getValueList().get(j).getLog_date().getMinutes();
 						
-					}else if(cnt > 0){
+					}else {
 						SIHMSSensingData sData = new SIHMSSensingData();
 						sData.setLog_date(data[i].getValueList().get(j).getLog_date());
 						sData.getLog_date().setSeconds(0);
