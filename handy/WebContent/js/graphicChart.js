@@ -349,6 +349,10 @@ AmCharts.ready(function() {
 				
 				chartSub.dataProvider = event.item.dataContext.sensingData;
 				chartSub.mouseWheelZoomEnabled = true;
+				
+				chartSub.validateData();
+				chartSub.animateAgain();
+				chartSub.invalidateSize();
 				chartSub.write("chartdiv");
 			});
 			chart.write("chartdiv");
@@ -356,7 +360,11 @@ AmCharts.ready(function() {
 function resetChart() {
 	chart.dataProvider = data;
 	
+	chart.validateData();
+	chart.animateAgain();
+	chart.invalidateSize();
 	// remove the "Go back" label
 	chart.allLabels = [];
 	chart.write("chartdiv");
+	
 }
