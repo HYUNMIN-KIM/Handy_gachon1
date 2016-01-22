@@ -21,7 +21,7 @@ AmCharts.ready(function() {
 	  data[x].sensingData[y].avagStep = parseInt(sum3 /(data[x].sensingData.length));// average step.
 	  }
 	 }
-	//최고 최저값 구하기
+	//최고 최저값 
 
 	var HTemp,LTemp,HHeart,LHeart,HStep,LStep;
 	for(var x in data){
