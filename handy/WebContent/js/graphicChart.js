@@ -366,4 +366,5 @@ function resetChart() {
 	// remove the "Go back" label
 	chart.allLabels = [];
 	chart.write("chartdiv");
+	
 }
