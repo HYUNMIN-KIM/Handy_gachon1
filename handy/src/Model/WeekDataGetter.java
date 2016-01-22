@@ -104,7 +104,7 @@ public class WeekDataGetter {
 						cnt++;
 						minute = data[i].getValueList().get(j).getLog_date().getMinutes();
 						
-					}else if(cnt > 0){
+					}else {
 						SIHMSSensingData sData = new SIHMSSensingData();
 						sData.setLog_date(data[i].getValueList().get(j).getLog_date());
 						sData.getLog_date().setSeconds(0);
