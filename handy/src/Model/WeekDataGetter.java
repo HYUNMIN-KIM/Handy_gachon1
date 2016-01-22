@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import util.FloatFormat;
 import Dao.DaoGetInfo;
+import bean.SIHMCalorieCalc;
 import bean.SIHMConditionCalc;
 import bean.UserExtraBean;
 import bean.UserWeekData;
@@ -64,36 +65,54 @@ public class WeekDataGetter {
 		int minute, firstMinute, heartTotal, stepTotal, size;
 		float temperatureTotal;
 
+		//칼로리 계산
+		for(int i=0;i<data.length;i++)
+		{
+			data[i].setCalorieCalc(new SIHMCalorieCalc(ux.getGender(),ux.getAge(),
+					ux.getHeight(), ux.getWeight(), (int) result));
+			if (data[i].getValueList().size() > 0)
+				
+				data[i].getCalorieCalc().calcConsumedCalorie(data[i].getValueList());
+			//System.out.println("kal : " + data[i].getCalorieCalc().calcConsumedCalorie(data[i].getValueList()));
+		}
+		
 		for (int i = 0; i < data.length; i++) {
 
 			data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux
 					.getAge(), ux.getHeight(), ux.getWeight(), (int) result));
-			
-			
-			
+
+
+
 			// FIXME 센싱데이터가 0개면 NaN 출력됨
 			if (data[i].getValueList().size() > 0)
+			{
 				data[i].getConditionCalc().calcPoints(data[i].getValueList());
+				
 
-			
-			
+			}
+
 			firstMinute = 0;
 			minute = 0;
 			cnt = 0;
 			heartTotal = 0;
 			stepTotal = 0;
 			temperatureTotal = 0;
-			
+
 			//10분동안 센서 정보들의 평균값만을 포함한다
 			ArrayList<SIHMSSensingData> list = new ArrayList<>();
 			for (int j = 0; j < data[i].getValueList().size(); j++) {
-				
+
 				if(cnt == 0){
 					firstMinute = minute = data[i].getValueList().get(j).getLog_date().getMinutes();
 					heartTotal = data[i].getValueList().get(j).getHeart_rate();
 					stepTotal = data[i].getValueList().get(j).getSteps();
 					temperatureTotal = data[i].getValueList().get(j).getTemperature();
 					cnt = 1;
+
+
+				}else if(cnt < 9){
+
+
 					
 				}else if(cnt < 4){
 					
@@ -104,39 +123,44 @@ public class WeekDataGetter {
 						temperatureTotal += data[i].getValueList().get(j).getTemperature();
 						cnt++;
 						minute = data[i].getValueList().get(j).getLog_date().getMinutes();
-						
+
+
+					}else if(cnt > 0){
+
+			
 					}else {
+
 						SIHMSSensingData sData = new SIHMSSensingData();
 						sData.setLog_date(data[i].getValueList().get(j).getLog_date());
 						sData.getLog_date().setSeconds(0);
 						sData.getLog_date().setMinutes(firstMinute);
-						
+
 						if(heartTotal != 0)
 							sData.setHeart_rate(heartTotal / cnt);
 						if(stepTotal != 0)
 							sData.setSteps(stepTotal / cnt);
 						if(temperatureTotal != 0)
 							sData.setTemperature(temperatureTotal / cnt);
-						
-						
+
+
 						list.add(sData);
 						cnt = 0;
 					}
-					
+
 				}else{
 					SIHMSSensingData sData = new SIHMSSensingData();
 					sData.setLog_date(data[i].getValueList().get(j).getLog_date());
 					sData.getLog_date().setSeconds(0);
 					sData.getLog_date().setMinutes(firstMinute);
-					
+
 					if(heartTotal != 0)
 						sData.setHeart_rate(heartTotal / cnt);
 					if(stepTotal != 0)
 						sData.setSteps(stepTotal / cnt);
 					if(temperatureTotal != 0)
 						sData.setTemperature(Float.parseFloat(FloatFormat.format(temperatureTotal / cnt)));
-					
-					
+
+
 					list.add(sData);
 					cnt = 0;
 				}
@@ -144,11 +168,12 @@ public class WeekDataGetter {
 			data[i].getValueList().clear();
 			data[i].getValueList().addAll(list);
 
-			
-			
-			
+
+
+
 		}
 
 		return data;
 	}
 }
+

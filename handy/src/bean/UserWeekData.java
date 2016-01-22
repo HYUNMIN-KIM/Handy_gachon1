@@ -10,11 +10,21 @@ public class UserWeekData {
 	private String date;
 	private SIHMConditionCalc conditionCalc;
 	private List<SIHMSSensingData> valueList;
+	private SIHMCalorieCalc calorieCalc;
 
+	public SIHMCalorieCalc getCalorieCalc(){
+		return calorieCalc;
+	}
+	
+	
 	public SIHMConditionCalc getConditionCalc() {
 		return conditionCalc;
 	}
-
+	
+	public void setCalorieCalc (SIHMCalorieCalc calorieCalc){
+		this.calorieCalc = calorieCalc;
+	}
+	
 	public void setConditionCalc(SIHMConditionCalc conditionCalc) {
 		this.conditionCalc = conditionCalc;
 	}
@@ -40,3 +50,4 @@ public class UserWeekData {
 		this.valueList = valueList;
 	}
 }
+
