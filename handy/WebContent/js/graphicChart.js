@@ -45,7 +45,9 @@ AmCharts.ready(function() {
 							/ (data[x].sensingData.length));// average step.
 					
 					temp = data[x].sensingData[y].avagTemp;
+					
 				}
+				document.getElementById("info").innerHTML = data[x].sensingData[y].avagHeart;
 			}
 			// 최고 최저값
 
@@ -93,8 +95,7 @@ AmCharts.ready(function() {
 				}
 			}
 			
-			document.getElementById('info').innerHTML = temp;
-			console.log(temp);
+			
 			
 			// LEGEND
 			var legend = new AmCharts.AmLegend();
@@ -163,7 +164,7 @@ AmCharts.ready(function() {
 			graph_temp.lineColor = "#00CC00";
 			graph_temp.valueField = "temperature";
 			// graph_temp.dashLength = 3;
-			graph_temp.balloonText = "<b><span style='font-size:14px;'>[[temperature]]</span></b>";
+			graph_temp.balloonText = "<b><span style='font-size:14px;'> average :[[avagTemp]], [[temperature]]</span></b>";
 			// graph_temp.bullet = "round";
 			chartSub.addGraph(graph_temp);
 			
@@ -175,7 +176,7 @@ AmCharts.ready(function() {
 			graph_hr.lineColor = "#FF8600";
 			graph_hr.valueField = "heart_rate";
 			// graph_hr.dashLength = 3;
-			graph_hr.balloonText = "<b><span style='font-size:14px;'>[[heart_rate]]</span></b>";
+			graph_hr.balloonText = "<b><span style='font-size:14px;'> average :[[avagHeart]], [[heart_rate]]</span></b>";
 			// graph_hr.bullet = "round";
 			chartSub.addGraph(graph_hr);
 
