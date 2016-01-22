@@ -74,7 +74,7 @@ $(document).ready(function (){
 	<%}%>
 	
 	var ob = JSON.stringify(data);
-	//console.log(ob);
+	console.log(ob);
 });
          
          
@@ -82,8 +82,9 @@ $(document).ready(function (){
 
 
 
-<div id="chartdiv">
-</div>
+<div id="chartdiv"></div>
+<input type='button' id="btn" value='GO BACK' style="margin-left:835px">
+<div id="info" style="margin-top:700px">SSSS</div>
 
 <ul>
 <li>컨디션 지수 : </li>
