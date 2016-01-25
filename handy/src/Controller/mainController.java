@@ -31,17 +31,21 @@ public class mainController
   
   private void process(HttpServletRequest request, HttpServletResponse response)
   {
+	  String startDate = null;
     String userid = null;
     userid = request.getParameter("userid");
     if (userid != null)
     {
-      UserWeekData[] data = WeekDataGetter.getWeekData(userid);
+    	if(request.getParameter("startDate") != null && !request.getParameter("startDate").equals(""))
+    	startDate = request.getParameter("startDate");
+    	
+    	
+      UserWeekData[] data = WeekDataGetter.getWeekData(userid, startDate);
       request.setAttribute("data", data);
       try
       {
-    	  
         RequestDispatcher rd = request
-          .getRequestDispatcher("/test.jsp");
+          .getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
       }
       catch (Exception e)

@@ -1,5 +1,7 @@
 package Model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -11,7 +13,7 @@ import bean.UserExtraBean;
 import bean.UserWeekData;
 
 public class WeekDataGetter {
-   public static UserWeekData[] getWeekData(String id) {
+   public static UserWeekData[] getWeekData(String id, String startDate) {
       DaoGetInfo daoGetInfo = new DaoGetInfo();
       UserExtraBean ux = null;
       UserWeekData[] data = new UserWeekData[7];
@@ -19,13 +21,27 @@ public class WeekDataGetter {
       int sum = 0;
       int cnt = 0;
 
+      
       Calendar c = Calendar.getInstance();
-      c.add(3, -1);
-
-      int dayOfWeek = c.get(7);
-
-      c.add(5, (dayOfWeek - 1) * -1);
-
+      
+      if(startDate == null){
+	      c.add(3, -1);
+	      int dayOfWeek = c.get(7);
+	      c.add(5, (dayOfWeek - 1) * -1);
+      }else{
+    	  try {
+    		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+			c.setTime(formatter.parse(startDate));
+		} catch (Exception e) {
+			// formatter parse error
+			System.out.println("WeekDataGetter startDate parseError");
+			e.printStackTrace();
+		}
+    	  
+      }
+      
+      
+      
       int userSeq = daoGetInfo.getUser_seq(id);
 
       for (int i = 0; i < 7; i++)

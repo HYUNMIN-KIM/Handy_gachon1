@@ -47,12 +47,21 @@ AmCharts.ready(function() {
 					temp = data[x].sensingData[y].avagTemp;
 					
 				}
-				document.getElementById("info").innerHTML = data[x].sensingData[y].avagHeart;
+				//FIXME :: avageHeart없으면?
+				//document.getElementById("info").innerHTML = data[x].sensingData[y].avagHeart;
 			}
 			// 최고 최저값
 
+			
+				
 			var HTemp, LTemp, HHeart, LHeart, HStep, LStep;
 			for ( var x in data) {
+				
+				if(typeof data[x].sensingData[0] == 'undefined'){
+					//센싱데이터가 없으면
+					continue;
+				}
+				
 				HTemp = parseFloat(data[x].sensingData[0].temperature).toFixed(
 						2);
 				LTemp = parseFloat(data[x].sensingData[0].temperature).toFixed(

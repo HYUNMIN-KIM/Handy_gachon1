@@ -1,11 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@ page import="bean.*"%>
+<%@ page import="java.text.*"%>
+<%@ page import="util.*"%>
+<%@ page errorPage="errorpage.jsp" %>
 <link type="text/css" rel="stylesheet" href="css/header.css" />
 
+<%
+		UserWeekData[] data = (UserWeekData[]) request.getAttribute("data");
+		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("HH:mm:ss");
+		
+%>
 
 <div id="headerBar">
 </div>
 
 <div id="header">
-
+<span id="header_title">Condition Graph</span>
+<span id="header_date"><%=data[0].getDate() %> ~ <%=data[data.length-1].getDate() %></span>
+ <div class="week-picker"></div>
+</div>
+<div id="graphController">
+<input type="image" src="image/back.png" id="btn" width="30" height="30"><br>
 </div>
