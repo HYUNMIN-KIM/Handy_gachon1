@@ -72,8 +72,8 @@ public class DataAnalysis extends HttpServlet {
 				num = Activity_point(point);
 
 			response.setContentType("text/plain");
-			
-				out.println(Data(content, num));
+				
+				out.println(content);
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -81,9 +81,6 @@ public class DataAnalysis extends HttpServlet {
 
 
 	}
-
-	//	String name[] = {"ConditionDetail_","Temperature_","TemperatureChange_","TemperatureRhythm_","Heart-lung"
-	//		,"HeartRateChange_","HeartRateRhythm_","Synchronization_","Activity_"};
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -121,28 +118,28 @@ public class DataAnalysis extends HttpServlet {
 
 	public int Condition_point(float con_p)
 	{
-		int num=0;
+		int num=1;
 
 		if(con_p>=90)
-			num=1;
-		else if(con_p<90 && con_p>=80)
-			num=2;
-		else if(con_p<80 && con_p>=70)
-			num=3;
-		else if(con_p<70 && con_p>=60)
-			num=4;
-		else if(con_p<60 && con_p>=50)
-			num=5;
-		else if(con_p<50 && con_p>=40)
-			num=6;
-		else if(con_p<40 && con_p>=30)
-			num=7;
-		else if(con_p<30 && con_p>=20)
-			num=8;
-		else if(con_p<20 && con_p>=10)
-			num=9;
-		else if(con_p<10)
 			num=10;
+		else if(con_p<90 && con_p>=80)
+			num=9;
+		else if(con_p<80 && con_p>=70)
+			num=8;
+		else if(con_p<70 && con_p>=60)
+			num=7;
+		else if(con_p<60 && con_p>=50)
+			num=6;
+		else if(con_p<50 && con_p>=40)
+			num=5;
+		else if(con_p<40 && con_p>=30)
+			num=4;
+		else if(con_p<30 && con_p>=20)
+			num=3;
+		else if(con_p<20 && con_p>=10)
+			num=2;
+		else if(con_p<10)
+			num=1;
 
 		return num;
 

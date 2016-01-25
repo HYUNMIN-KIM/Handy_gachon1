@@ -207,13 +207,17 @@ AmCharts.ready(function() {
 			chartCursor.cursorColor = "#CC0000";
 			chart.addChartCursor(chartCursor);
 			chart.mouseWheelZoomEnabled = true;
-
+			
 			chart.addListener("clickGraphItem", function(event) {
 				var button = document.getElementById('btn');
 
 				button.onclick = function() {
 					resetChart()();
 				}
+				clickData = event.item.dataContext;
+				
+				
+				
 
 				// CURSOR
 				// chartCursorSub
@@ -224,6 +228,35 @@ AmCharts.ready(function() {
 				chartSub.mouseWheelZoomEnabled = true;
 
 				chartSub.dataProvider = event.item.dataContext.sensingData;
+				var contents = ["ConditionDetail_","Temperature_","TemperatureChange_","TemperatureRhythm_",
+						"Heart-lung","HeartRateChange_","HeartRateRhythm_","Synchronization_","Activity_"];
+				
+				var points = [clickData.ConditionPoint, clickData.conditionData.tempPoint,
+						clickData.conditionData.tempchangeDeductPoint,clickData.conditionData.tempRhythmPoint,
+						clickData.conditionData.hrPoint,clickData.conditionData.hrChangeDeductPoint,clickData.conditionData.hrRhythmPoint,
+						clickData.conditionData.synchroDeductPoint,clickData.conditionData.activityPoint];
+				
+				
+				
+			
+t = "";				
+				for(var i=0;i<9;i=i+1)
+				{
+					$.ajax(
+							{
+			            url:'/handy/DataAnalysis',
+			            type:'GET',
+			            asnyc: false,
+			            data:{'content' : contents[i],'point': points[i]},
+			            success:function(data){
+			             t += data;
+			            	$('#analysis').text(t);
+			            }
+							}
+			            );
+				}
+
+				
 				chartSub.mouseWheelZoomEnabled = true;
 
 				chartSub.validateData();

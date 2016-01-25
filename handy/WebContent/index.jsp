@@ -122,6 +122,10 @@ $("#header_date").click(function (){
 <div id="chartdiv">
 </div>
 
+<div id="analysis">
+
+</div>
+
 
 
 
