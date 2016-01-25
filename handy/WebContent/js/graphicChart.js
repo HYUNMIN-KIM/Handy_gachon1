@@ -165,19 +165,18 @@ AmCharts.ready(function() {
 			// graph_cond
 			var graph_cond = new AmCharts.AmGraph();
 			graph_cond.type = "column";
-			graph_cond.title = "condition";
+			graph_cond.title = "CONDITION";
 			graph_cond.lineColor = "#85C5E3";
 			graph_cond.valueField = "conditionPoint";
 			graph_cond.fillAlphas = 1;
 			graph_cond.balloonText = "<b><span style='font-size:14px;'>[[conditionPoint]]</span></b>";
-			// chart.graph_cond.balloon.drop = true;
 			graph_cond.valueAxis = valueAxis;
 			chart.addGraph(graph_cond);
 
 			// graph_cal
 			var graph_cal = new AmCharts.AmGraph();
 			graph_cal.type = "line";
-			graph_cal.title = "calorie";
+			graph_cal.title = "CALORIE";
 			graph_cal.lineColor = "#00CC00";
 			graph_cal.valueField = "caloriePoint";
 			graph_cal.fillAlphas = 0;
@@ -191,7 +190,7 @@ AmCharts.ready(function() {
 			var graph_temp = new AmCharts.AmGraph();
 			graph_temp.type = "line";
 			graph_temp.lineThickness = 2.5;
-			graph_temp.title = "temperature";
+			graph_temp.title = "TEMPERATURE";
 			graph_temp.lineColor = "#00CC00";
 			graph_temp.valueField = "temperature";
 			graph_temp.fillAlphas = 0;
@@ -204,7 +203,7 @@ AmCharts.ready(function() {
 			var graph_hr = new AmCharts.AmGraph();
 			graph_hr.type = "line";
 			graph_hr.lineThickness = 2.5;
-			graph_hr.title = "heart rate";
+			graph_hr.title = "HEART RATE";
 			graph_hr.lineColor = "#FF8600";
 			graph_hr.valueField = "heart_rate";
 			graph_hr.fillAlphas = 0;
@@ -216,7 +215,7 @@ AmCharts.ready(function() {
 			// graph_step
 			var graph_step = new AmCharts.AmGraph();
 			graph_step.type = "column";
-			graph_step.title = "step";
+			graph_step.title = "STEP";
 			graph_step.lineColor = "#770055";
 			graph_step.valueField = "step";
 			graph_step.fillAlphas = 0.7;
