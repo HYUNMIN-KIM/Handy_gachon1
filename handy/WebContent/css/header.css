@@ -46,6 +46,7 @@ div{
 	font-size: 8pt;
 	right:10px;
 	bottom: 10px;
+	cursor: pointer;
 }
 
 .week-picker{

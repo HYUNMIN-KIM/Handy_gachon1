@@ -61,6 +61,21 @@ $(document).ready(function (){
 	<%}%>
 	
 	var ob = JSON.stringify(data);
+	
+	
+
+	for(var i=0; i<9; i++){
+		if(i == 0){
+			$("#analysis"+i).css("borderTopColor", "#545454");
+		}else if(i < 4){
+			$("#analysis"+i).css("border-color", "#009e00");
+		}else if(i<8){
+			$("#analysis"+i).css("border-color", "#ff8600");
+		}else{
+			$("#analysis"+i).css("border-color", "#770055");
+		}
+	}
+	
 });
 
 
@@ -122,24 +137,17 @@ $("#header_date").click(function (){
 <div id="chartdiv">
 </div>
 
-<div>
+<div id="analysisdiv">
+전문가의 분석 의견
 <ul>
 	<li class="analysis" id="analysis0"></li>
-	<br>
 	<li class="analysis" id="analysis1"></li>
-	<br>
 	<li class="analysis" id="analysis2"></li>
-	<br>
 	<li class="analysis" id="analysis3"></li>
-	<br>
 	<li class="analysis" id="analysis4"></li>
-	<br>
 	<li class="analysis" id="analysis5"></li>
-	<br>
 	<li class="analysis" id="analysis6"></li>
-	<br>
 	<li class="analysis" id="analysis7"></li>
-	<br>
 	<li class="analysis" id="analysis8"></li>
 </ul>
 

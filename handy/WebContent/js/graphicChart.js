@@ -251,6 +251,7 @@ AmCharts.ready(function() {
 						async: false,
 						data:{'content' : contents[i],'point': points[i]},
 						success:function(data){
+//							data = data.replace(/\./gi, ".");
 							$('#analysis'+i).text(data);
 						}
 					}

@@ -2,11 +2,34 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-#chartdiv{
-	position:relative;
-	width: 70%; 
-	height: 375px; 
+#chartdiv {
+	position: relative;
+	width: 70%;
+	height: 375px;
 	background-color: #FFFFFF;
-	margin : 0 auto;
+	margin: 0 auto;
 	z-index: 0;
+}
+
+#analysisdiv {
+	position: relative;
+	width: 70%;
+	margin: 0 auto;
+	margin-top: 30px; 
+	font-style: italic;
+	text-align: left;
+	padding: 5px;
+}
+
+.analysis {
+	vertical-align: bottom;
+	line-height : 25px;
+	font-size: 16px;
+	font-style: normal; 
+	margin : 12px;
+	padding : 6px;
+	list-style: none;
+	border : 1px solid #dadada;
+}
+
 }
