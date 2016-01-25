@@ -31,6 +31,8 @@ div{
 }
 
 #btn{
+	border : none;
+	outline-style:none;
 }
 
 #header_title{

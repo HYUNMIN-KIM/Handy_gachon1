@@ -21,5 +21,5 @@
  <div class="week-picker"></div>
 </div>
 <div id="graphController">
-<input type='button' id="btn" value='GO BACK'>
+<input type="image" src="image/back.png" id="btn" width="30" height="30"><br>
 </div>
