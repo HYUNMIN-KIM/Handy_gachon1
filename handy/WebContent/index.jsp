@@ -34,8 +34,8 @@ $(document).ready(function (){
 	<% for(int i=0; i<data.length; i++){ %>
 		data[<%=i%>] = new Object;
 		data[<%=i%>].date = '<%=data[i].getDate()%>';
-		data[<%=i%>].conditionPoint = '<%=FloatFormat.format(data[i].getConditionCalc().getConditionPoint())%>';
-		data[<%=i%>].caloriePoint = '<%=data[i].getCalorieCalc().getcalcConsumedCalorie()%>';
+		data[<%=i%>].conditionPoint = '<%=FloatFormat.format(data[i].getConditionCalc().getConditionPoint()) %>';
+		data[<%=i%>].caloriePoint = '<%=FloatFormat.format(data[i].getCalorieCalc().getcalcConsumedCalorie()) %>';
 
 		data[<%=i%>].conditionData = new Object;
 		
