@@ -195,8 +195,6 @@ AmCharts.ready(function() {
 			graph_temp.lineColor = "#00CC00";
 			graph_temp.valueField = "temperature";
 			graph_temp.fillAlphas = 0;
-			graph_temp.bullet = "round";
-			graph_temp.bulletSize = 1;
 			// graph_temp.balloonText = "<b><span style='font-size:14px;'>
 			// average: [[avgTemp]]<br>high: [[highTemp]]<br>low:
 			// [[lowTemp]]</span></b>";
@@ -210,8 +208,6 @@ AmCharts.ready(function() {
 			graph_hr.lineColor = "#FF8600";
 			graph_hr.valueField = "heart_rate";
 			graph_hr.fillAlphas = 0;
-			graph_hr.bullet = "round";
-			graph_hr.bulletSize = "1";
 			// graph_hr.balloonText = "<b><span style='font-size:14px;'>
 			// average: [[avgHeart]]<br>high: [[highHeart]]<br>low:
 			// [[lowHeart]]</span></b>";
