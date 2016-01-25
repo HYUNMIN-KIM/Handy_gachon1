@@ -12,19 +12,43 @@ div{
 }
 
 #header{
+	position : relative;
 	display: block;
 	width: 95%;
 	min-height: 25px;
 	background-color: #fafafa;
+	padding: 3px;
+	
+}
+
+
+#graphController{
+	position: relative;
+	width: 95%;
+	min-height: 10px;
+	padding: 2px;
 	margin-bottom: 20px;
-	padding: 5px;
-	
-	
 }
 
-#headerTitle{
-	font-size: 20pt;
-	padding-left: 10px;
+#btn{
 }
 
+#header_title{
+	font-size: 12pt;
+	margin-left: 4px;
+	margin-top: 3px;
+}
 
+#header_date{
+	position: absolute;
+	font-size: 8pt;
+	right:10px;
+	bottom: 10px;
+}
+
+.week-picker{
+	max-height: 100px;
+	position: absolute;
+	right:10px;
+	z-index: 5;
+}

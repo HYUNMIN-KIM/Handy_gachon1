@@ -2,12 +2,11 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-body *{
-	font-family: '³ª´®°íµñ', 'Nanum Gothic', sans-serif;
-}
-
-#main{
-	padding: 5px;
-	
-	
+#chartdiv{
+	position:relative;
+	width: 70%; 
+	height: 375px; 
+	background-color: #FFFFFF;
+	margin : 0 auto;
+	z-index: 0;
 }
