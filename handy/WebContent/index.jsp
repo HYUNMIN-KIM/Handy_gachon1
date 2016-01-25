@@ -122,7 +122,26 @@ $("#header_date").click(function (){
 <div id="chartdiv">
 </div>
 
-<div id="analysis">
+<div>
+<ul>
+	<li class="analysis" id="analysis0"></li>
+	<br>
+	<li class="analysis" id="analysis1"></li>
+	<br>
+	<li class="analysis" id="analysis2"></li>
+	<br>
+	<li class="analysis" id="analysis3"></li>
+	<br>
+	<li class="analysis" id="analysis4"></li>
+	<br>
+	<li class="analysis" id="analysis5"></li>
+	<br>
+	<li class="analysis" id="analysis6"></li>
+	<br>
+	<li class="analysis" id="analysis7"></li>
+	<br>
+	<li class="analysis" id="analysis8"></li>
+</ul>
 
 </div>
 

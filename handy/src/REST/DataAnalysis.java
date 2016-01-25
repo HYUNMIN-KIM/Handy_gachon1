@@ -47,7 +47,7 @@ public class DataAnalysis extends HttpServlet {
 
 		try
 		{
-
+			
 			String content = request.getParameter("content");
 			float point = Float.parseFloat(request.getParameter("point"));
 			int num=0;
@@ -60,7 +60,7 @@ public class DataAnalysis extends HttpServlet {
 				num = Sync_TempChange_point(point);
 			else if(content.equalsIgnoreCase("TemperatureRhythm_"))
 				num = Rhythm_point(point);
-			else if(content.equalsIgnoreCase("Heart-lung"))
+			else if(content.equalsIgnoreCase("HeartRate_"))
 				num = Temp_Hr_point(point);
 			else if(content.equalsIgnoreCase("HeartRateChange_"))
 				num = HrChange_point(point);
@@ -73,7 +73,7 @@ public class DataAnalysis extends HttpServlet {
 
 			response.setContentType("text/plain");
 				
-				out.println(content);
+				out.println(Data(content,num));
 			
 		}catch(Exception e){
 			e.printStackTrace();
