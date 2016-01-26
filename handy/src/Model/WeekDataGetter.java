@@ -33,6 +33,10 @@ public class WeekDataGetter {
 	   UserWeekData[] data = new UserWeekData[7];
 	   userSeq = daoGetInfo.getUser_seq(id);
 	   
+	   
+	   // 유저정보
+       ux = daoGetInfo.getExtraUser(userSeq);
+
 	   //get calendar
 	   Calendar c = Calendar.getInstance();
 	   
@@ -57,10 +61,7 @@ public class WeekDataGetter {
       //TODO 7일간의 정보를 처리함. 월간 정보 필요 시 수정
       for (int i = 0; i < 7; i++) {
     	  data[i] = new UserWeekData();
-
-          // 유저정보
-          ux = daoGetInfo.getExtraUser(userSeq);
-
+         
     	  
     	 //날짜설정
          year = c.get(1);
@@ -77,6 +78,7 @@ public class WeekDataGetter {
          data[i].setDate(strDate);
          data[i].setValueList(daoGetInfo.getSensorValue_YearWeek(userSeq,
                year, month, day));
+         
 
          //평균 심박수 계산을 위한 작업
          for (int j = 0; j < data[i].getValueList().size(); j++) {
@@ -96,37 +98,32 @@ public class WeekDataGetter {
       
       
       
-      //칼로리 계산
-      for(int i=0;i<data.length;i++)
-      {
-         data[i].setCalorieCalc(new SIHMCalorieCalc(ux.getGender(),ux.getAge(),
-               ux.getHeight(), ux.getWeight(), (int) heartAvg));
-         
-         if (data[i].getValueList().size() > 0)
-            data[i].getCalorieCalc().calcConsumedCalorie(data[i].getValueList());
-      }
-      
-      
       
 
       for (int i = 0; i < data.length; i++) {
+    	  
+    	  firstMinute = 0;
+          minute = 0;
+          cnt = 0;
+          heartTotal = 0;
+          stepTotal = 0;
+          temperatureTotal = 0;
+    	  
+    	  
 
-    	  //센싱 데이터 수가 0개면 continue
-    	  if (data[i].getValueList().size() <= 0)
-         	 continue;
-    	 
+    	  if(data[i].getValueList().size() <= 0) //센싱값이 0개 이하면 continue
+    		  continue;
+    	  
+    	  //칼로리 계산
+    	    data[i].setCalorieCalc(new SIHMCalorieCalc(ux.getGender(),ux.getAge(),
+    	               ux.getHeight(), ux.getWeight(), (int) heartAvg));
+    	    data[i].getCalorieCalc().calcConsumedCalorie(data[i].getValueList());
+    	  
     	  
     	 //컨디션 계산
          data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux
                .getAge(), ux.getHeight(), ux.getWeight(), (int) heartAvg));
-         
-         
-         firstMinute = 0;
-         minute = 0;
-         cnt = 0;
-         heartTotal = 0;
-         stepTotal = 0;
-         temperatureTotal = 0;
+         data[i].getConditionCalc().calcPoints(data[i].getValueList());
          
          
          
@@ -143,7 +140,7 @@ public class WeekDataGetter {
                
             }else if(cnt < 4){
                
-               //이전 정보와 시간 차이가 2분을 넘어간경우 그때까지 정보만 평균값으로 넣음
+               //이전 정보와 시간 차이가 2분을 넘어간경우 
                if(minute +2 > data[i].getValueList().get(j).getLog_date().getMinutes()){
                   heartTotal += data[i].getValueList().get(j).getHeart_rate();
                   stepTotal += data[i].getValueList().get(j).getSteps();
@@ -186,6 +183,7 @@ public class WeekDataGetter {
             }
          }
          
+         //기존 1분마다의 값 제거 후 5분마다 평균을 낸 값 추가
          data[i].getValueList().clear();
          data[i].getValueList().addAll(list);
       }
