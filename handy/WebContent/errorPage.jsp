@@ -8,6 +8,14 @@
 <title>ERROR</title>
 </head>
 <body>
-DATA ERROR
+	<div style="text-align: center;margin:100px">
+		<div style="font-weight: bold;">
+		   <%= exception.getClass().getName() %>
+		</div>
+		
+	    <div>
+	        <%= exception.getMessage() %>
+	    </div>
+    </div>	
 </body>
 </html>
