@@ -3,6 +3,8 @@ var chartSub;
 var charData;
 var temp;
 
+
+
 AmCharts.ready(function() {
 			document.getElementById('backbtn').style.display = 'none';
 			document.getElementById('analysisdiv').style.display = 'none';
@@ -15,44 +17,12 @@ AmCharts.ready(function() {
 			chart.creditsPosition = "top-left";
 			chart.startDuration = 1;
 			chart.startEffect = "elastic";
-			
-			
-			chartSub = new AmCharts.AmSerialChart();
-			chartSub.dataProvider = charData;
-			chartSub.dataDateFormat = "HH:NN:SS";
-			chartSub.categoryField = "log_date";
-			chartSub.creditsPosition = "top-left";
-			chartSub.startDuration = 1;
-			chartSub.startEffect = "elastic";
-			
+
 			// LEGEND
 			var legend = new AmCharts.AmLegend();
 			legend.useGraphSettings = true;
-			var legendSub = new AmCharts.AmLegend();
-			legendSub.useGraphSettings = false;
 
 			chart.addLegend(legend);
-			chartSub.addLegend(legendSub);
-
-			// AXES
-			// categoryAxis
-			var categoryAxis = chart.categoryAxis;
-			categoryAxis.parseDates = true;
-			categoryAxis.minPeriod = "DD";
-			categoryAxis.gridAlpha = 0.1;
-			categoryAxis.minorGridAlpha = 0.1;
-			categoryAxis.axisAlpha = 0;
-			categoryAxis.minorGridEnabled = true;
-			categoryAxis.inside = false;
-
-			var categoryAxis2 = chartSub.categoryAxis;
-			categoryAxis2.parseDates = true;
-			categoryAxis2.minPeriod = "mm";
-			categoryAxis2.gridAlpha = 0.1;
-			categoryAxis2.minorGridAlpha = 0.1;
-			categoryAxis2.axisAlpha = 0;
-			categoryAxis2.minorGridEnabled = true;
-			categoryAxis2.inside = false;
 
 			// valueAxis
 			// chart
@@ -78,14 +48,6 @@ AmCharts.ready(function() {
 			valueAxis2.position = "right";
 			chart.addValueAxis(valueAxis2);
 
-			// chartSub
-			var valueAxis3 = new AmCharts.ValueAxis();
-			valueAxis3.tickLength = 0;
-			valueAxis3.axisAlpha = 0;
-			valueAxis3.showFirstLabel = false;
-			valueAxis3.showLastLabel = false;
-			chartSub.addValueAxis(valueAxis3);
-
 			// GRAPHS
 			// graph_cond
 			var graph_cond = new AmCharts.AmGraph();
@@ -99,6 +61,53 @@ AmCharts.ready(function() {
 			graph_cond.cornerRadiusTop = 5;
 			chart.addGraph(graph_cond);
 
+			// chartSub
+			
+			chartSub = new AmCharts.AmSerialChart();
+			chartSub.dataProvider = charData;
+			chartSub.dataDateFormat = "HH:NN:SS";
+			chartSub.categoryField = "log_date";
+			chartSub.creditsPosition = "top-left";
+			chartSub.startDuration = 1;
+			chartSub.startEffect = "elastic";
+			
+			
+			var legendSub = new AmCharts.AmLegend();
+			legendSub.useGraphSettings = false;
+
+			
+			chartSub.addLegend(legendSub);
+
+			// AXES
+			// categoryAxis
+			var categoryAxis = chart.categoryAxis;
+			categoryAxis.parseDates = true;
+			categoryAxis.minPeriod = "DD";
+			categoryAxis.gridAlpha = 0.1;
+			categoryAxis.minorGridAlpha = 0.1;
+			categoryAxis.axisAlpha = 0;
+			categoryAxis.minorGridEnabled = true;
+			categoryAxis.inside = false;
+
+			var categoryAxis2 = chartSub.categoryAxis;
+			categoryAxis2.parseDates = true;
+			categoryAxis2.minPeriod = "mm";
+			categoryAxis2.gridAlpha = 0.1;
+			categoryAxis2.minorGridAlpha = 0.1;
+			categoryAxis2.axisAlpha = 0;
+			categoryAxis2.minorGridEnabled = true;
+			categoryAxis2.inside = false;
+
+			
+			var valueAxis3 = new AmCharts.ValueAxis();
+			valueAxis3.tickLength = 0;
+			valueAxis3.axisAlpha = 0;
+			valueAxis3.showFirstLabel = false;
+			valueAxis3.showLastLabel = false;
+			chartSub.addValueAxis(valueAxis3);
+
+			
+			
 			// graph_cal
 			var graph_cal = new AmCharts.AmGraph();
 			graph_cal.type = "line";
@@ -110,7 +119,6 @@ AmCharts.ready(function() {
 			graph_cal.bulletSize = "7";
 			graph_cal.balloonText = "<b><span style='font-size:14px;'>[[caloriePoint]]</span></b>";
 			graph_cal.valueAxis = valueAxis2;
-			graph_cal.animationPlayed = true;
 			chart.addGraph(graph_cal);
 
 			// graph_temp
@@ -122,7 +130,6 @@ AmCharts.ready(function() {
 			graph_temp.valueField = "temperature";
 			graph_temp.fillAlphas = 0;
 			graph_temp.balloonText = "<b><span style='font-size:14px;'>[[temperature]]</span></b>";
-			graph_temp.animationPlayed = true;
 			chartSub.addGraph(graph_temp);
 
 			// graph_hr
@@ -134,7 +141,6 @@ AmCharts.ready(function() {
 			graph_hr.valueField = "heart_rate";
 			graph_hr.fillAlphas = 0;
 			graph_hr.balloonText = "<b><span style='font-size:14px;'>[[heart_rate]]</span></b>";
-			graph_hr.animationPlayed = true;
 			chartSub.addGraph(graph_hr);
 
 			// graph_step
@@ -155,6 +161,7 @@ AmCharts.ready(function() {
 			chartCursor.cursorColor = "#CC0000";
 			chart.addChartCursor(chartCursor);
 			chart.mouseWheelZoomEnabled = true;
+			
 			
 			
 			chart.addListener("clickGraphItem", function(event) {
@@ -277,7 +284,7 @@ AmCharts.ready(function() {
 								chartSub.mouseWheelZoomEnabled = true;
 
 								chartSub.validateData();
-								chartSub.animateAgain();
+								//chartSub.animateAgain();
 								chartSub.invalidateSize(); // 차트크기 일정하게
 								chartSub.write("chartdiv");
 							});
@@ -287,9 +294,8 @@ AmCharts.ready(function() {
 function resetChart() {
 	chart.dataProvider = data;
 	chart.validateData();
-	chart.animateAgain();
+//	chart.animateAgain();
 	chart.invalidateSize(); // 차트크기 일정하게
-
 	chart.allLabels = [];
 	chart.write("chartdiv");
 }
