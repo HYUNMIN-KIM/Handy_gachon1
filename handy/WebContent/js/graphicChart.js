@@ -4,9 +4,9 @@ var charData;
 var temp;
 
 AmCharts.ready(function() {
-			document.getElementById('backbtn').style.visibility = 'hidden';
-			document.getElementById('analysisdiv').style.visibility = 'hidden';
-			$("#legendDiv").css("visibility", "hidden");
+			document.getElementById('backbtn').style.display = 'none';
+			document.getElementById('analysisdiv').style.display = 'none';
+			$("#legendDiv").css("display", "none");
 
 			chart = new AmCharts.AmSerialChart();
 			chart.dataProvider = data;
@@ -148,14 +148,14 @@ AmCharts.ready(function() {
 
 			chart.addListener("clickGraphItem", function(event) {
 								var button = document.getElementById('backbtn');
-								document.getElementById('backbtn').style.visibility = 'visible';
-								document.getElementById('analysisdiv').style.visibility = 'visible';
-								$("#legendDiv").css("visibility", "visible");
+								document.getElementById('backbtn').style.display = 'block';
+								document.getElementById('analysisdiv').style.display = 'block';
+								$("#legendDiv").css("display", "block");
 
 								button.onclick = function() {
-									document.getElementById('backbtn').style.visibility = 'hidden';
-									document.getElementById('analysisdiv').style.visibility = 'hidden';
-									$("#legendDiv").css("visibility", "hidden");
+									document.getElementById('backbtn').style.display = 'none';
+									document.getElementById('analysisdiv').style.display = 'none';
+									$("#legendDiv").css("display", "none");
 									resetChart();
 								}
 
