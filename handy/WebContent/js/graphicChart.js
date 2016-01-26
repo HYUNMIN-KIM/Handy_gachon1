@@ -55,6 +55,8 @@ AmCharts.ready(function() {
 			valueAxis.title = "Condition Index"
 			valueAxis.tickLength = 0;
 			valueAxis.axisAlpha = 0;
+			valueAxis.minimum = 0;
+			valueAxis.gridCount = 20;
 			valueAxis.showFirstLabel = false;
 			valueAxis.showLastLabel = false;
 			valueAxis.position = "left";
