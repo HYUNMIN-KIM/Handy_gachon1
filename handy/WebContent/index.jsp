@@ -14,6 +14,8 @@
 	<script type="text/javascript"  src="http://cdn.amcharts.com/lib/3/serial.js"></script>
 	<script type="text/javascript" src="js/graphicChart.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.corner/2.13/jquery.corner.js"></script>
+	
 	<link type="text/css" rel="stylesheet" href="css/header.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
 	<link type="text/css" rel="stylesheet" href="css/index.css" />
@@ -115,14 +117,15 @@
 
 	    //전문가 분석 정보 테두리 색상
 	    for(var i=0; i<9; i++){
+	    	$("#analysis"+i).corner();
 	        if(i == 0){
-	            $("#analysis"+i).css("borderTopColor", "#545454");
+	            $("#analysis"+i).css({"border-color" : "#545454", "background-color" : "#ececec"});
 	        }else if(i < 4){
-	            $("#analysis"+i).css("border-color", "#009e00");
+	            $("#analysis"+i).css({"border-color" : "#009e00", "background-color" : "#e1ffe1"});
 	        }else if(i<8){
-	            $("#analysis"+i).css("border-color", "#ff8600");
+	            $("#analysis"+i).css({"border-color" : "#ff8600", "background-color" : "#ffe7cc"});
 	        }else{
-	            $("#analysis"+i).css("border-color", "#770055");
+	            $("#analysis"+i).css({"border-color" : "#770055", "background-color" : "#ffe1f6"});
 	        }
 	    }
 	    
