@@ -250,7 +250,7 @@ AmCharts.ready(function() {
 									document.getElementById('backbtn').style.visibility = 'hidden';
 									document.getElementById('analysisdiv').style.visibility = 'hidden';
 									$("#legendDiv").css("visibility", "hidden");
-									resetChart()();
+									resetChart();
 								}
 
 								//클릭한 데이터
