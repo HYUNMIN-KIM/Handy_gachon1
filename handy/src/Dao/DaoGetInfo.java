@@ -18,31 +18,13 @@ import bean.UserExtraBean;
 
 public class DaoGetInfo {
 
-   //private static Connection conn = JDBCManager.getInstance();
+ 
    
    private Statement st = null;
    private ResultSet rs = null;
    private PreparedStatement pstmt = null;
    
-   /*
-   public int getUser_seq()
-   {
-      int result = 0;
-      
-      try{
-         String query = "select count(*) FROM COMM_USER";
-         pstmt = conn.prepareStatement(query);
-         
-         rs = pstmt.executeQuery();
-         rs.next();
-         
-         result = rs.getInt("count(*)");
-      }catch(SQLException e){
-          System.out.println(e.getMessage());
-      }
-      return result;
-   }
-   */
+   //SensingData query
     public ArrayList<SIHMSSensingData> getSensorValue_YearWeek(int user_seq, int year, int month, int day)
      {
        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -87,7 +69,7 @@ public class DaoGetInfo {
      }
      
    
-   
+   //user_id로 user_seq 가져오기
    public int getUser_seq(String user_id)
    {
       int result = 0;
@@ -107,6 +89,7 @@ public class DaoGetInfo {
       return result;
    }
    
+   //user_id 가져오기
    public String getUser_Id()
    {
       String result = null;
@@ -125,30 +108,6 @@ public class DaoGetInfo {
       JDBCManager.close();
       return result;
    }
-   
-   
-   /*
-       public ArrayList<SensorValueBean> getSensor(int user_seq)
-       {
-          ArrayList<SensorValueBean> sensorInfo = new ArrayList<SensorValueBean>();
-          Connection conn = JDBCManager.getInstance();
-          try{
-             String query = "select LOG_DT,TEMPERATURE,HEART_RATE,STEPS from GB_SENSING_DATA WHERE REG_USER_SEQ=?";
-
-             pstmt = conn.prepareStatement(query);
-             pstmt.setInt(1,user_seq);
-             rs = pstmt.executeQuery();
-             while(rs.next()){
-                sensorInfo.add(new SensorValueBean(rs.getInt("HEART_RATE"),rs.getDouble("TEMPERATURE"), rs.getInt("STEPS"), rs.getDate("LOG_DT")));
-             
-             }
-             }catch(SQLException e){
-                 System.out.println(e.getMessage());
-          }
-          JDBCManager.close();
-         return sensorInfo;
-       }
-*/
    
 
    public UserBean getUser(int user_seq)

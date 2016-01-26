@@ -24,14 +24,14 @@ public class JDBCManager {
 
 		if(conn == null) {
 			try {
-				// 드라이버를 로딩한다.
+				// 드라이버를 로딩
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 			} catch (ClassNotFoundException e ) {
 				e.printStackTrace();
 			}
 
 			try {
-				// 데이터베이스의 연결을 설정한다.
+				// DB 연결 설정
 				conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 			} catch ( Exception e ) {
 				e.printStackTrace();
@@ -39,7 +39,7 @@ public class JDBCManager {
 		}
 		return conn;
 	}
-
+	//DB close()
 	public static void close(){
 
 		if(conn==null)
