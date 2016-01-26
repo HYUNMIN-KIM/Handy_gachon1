@@ -15,8 +15,6 @@ AmCharts.ready(function() {
 			chart.dataDateFormat = "YYYY/MM/DD";
 			chart.categoryField = "date";
 			chart.creditsPosition = "top-left";
-			chart.startDuration = 1;
-			chart.startEffect = "elastic";
 
 			// LEGEND
 			var legend = new AmCharts.AmLegend();
@@ -68,8 +66,6 @@ AmCharts.ready(function() {
 			chartSub.dataDateFormat = "HH:NN:SS";
 			chartSub.categoryField = "log_date";
 			chartSub.creditsPosition = "top-left";
-			chartSub.startDuration = 1;
-			chartSub.startEffect = "elastic";
 			
 			
 			var legendSub = new AmCharts.AmLegend();
