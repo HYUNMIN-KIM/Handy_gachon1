@@ -59,9 +59,8 @@ public class WeekDataGetter {
       //TODO 7일간의 정보를 처리함. 월간 정보 필요 시 수정
       for (int i = 0; i < 7; i++) {
     	  data[i] = new UserWeekData();
-         
-    	  
-    	 //날짜설정
+
+    	  //날짜설정
          year = c.get(1);
          month = c.get(2) + 1;
          day = c.get(5);
@@ -94,9 +93,6 @@ public class WeekDataGetter {
       
       //평균 심박수 계산
       heartAvg = sum / (float) cnt;
-      
-      
-      
       
 
       for (int i = 0; i < data.length; i++) {

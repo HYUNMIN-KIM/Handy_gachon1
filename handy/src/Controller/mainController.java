@@ -1,8 +1,11 @@
 package Controller;
 
+import Dao.DaoGetInfo;
 import Model.WeekDataGetter;
 import bean.UserWeekData;
+
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/get")
-public class mainController
-  extends HttpServlet
+public class mainController  extends HttpServlet
 {
   private static final long serialVersionUID = 1L;
   
@@ -48,7 +50,9 @@ public class mainController
     		startDate = request.getParameter("startDate");
     	
     	//데이터 가져오기
-    	UserWeekData[] data = WeekDataGetter.getWeekData(userid, startDate);
+    	DaoGetInfo.Connection();
+    		UserWeekData[] data = WeekDataGetter.getWeekData(userid, startDate);
+    	DaoGetInfo.DisConnection();
     	request.setAttribute("data", data);
       
       try

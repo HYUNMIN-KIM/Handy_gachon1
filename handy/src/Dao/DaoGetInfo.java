@@ -19,17 +19,33 @@ import bean.UserExtraBean;
 public class DaoGetInfo {
 
  
-   
+   private static Connection conn = null;
    private Statement st = null;
    private ResultSet rs = null;
    private PreparedStatement pstmt = null;
+   
+   public static Connection Connection(){
+	   if(conn == null){
+		   conn = JDBCManager.getInstance();
+		   return conn;
+	   }else{
+		   return conn;
+	   }
+		   
+   }
+   
+   public static void DisConnection(){
+	   conn = null;
+	   JDBCManager.close();
+   }
+   
    
    //SensingData query
     public ArrayList<SIHMSSensingData> getSensorValue_YearWeek(int user_seq, int year, int month, int day)
      {
        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
        ArrayList<SIHMSSensingData> sensorInfo = new ArrayList<SIHMSSensingData>();
-       Connection conn = JDBCManager.getInstance();
+       
        try
        {
          String query = "select TO_CHAR(LOG_DT, 'yyyy-mm-dd hh24:mi:ss') as LOG_DT, TEMPERATURE,HEART_RATE,STEPS from GB_SENSING_DATA WHERE REG_USER_SEQ=? AND YEAR=? AND MONTH=? AND DAY=? ORDER BY LOG_DT ";
@@ -64,7 +80,7 @@ public class DaoGetInfo {
        {
          System.out.println(e.getMessage());
        }
-       JDBCManager.close();
+       
        return sensorInfo;
      }
      
@@ -73,7 +89,6 @@ public class DaoGetInfo {
    public int getUser_seq(String user_id)
    {
       int result = 0;
-      Connection conn = JDBCManager.getInstance();
       try{
          String query = "select USER_SEQ FROM COMM_USER WHERE USER_ID = ?";
          pstmt = conn.prepareStatement(query);
@@ -85,7 +100,6 @@ public class DaoGetInfo {
       }catch(SQLException e){
           System.out.println(e.getMessage());
       }
-      JDBCManager.close();
       return result;
    }
    
@@ -93,7 +107,6 @@ public class DaoGetInfo {
    public String getUser_Id()
    {
       String result = null;
-      Connection conn = JDBCManager.getInstance();
       try{
          String query = "select USER_SEQ,USER_ID FROM COMM_USER";
          pstmt = conn.prepareStatement(query);
@@ -105,7 +118,6 @@ public class DaoGetInfo {
       }catch(SQLException e){
           System.out.println(e.getMessage());
       }
-      JDBCManager.close();
       return result;
    }
    
@@ -113,7 +125,6 @@ public class DaoGetInfo {
    public UserBean getUser(int user_seq)
    {
       UserBean user = new UserBean();
-      Connection conn = JDBCManager.getInstance();
       try{
          String query = "select USER_ID,USER_NM,USER_SEQ FROM COMM_USER WHERE USER_SEQ  = ?";
 
@@ -128,7 +139,6 @@ public class DaoGetInfo {
          
 
       }
-      JDBCManager.close();
       return user;
    }
 
@@ -137,7 +147,6 @@ public class DaoGetInfo {
    public UserExtraBean getExtraUser(int user_seq)
    {
       UserExtraBean userExtra = null;
-      Connection conn = JDBCManager.getInstance();
       try{
          String query = "select GENDER,HEIGHT,WEIGHT FROM GB_USER_EXTRA_INFO WHERE REG_USER_SEQ = ?";
 
@@ -155,7 +164,6 @@ public class DaoGetInfo {
          
 
       }
-      JDBCManager.close();
       return userExtra;
    }
 }
