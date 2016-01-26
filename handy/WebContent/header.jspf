@@ -3,7 +3,7 @@
     <%@ page import="bean.*"%>
 <%@ page import="java.text.*"%>
 <%@ page import="util.*"%>
-<%@ page errorPage="errorpage.jsp" %>
+
 <%
 		UserWeekData[] data = (UserWeekData[]) request.getAttribute("data");
 		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("HH:mm:ss");

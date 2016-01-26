@@ -13,7 +13,7 @@
 		   <%= exception.getClass().getName() %>
 		</div>
 		
-	    <div>
+	    <div style="margin-top:30px;">
 	        <%= exception.getMessage() %>
 	    </div>
     </div>	
