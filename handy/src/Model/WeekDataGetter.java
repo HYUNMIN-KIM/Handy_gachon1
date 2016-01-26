@@ -41,10 +41,8 @@ public class WeekDataGetter {
 	   Calendar c = Calendar.getInstance();
 	   
       if(startDate == null){
-    	  
 	      c.add(3, -1);
-	      int dayOfWeek = c.get(7);
-	      c.add(5, (dayOfWeek - 1) * -1);
+	      c.add(5, (c.get(7) - 1) * -1);
 	      
       }else{
     	  
@@ -73,6 +71,7 @@ public class WeekDataGetter {
          if(month < 10)
             strDate += 0;
          strDate += month + "/" + day;
+         
          
          //날짜와 얻어온 센서 정보 설정
          data[i].setDate(strDate);
@@ -108,22 +107,25 @@ public class WeekDataGetter {
           heartTotal = 0;
           stepTotal = 0;
           temperatureTotal = 0;
-    	  
+
+          //데이터 계산을 위한 유저 정보 설정
+	  	    data[i].setCalorieCalc(new SIHMCalorieCalc(ux.getGender(),ux.getAge(),
+		               ux.getHeight(), ux.getWeight(), (int) heartAvg));
+	        data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux
+	                .getAge(), ux.getHeight(), ux.getWeight(), (int) heartAvg));
+
     	  
 
-    	  if(data[i].getValueList().size() <= 0) //센싱값이 0개 이하면 continue
-    		  continue;
+	     if(data[i].getValueList().size() <= 0){ //센싱값이 0개 이하면 continue
+	    	 continue;
+	     }
     	  
-    	  //칼로리 계산
-    	    data[i].setCalorieCalc(new SIHMCalorieCalc(ux.getGender(),ux.getAge(),
-    	               ux.getHeight(), ux.getWeight(), (int) heartAvg));
+    	  	//칼로리 계산
     	    data[i].getCalorieCalc().calcConsumedCalorie(data[i].getValueList());
     	  
     	  
-    	 //컨디션 계산
-         data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux
-               .getAge(), ux.getHeight(), ux.getWeight(), (int) heartAvg));
-         data[i].getConditionCalc().calcPoints(data[i].getValueList());
+    	    //컨디션 계산
+    	    data[i].getConditionCalc().calcPoints(data[i].getValueList());
          
          
          
