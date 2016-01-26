@@ -3,12 +3,11 @@ var chartSub;
 var charData;
 var temp;
 
-
 AmCharts.ready(function() {
 			document.getElementById('backbtn').style.visibility = 'hidden';
 			document.getElementById('analysisdiv').style.visibility = 'hidden';
 			$("#legendDiv").css("visibility", "hidden");
-			
+
 			chart = new AmCharts.AmSerialChart();
 			chart.dataProvider = data;
 			chart.dataDateFormat = "YYYY/MM/DD";
@@ -20,92 +19,6 @@ AmCharts.ready(function() {
 			chartSub.dataDateFormat = "HH:NN:SS";
 			chartSub.categoryField = "log_date";
 			chartSub.creditsPosition = "top-left";
-
-			// 최고 최저값 평균: 삭제해야 함
-			/*
-			 * 
-			 * 
-			// 평균값 구하기
-			var sum1, sum2, sum3;
-
-			for ( var x in data) {
-				sum1 = sum2 = sum3 = 0;
-				for ( var y in data[x].sensingData) {
-					sum1 += parseFloat(data[x].sensingData[y].temperature);// sum
-																			// temperature
-					sum2 += parseInt(data[x].sensingData[y].heart_rate);// sum
-																		// heart_rate
-					sum3 += parseInt(data[x].sensingData[y].step); // sum step
-
-				}
-				for ( var y in data[x].sensingData) {
-					data[x].sensingData[y].avgTemp = parseFloat(
-							sum1 / (data[x].sensingData.length)).toFixed(2); // avg
-																				// temperature
-					data[x].sensingData[y].avgHeart = parseInt(sum2
-							/ (data[x].sensingData.length)); // avg
-																// heart_rate
-					data[x].sensingData[y].avgStep = parseInt(sum3
-							/ (data[x].sensingData.length)); // avg step
-
-					temp = data[x].sensingData[y].avgTemp;
-
-				}
-			}
-
-			
-			var HTemp, LTemp, HHeart, LHeart, HStep, LStep;
-			for ( var x in data) {
-
-				if (typeof data[x].sensingData[0] == 'undefined') {
-					// 센싱데이터가 없으면
-					continue;
-				}
-
-				HTemp = parseFloat(data[x].sensingData[0].temperature).toFixed(
-						2);
-				LTemp = parseFloat(data[x].sensingData[0].temperature).toFixed(
-						2);
-				HHeart = parseInt(data[x].sensingData[0].heart_rate);
-				LHeart = parseInt(data[x].sensingData[0].heart_rate);
-				HStep = parseInt(data[x].sensingData[0].step);
-				LStep = parseInt(data[x].sensingData[0].step);
-
-				for ( var y in data[x].sensingData) {
-					if (data[x].sensingData[y].temperature > HTemp) {
-						HTemp = parseFloat(data[x].sensingData[y].temperature)
-								.toFixed(2);
-					}
-					if (data[x].sensingData[y].temperature < LTemp) {
-						LTemp = parseFloat(data[x].sensingData[y].temperature)
-								.toFixed(2);
-					}
-					if (data[x].sensingData[y].heart_rate > HHeart) {
-						HHeart = parseInt(data[x].sensingData[y].heart_rate);
-					}
-					if (data[x].sensingData[y].heart_rate < LHeart) {
-						LHeart = parseInt(data[x].sensingData[y].heart_rate);
-					}
-					if (data[x].sensingData[y].step > HStep) {
-						HStep = parseInt(data[x].sensingData[y].step);
-					}
-					if (data[x].sensingData[y].step < LStep) {
-						LStep = parseInt(data[x].sensingData[y].step);
-					}
-				}
-
-				for ( var y in data[x].sensingData) {
-					data[x].sensingData[y].highTemp = HTemp; // high
-																// temperature.
-					data[x].sensingData[y].highHeart = HHeart// high
-																// heart_rate.
-					data[x].sensingData[y].highStep = HStep// high step.
-					data[x].sensingData[y].lowTemp = LTemp; // low temperature.
-					data[x].sensingData[y].lowHeart = LHeart// low heart_rate.
-					data[x].sensingData[y].lowStep = LStep// low step.
-				}
-			}
-			*/
 
 			// LEGEND
 			var legend = new AmCharts.AmLegend();
@@ -125,7 +38,7 @@ AmCharts.ready(function() {
 			categoryAxis.minorGridAlpha = 0.1;
 			categoryAxis.axisAlpha = 0;
 			categoryAxis.minorGridEnabled = true;
-			categoryAxis.inside = false; // x axis
+			categoryAxis.inside = false;
 
 			var categoryAxis2 = chartSub.categoryAxis;
 			categoryAxis2.parseDates = true;
@@ -134,7 +47,7 @@ AmCharts.ready(function() {
 			categoryAxis2.minorGridAlpha = 0.1;
 			categoryAxis2.axisAlpha = 0;
 			categoryAxis2.minorGridEnabled = true;
-			categoryAxis2.inside = false; // x axis
+			categoryAxis2.inside = false;
 
 			// valueAxis
 			// chart
@@ -198,9 +111,7 @@ AmCharts.ready(function() {
 			graph_temp.lineColor = "#00CC00";
 			graph_temp.valueField = "temperature";
 			graph_temp.fillAlphas = 0;
-			// graph_temp.balloonText = "<b><span style='font-size:14px;'>
-			// average: [[avgTemp]]<br>high: [[highTemp]]<br>low:
-			// [[lowTemp]]</span></b>";
+			graph_temp.balloonText = "<b><span style='font-size:14px;'>[[temperature]]</span></b>";
 			chartSub.addGraph(graph_temp);
 
 			// graph_hr
@@ -211,9 +122,7 @@ AmCharts.ready(function() {
 			graph_hr.lineColor = "#FF8600";
 			graph_hr.valueField = "heart_rate";
 			graph_hr.fillAlphas = 0;
-			// graph_hr.balloonText = "<b><span style='font-size:14px;'>
-			// average: [[avgHeart]]<br>high: [[highHeart]]<br>low:
-			// [[lowHeart]]</span></b>";
+			graph_hr.balloonText = "<b><span style='font-size:14px;'>[[heart_rate]]</span></b>";
 			chartSub.addGraph(graph_hr);
 
 			// graph_step
@@ -223,9 +132,7 @@ AmCharts.ready(function() {
 			graph_step.lineColor = "#770055";
 			graph_step.valueField = "step";
 			graph_step.fillAlphas = 0.7;
-			// graph_step.balloonText = "<b><span style='font-size:14px;'>
-			// average: [[avgStep]]<br>high: [[highStep]]<br>low:
-			// [[lowStep]]</span></b>";
+			graph_step.balloonText = "<b><span style='font-size:14px;'>[[step]]</span></b>";
 			graph_step.textAlign = "left";
 			chartSub.addGraph(graph_step);
 
@@ -237,15 +144,12 @@ AmCharts.ready(function() {
 			chart.addChartCursor(chartCursor);
 			chart.mouseWheelZoomEnabled = true;
 
-			chart
-					.addListener(
-							"clickGraphItem",
-							function(event) {
+			chart.addListener("clickGraphItem", function(event) {
 								var button = document.getElementById('backbtn');
 								document.getElementById('backbtn').style.visibility = 'visible';
 								document.getElementById('analysisdiv').style.visibility = 'visible';
 								$("#legendDiv").css("visibility", "visible");
-								
+
 								button.onclick = function() {
 									document.getElementById('backbtn').style.visibility = 'hidden';
 									document.getElementById('analysisdiv').style.visibility = 'hidden';
@@ -253,75 +157,64 @@ AmCharts.ready(function() {
 									resetChart();
 								}
 
-								//클릭한 데이터
+								// 클릭한 데이터
 								clickData = event.item.dataContext;
 								var sensingData = clickData.sensingData;
-								
-								
-								///최고-최저-평균 계산
-								if (typeof sensingData[0] != 'undefined') { //센싱데이터가 있을 때 만
-								
+
+								// /최고-최저-평균 계산
+								if (typeof sensingData[0] != 'undefined') { // 센싱데이터가 있을 때만
 									var sensingDataLength = sensingData.length;
-									var HighTemp = sensingData[0].temperature, 
-									LowTemp = sensingData[0].temperature, 
-									HighHeart = sensingData[0].heart_rate, 
-									LowHeart = sensingData[0].heart_rate, 
-									HighStep = sensingData[0].step, 
-									LowStep = sensingData[0].step, 
-									TotalTemp = 0, 
-									TotalHeart = 0, 
-									TotalStep = 0;
-									
-									
-									for(var i=1; i<sensingDataLength; i++){
-										//temperature
+									var HighTemp = sensingData[0].temperature, LowTemp = sensingData[0].temperature, HighHeart = sensingData[0].heart_rate, LowHeart = sensingData[0].heart_rate, HighStep = sensingData[0].step, LowStep = sensingData[0].step, TotalTemp = 0, TotalHeart = 0, TotalStep = 0;
+
+									for (var i = 1; i < sensingDataLength; i++) {
+										// temperature
 										var temp = parseFloat(sensingData[i].temperature);
-										if(temp < LowTemp)
+										if (temp < LowTemp)
 											LowTemp = temp;
-										if(temp > HighTemp)
+										if (temp > HighTemp)
 											HighTemp = temp;
 										TotalTemp += temp;
-										
-										//Heart
+
+										// Heart
 										var heart = parseInt(sensingData[i].heart_rate);
-										if(heart < LowHeart)
+										if (heart < LowHeart)
 											LowHeart = heart;
-										if(heart > HighHeart)
+										if (heart > HighHeart)
 											HighHeart = heart;
 										TotalHeart += heart;
-										
-										//Step
+
+										// Step
 										var step = parseInt(sensingData[i].step);
-										if(step < LowStep)
+										if (step < LowStep)
 											LowStep = step;
-										if(step > HighStep)
+										if (step > HighStep)
 											HighStep = step;
-										TotalStep += step;										
-										
+										TotalStep += step;
+
 									}
-									
-									//toFixed로 소수점 제한
+
+									// toFixed로 소수점 제한
 									$("#tempMin").text(LowTemp);
 									$("#tempMax").text(HighTemp);
-									$("#tempAvg").text((TotalTemp/sensingDataLength).toFixed(2));
-									
-								
+									$("#tempAvg").text(
+											(TotalTemp / sensingDataLength)
+													.toFixed(2));
+
 									$("#heartMin").text(LowHeart);
 									$("#heartMax").text(HighHeart);
-									$("#heartAvg").text((TotalHeart/sensingDataLength).toFixed(2));
-									
+									$("#heartAvg").text(
+											(TotalHeart / sensingDataLength)
+													.toFixed(2));
+
 									$("#stepMin").text(LowStep);
 									$("#stepMax").text(HighStep);
-									$("#stepAvg").text((TotalStep/sensingDataLength).toFixed(2));
-									
-								
+									$("#stepAvg").text(
+											(TotalStep / sensingDataLength)
+													.toFixed(2));
+
 								}
-								
-								//계산 끝
-								
-								
-								
-								
+								// 계산 끝
+
 								// CURSOR
 								// chartCursorSub
 								var chartCursorSub = new AmCharts.ChartCursor();
@@ -351,7 +244,6 @@ AmCharts.ready(function() {
 								var t = "";
 
 								for (var i = 0; i < 9; i = i + 1) {
-
 									$.ajax({
 										url : '/handy/DataAnalysis',
 										type : 'GET',
@@ -362,7 +254,6 @@ AmCharts.ready(function() {
 										},
 										success : function(data) {
 											// 줄바꾸기 필요 시 수정
-											// data = data.replace(/\./gi, ".");
 											$('#analysis' + i).text(data);
 										}
 									});
@@ -372,7 +263,7 @@ AmCharts.ready(function() {
 
 								chartSub.validateData();
 								chartSub.animateAgain();
-								chartSub.invalidateSize();
+								chartSub.invalidateSize(); // 차트크기 일정하게
 								chartSub.write("chartdiv");
 							});
 			chart.write("chartdiv");
@@ -382,7 +273,7 @@ function resetChart() {
 	chart.dataProvider = data;
 	chart.validateData();
 	chart.animateAgain();
-	chart.invalidateSize();
+	chart.invalidateSize(); // 차트크기 일정하게
 
 	chart.allLabels = [];
 	chart.write("chartdiv");
