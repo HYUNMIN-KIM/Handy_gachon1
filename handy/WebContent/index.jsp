@@ -133,9 +133,40 @@ $("#header_date").click(function (){
 </script>
 
 
-
-<div id="chartdiv">
+<div id="chartArea">
+	<div id="chartdiv">
+	</div>
+	<div id="legendDiv">
+	<table>
+		<tr>
+			<td></td>
+			<td class="legendTitle">Min</td>
+			<td class="legendTitle">Max</td>
+			<td class="legendTitle">Average</td>
+		</tr>
+		<tr>
+			<td class="type legendTitle" id="tempTitle">Temperature</td>
+			<td id="tempMin"></td>
+			<td id="tempMax"></td>
+			<td id="tempAvg"></td>
+		</tr>
+		<tr>
+		<td class="type legendTitle" id="heartTitle">Heart Rate</td>
+		<td id="heartMin"></td>
+		<td id="heartMax"></td>
+		<td id="heartAvg"></td>
+		</tr>
+		<tr>
+		<td class="type legendTitle" id="stepTitle">Step</td>
+		<td id="stepMin"></td>
+		<td id="stepMax"></td>
+		<td id="stepAvg"></td>
+		</tr>
+		
+	</table>
+	</div>
 </div>
+
 
 <div id="analysisdiv">
 전문가의 분석 의견

@@ -8,7 +8,6 @@
 	height: 375px;
 	background-color: #FFFFFF;
 	margin: 0 auto;
-	z-index: 0;
 }
 
 #analysisdiv {
@@ -32,4 +31,49 @@
 	border : 1px solid #dadada;
 }
 
+#chartArea{
+	position: relative;
+	width: 95%;
+	z-index: 0;
 }
+
+#legendDiv{
+	position: absolute;
+	right : 10px;
+	top : 20px;
+	font-size: 8pt;
+	z-index:3;
+}
+
+#legendDiv table{
+	border: 1px solid #dadada;
+	padding: 2px;
+	text-align: right;
+}
+
+#tempTitle{
+	color: #00b600;
+}
+
+#heartTitle{
+	color : #ff8600;
+}
+#stepTitle{
+	color: #770055;
+}
+
+
+#legendDiv table td{
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+
+#legendDiv table .type{
+	font-size : 6pt;
+}
+
+.legendTitle{
+	font-weight: bold;
+}
+

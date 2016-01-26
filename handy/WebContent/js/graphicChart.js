@@ -3,9 +3,11 @@ var chartSub;
 var charData;
 var temp;
 
+
 AmCharts.ready(function() {
 			document.getElementById('backbtn').style.visibility = 'hidden';
 			document.getElementById('analysisdiv').style.visibility = 'hidden';
+			$("#legendDiv").css("visibility", "hidden");
 			
 			chart = new AmCharts.AmSerialChart();
 			chart.dataProvider = data;
@@ -19,6 +21,10 @@ AmCharts.ready(function() {
 			chartSub.categoryField = "log_date";
 			chartSub.creditsPosition = "top-left";
 
+			// 최고 최저값 평균: 삭제해야 함
+			/*
+			 * 
+			 * 
 			// 평균값 구하기
 			var sum1, sum2, sum3;
 
@@ -45,12 +51,9 @@ AmCharts.ready(function() {
 					temp = data[x].sensingData[y].avgTemp;
 
 				}
-				// FIXME :: avgeHeart없으면?
-				// document.getElementById("info").innerHTML =
-				// data[x].sensingData[y].avgHeart;
 			}
 
-			// 최고 최저값
+			
 			var HTemp, LTemp, HHeart, LHeart, HStep, LStep;
 			for ( var x in data) {
 
@@ -102,6 +105,7 @@ AmCharts.ready(function() {
 					data[x].sensingData[y].lowStep = LStep// low step.
 				}
 			}
+			*/
 
 			// LEGEND
 			var legend = new AmCharts.AmLegend();
@@ -240,15 +244,84 @@ AmCharts.ready(function() {
 								var button = document.getElementById('backbtn');
 								document.getElementById('backbtn').style.visibility = 'visible';
 								document.getElementById('analysisdiv').style.visibility = 'visible';
+								$("#legendDiv").css("visibility", "visible");
 								
 								button.onclick = function() {
 									document.getElementById('backbtn').style.visibility = 'hidden';
 									document.getElementById('analysisdiv').style.visibility = 'hidden';
+									$("#legendDiv").css("visibility", "hidden");
 									resetChart()();
 								}
 
+								//클릭한 데이터
 								clickData = event.item.dataContext;
-
+								var sensingData = clickData.sensingData;
+								
+								
+								///최고-최저-평균 계산
+								if (typeof sensingData[0] != 'undefined') { //센싱데이터가 있을 때 만
+								
+									var sensingDataLength = sensingData.length;
+									var HighTemp = sensingData[0].temperature, 
+									LowTemp = sensingData[0].temperature, 
+									HighHeart = sensingData[0].heart_rate, 
+									LowHeart = sensingData[0].heart_rate, 
+									HighStep = sensingData[0].step, 
+									LowStep = sensingData[0].step, 
+									TotalTemp = 0, 
+									TotalHeart = 0, 
+									TotalStep = 0;
+									
+									
+									for(var i=1; i<sensingDataLength; i++){
+										//temperature
+										var temp = parseFloat(sensingData[i].temperature);
+										if(temp < LowTemp)
+											LowTemp = temp;
+										if(temp > HighTemp)
+											HighTemp = temp;
+										TotalTemp += temp;
+										
+										//Heart
+										var heart = parseInt(sensingData[i].heart_rate);
+										if(heart < LowHeart)
+											LowHeart = heart;
+										if(heart > HighHeart)
+											HighHeart = heart;
+										TotalHeart += heart;
+										
+										//Step
+										var step = parseInt(sensingData[i].step);
+										if(step < LowStep)
+											LowStep = step;
+										if(step > HighStep)
+											HighStep = step;
+										TotalStep += step;										
+										
+									}
+									
+									//toFixed로 소수점 제한
+									$("#tempMin").text(LowTemp);
+									$("#tempMax").text(HighTemp);
+									$("#tempAvg").text((TotalTemp/sensingDataLength).toFixed(2));
+									
+								
+									$("#heartMin").text(LowHeart);
+									$("#heartMax").text(HighHeart);
+									$("#heartAvg").text((TotalHeart/sensingDataLength).toFixed(2));
+									
+									$("#stepMin").text(LowStep);
+									$("#stepMax").text(HighStep);
+									$("#stepAvg").text((TotalStep/sensingDataLength).toFixed(2));
+									
+								
+								}
+								
+								//계산 끝
+								
+								
+								
+								
 								// CURSOR
 								// chartCursorSub
 								var chartCursorSub = new AmCharts.ChartCursor();
@@ -288,6 +361,7 @@ AmCharts.ready(function() {
 											'point' : points[i]
 										},
 										success : function(data) {
+											// 줄바꾸기 필요 시 수정
 											// data = data.replace(/\./gi, ".");
 											$('#analysis' + i).text(data);
 										}
