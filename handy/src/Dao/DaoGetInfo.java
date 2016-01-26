@@ -4,15 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-
 import Model.SIHMSSensingData;
-import bean.SensorValueBean;
 import bean.UserBean;
 import bean.UserExtraBean;
 
@@ -20,7 +15,6 @@ public class DaoGetInfo {
 
  
    private static Connection conn = null;
-   private Statement st = null;
    private ResultSet rs = null;
    private PreparedStatement pstmt = null;
    

@@ -1,11 +1,6 @@
 package REST;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +12,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import Dao.DaoGetInfo;
-import Model.WeekDataGetter;
-import bean.UserWeekData;
 
 /**
  * Servlet implementation class DataAnalysis

@@ -1,11 +1,7 @@
 package Dao;
 
 
-
-
 import java.sql.*;
-
-
 
 public class JDBCManager {
 
