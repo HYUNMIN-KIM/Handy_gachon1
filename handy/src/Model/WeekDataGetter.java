@@ -1,6 +1,5 @@
 package Model;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,96 +12,113 @@ import bean.UserExtraBean;
 import bean.UserWeekData;
 
 public class WeekDataGetter {
+	
+	
    public static UserWeekData[] getWeekData(String id, String startDate) {
-      DaoGetInfo daoGetInfo = new DaoGetInfo();
-      UserExtraBean ux = null;
-      UserWeekData[] data = new UserWeekData[7];
-      float result = 0;
-      int sum = 0;
-      int cnt = 0;
-
-      
-      Calendar c = Calendar.getInstance();
-      
+	   float heartAvg = 0;
+	   int sum = 0;
+	   int cnt = 0;
+	   int userSeq = 0;
+	   int year = 0;
+	   int month = 0;
+	   int day = 0;
+	   int minute, firstMinute, heartTotal, stepTotal;
+	   float temperatureTotal;
+	      
+	   
+	   String strDate = null;
+	   SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	   DaoGetInfo daoGetInfo = new DaoGetInfo();
+	   UserExtraBean ux = null;
+	   UserWeekData[] data = new UserWeekData[7];
+	   userSeq = daoGetInfo.getUser_seq(id);
+	   
+	   //get calendar
+	   Calendar c = Calendar.getInstance();
+	   
       if(startDate == null){
+    	  
 	      c.add(3, -1);
 	      int dayOfWeek = c.get(7);
 	      c.add(5, (dayOfWeek - 1) * -1);
+	      
       }else{
+    	  
     	  try {
-    		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 			c.setTime(formatter.parse(startDate));
-		} catch (Exception e) {
+    	  }catch (Exception e) {
 			// formatter parse error
-			System.out.println("WeekDataGetter startDate parseError");
 			e.printStackTrace();
-		}
+    	  }
     	  
       }
       
-      
-      
-      int userSeq = daoGetInfo.getUser_seq(id);
 
-      for (int i = 0; i < 7; i++)
-         data[i] = new UserWeekData();
-
+      //TODO 7일간의 정보를 처리함. 월간 정보 필요 시 수정
       for (int i = 0; i < 7; i++) {
+    	  data[i] = new UserWeekData();
 
-         int year = c.get(1);
-         int month = c.get(2) + 1;
-         int day = c.get(5);
-         String strDate = year + "/";
+          // 유저정보
+          ux = daoGetInfo.getExtraUser(userSeq);
+
+    	  
+    	 //날짜설정
+         year = c.get(1);
+         month = c.get(2) + 1;
+         day = c.get(5);
+         strDate = year + "/";
+         
+         //월 설정 - MM형식
          if(month < 10)
             strDate += 0;
          strDate += month + "/" + day;
-
          
+         //날짜와 얻어온 센서 정보 설정
          data[i].setDate(strDate);
          data[i].setValueList(daoGetInfo.getSensorValue_YearWeek(userSeq,
                year, month, day));
 
-         
-         // 유저정보 및 평균심박수를 구한다
-         ux = daoGetInfo.getExtraUser(userSeq);
-
+         //평균 심박수 계산을 위한 작업
          for (int j = 0; j < data[i].getValueList().size(); j++) {
             if (data[i].getValueList().get(j).steps <= 75) {
                sum += data[i].getValueList().get(j).heart_rate;
                cnt++;
             }
          }
-
+         
+         //calendar 다음날
          c.add(Calendar.DAY_OF_MONTH, 1);
       }
-
-      result = sum / (float) cnt;
-
-      int minute, firstMinute, heartTotal, stepTotal, size;
-      float temperatureTotal;
+      
+      
+      //평균 심박수 계산
+      heartAvg = sum / (float) cnt;
+      
+      
       
       //칼로리 계산
       for(int i=0;i<data.length;i++)
       {
          data[i].setCalorieCalc(new SIHMCalorieCalc(ux.getGender(),ux.getAge(),
-               ux.getHeight(), ux.getWeight(), (int) result));
+               ux.getHeight(), ux.getWeight(), (int) heartAvg));
+         
          if (data[i].getValueList().size() > 0)
-            
             data[i].getCalorieCalc().calcConsumedCalorie(data[i].getValueList());
-         //System.out.println("kal : " + data[i].getCalorieCalc().calcConsumedCalorie(data[i].getValueList()));
       }
+      
+      
+      
 
       for (int i = 0; i < data.length; i++) {
 
+    	  //센싱 데이터 수가 0개면 continue
+    	  if (data[i].getValueList().size() <= 0)
+         	 continue;
+    	 
+    	  
+    	 //컨디션 계산
          data[i].setConditionCalc(new SIHMConditionCalc(ux.getGender(), ux
-               .getAge(), ux.getHeight(), ux.getWeight(), (int) result));
-         
-         
-         
-         // FIXME 센싱데이터가 0개면 NaN 출력됨
-         if (data[i].getValueList().size() > 0)
-            data[i].getConditionCalc().calcPoints(data[i].getValueList());
-
+               .getAge(), ux.getHeight(), ux.getWeight(), (int) heartAvg));
          
          
          firstMinute = 0;
@@ -112,7 +128,9 @@ public class WeekDataGetter {
          stepTotal = 0;
          temperatureTotal = 0;
          
-         //10분동안 센서 정보들의 평균값만을 포함한다
+         
+         
+         //측정된 센서값의 시간 차가 2분 이상이 아니면 5분동안 센서 정보들의 평균값만을 포함한다. 
          ArrayList<SIHMSSensingData> list = new ArrayList<>();
          for (int j = 0; j < data[i].getValueList().size(); j++) {
             
@@ -146,7 +164,6 @@ public class WeekDataGetter {
                   if(temperatureTotal != 0)
                      sData.setTemperature(temperatureTotal / cnt);
                   
-                  
                   list.add(sData);
                   cnt = 0;
                }
@@ -164,18 +181,16 @@ public class WeekDataGetter {
                if(temperatureTotal != 0)
                   sData.setTemperature(Float.parseFloat(FloatFormat.format(temperatureTotal / cnt)));
                
-               
                list.add(sData);
                cnt = 0;
             }
          }
+         
          data[i].getValueList().clear();
          data[i].getValueList().addAll(list);
-         
-         
-         
-         
       }
+      
+      
 
       return data;
    }

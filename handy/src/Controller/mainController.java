@@ -3,7 +3,6 @@ package Controller;
 import Model.WeekDataGetter;
 import bean.UserWeekData;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +16,8 @@ public class mainController
 {
   private static final long serialVersionUID = 1L;
   
+  
+  
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
@@ -29,29 +30,37 @@ public class mainController
     process(request, response);
   }
   
+  
+  
+  
+  
   private void process(HttpServletRequest request, HttpServletResponse response)
   {
-	  String startDate = null;
+	  //userId와 startDate로 일주간의 데이터를 받아옴
+	String startDate = null;
     String userid = null;
     userid = request.getParameter("userid");
+    
     if (userid != null)
     {
+    	
     	if(request.getParameter("startDate") != null && !request.getParameter("startDate").equals(""))
-    	startDate = request.getParameter("startDate");
+    		startDate = request.getParameter("startDate");
     	
-    	
-      UserWeekData[] data = WeekDataGetter.getWeekData(userid, startDate);
-      request.setAttribute("data", data);
+    	//데이터 가져오기
+    	UserWeekData[] data = WeekDataGetter.getWeekData(userid, startDate);
+    	request.setAttribute("data", data);
+      
       try
       {
-        RequestDispatcher rd = request
-          .getRequestDispatcher("/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
       }
       catch (Exception e)
       {
         e.printStackTrace();
       }
+    
     }
     else
     {
@@ -63,6 +72,9 @@ public class mainController
       {
         e.printStackTrace();
       }
+      
     }
+    
+    
   }
 }
