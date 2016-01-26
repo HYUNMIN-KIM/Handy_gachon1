@@ -246,7 +246,6 @@ AmCharts.ready(function() {
 										clickData.conditionData.synchroDeductPoint,
 										clickData.conditionData.activityPoint ];
 
-								var t = "";
 
 								for (var i = 0; i < 9; i = i + 1) {
 									$.ajax({
