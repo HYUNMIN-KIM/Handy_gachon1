@@ -18,5 +18,5 @@
 </div>
 
 <div id="graphController">
-	<input type="image" src="image/backButton.png" id="backbtn" width="30" height="30">
+	<input type="image" alt="뒤로 가기" src="image/backButton.png" id="backbtn" width="25" height="25">
 </div>
