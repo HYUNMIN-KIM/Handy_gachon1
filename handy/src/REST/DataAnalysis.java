@@ -51,7 +51,7 @@ public class DataAnalysis extends HttpServlet {
 			String content = request.getParameter("content");
 			float point = Float.parseFloat(request.getParameter("point"));
 			int num=0;
-			
+			//ajax를 통해서 받아온 contents와 point를 처리
 			if(content.equalsIgnoreCase("ConditionDetail_"))
 				num = Condition_point(point);
 			else if(content.equalsIgnoreCase("Temperature_"))
@@ -93,7 +93,7 @@ public class DataAnalysis extends HttpServlet {
 
 
 	}
-
+	//위키피디아 parsing
 	public String Data(String sub, int num)
 	{
 
@@ -115,7 +115,7 @@ public class DataAnalysis extends HttpServlet {
 
 		return anal;
 	}
-
+    //컨디션 점수 등급
 	public int Condition_point(float con_p)
 	{
 		int num=1;
@@ -144,6 +144,7 @@ public class DataAnalysis extends HttpServlet {
 		return num;
 
 	}
+	//온도와 맥박 점수
 	public int Temp_Hr_point(float point)
 	{
 		int num=0;
@@ -158,6 +159,7 @@ public class DataAnalysis extends HttpServlet {
 
 		return num;
 	}
+	//싱크로와 온도 변화 점수 등급
 	public int Sync_TempChange_point(float point)
 	{
 		int num=0;
@@ -173,6 +175,7 @@ public class DataAnalysis extends HttpServlet {
 
 		return num;
 	}
+	//맥박변동 점수 등급
 	public int HrChange_point(float point)
 	{
 		int num=0;
@@ -188,6 +191,7 @@ public class DataAnalysis extends HttpServlet {
 
 		return num;
 	}
+	//리듬 점수 등급
 	public int Rhythm_point(float point)
 	{
 		int num=0;
@@ -198,6 +202,7 @@ public class DataAnalysis extends HttpServlet {
 			num=1;
 		return num;
 	}
+	//운동량 점수 등급
 	public int Activity_point(float point)
 	{
 		int num=0;
@@ -212,27 +217,5 @@ public class DataAnalysis extends HttpServlet {
 
 		return num;
 	}
-	/*
-	public float[] getPoint(int date)
-	{
-		float point[] = {0,};
-
-		DaoGetInfo db = new DaoGetInfo();
-		String userid = db.getUser_Id();
-
-
-		point[0] = data[date].getConditionCalc().getTempPoint(); 
-		point[1] = data[date].getConditionCalc().getConditionPoint();
-		point[2] = data[date].getConditionCalc().getTempChangeDeductPoint();
-		point[3] = data[date].getConditionCalc().getTempRhythmPoint();
-		point[4] = data[date].getConditionCalc().getHrPoint();
-		point[5] = data[date].getConditionCalc().getHrChangeDeductPoint();
-		point[6] = data[date].getConditionCalc().getHrRhythmPoint();
-		point[7] = data[date].getConditionCalc().getSynchroDeductPoint();
-		point[8] = data[date].getConditionCalc().getActivityPoint();
-
-		return point;
-
-	}
-	 */
+	
 }
