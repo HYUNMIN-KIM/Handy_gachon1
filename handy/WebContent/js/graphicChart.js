@@ -165,7 +165,8 @@ AmCharts.ready(function() {
 								if (typeof sensingData[0] != 'undefined') { // 센싱데이터가 있을 때만
 									var sensingDataLength = sensingData.length;
 									var HighTemp = sensingData[0].temperature, LowTemp = sensingData[0].temperature, HighHeart = sensingData[0].heart_rate, LowHeart = sensingData[0].heart_rate, HighStep = sensingData[0].step, LowStep = sensingData[0].step, TotalTemp = 0, TotalHeart = 0, TotalStep = 0;
-
+									var stepCount = 0;
+									
 									for (var i = 1; i < sensingDataLength; i++) {
 										// temperature
 										var temp = parseFloat(sensingData[i].temperature);
@@ -185,19 +186,21 @@ AmCharts.ready(function() {
 
 										// Step
 										var step = parseInt(sensingData[i].step);
-										if (step < LowStep)
-											LowStep = step;
-										if (step > HighStep)
-											HighStep = step;
-										TotalStep += step;
-
+										if(step > 0){
+											if (step < LowStep)
+												LowStep = step;
+											if (step > HighStep)
+												HighStep = step;
+											TotalStep += step;
+											stepCount++;
+										}
 									}
 
 									// toFixed로 소수점 제한
 									$("#tempMin").text(LowTemp);
 									$("#tempMax").text(HighTemp);
 									$("#tempAvg").text(
-											(TotalTemp / sensingDataLength)
+											(TotalTemp / stepCount)
 													.toFixed(2));
 
 									$("#heartMin").text(LowHeart);
