@@ -9,12 +9,12 @@ import Dao.DaoGetInfo;
 import bean.SIHMCalorieCalc;
 import bean.SIHMConditionCalc;
 import bean.UserExtraBean;
-import bean.UserWeekData;
+import bean.UserSensingData;
 
-public class WeekDataGetter {
+public class SensingDataGetter {
 	
 	
-   public static UserWeekData[] getWeekData(String id, String startDate) {
+   public static UserSensingData[] getWeekData(String id, String startDate) {
 	   float heartAvg = 0;
 	   int sum = 0;
 	   int cnt = 0;
@@ -30,7 +30,7 @@ public class WeekDataGetter {
 	   SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 	   DaoGetInfo daoGetInfo = new DaoGetInfo();
 	   UserExtraBean ux = null;
-	   UserWeekData[] data = new UserWeekData[7];
+	   UserSensingData[] data = new UserSensingData[7];
 	   userSeq = daoGetInfo.getUser_seq(id);
 	   
 	   
@@ -58,7 +58,7 @@ public class WeekDataGetter {
 
       //TODO 7일간의 정보를 처리함. 월간 정보 필요 시 수정
       for (int i = 0; i < 7; i++) {
-    	  data[i] = new UserWeekData();
+    	  data[i] = new UserSensingData();
 
     	  //날짜설정
          year = c.get(1);

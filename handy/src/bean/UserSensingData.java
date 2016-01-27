@@ -5,7 +5,7 @@ import java.util.List;
 
 import Model.SIHMSSensingData;
 
-public class UserWeekData {
+public class UserSensingData {
 
 	private String date;
 	private SIHMConditionCalc conditionCalc;
@@ -29,7 +29,7 @@ public class UserWeekData {
 		this.conditionCalc = conditionCalc;
 	}
 
-	public UserWeekData() {
+	public UserSensingData() {
 		//this.valueList = new ArrayList();
 	}
 

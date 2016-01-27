@@ -1,8 +1,8 @@
 package Controller;
 
 import Dao.DaoGetInfo;
-import Model.WeekDataGetter;
-import bean.UserWeekData;
+import Model.SensingDataGetter;
+import bean.UserSensingData;
 
 import java.io.IOException;
 
@@ -51,7 +51,7 @@ public class mainController  extends HttpServlet
     	
     	//데이터 가져오기
     	DaoGetInfo.Connection();
-    		UserWeekData[] data = WeekDataGetter.getWeekData(userid, startDate);
+    		UserSensingData[] data = SensingDataGetter.getWeekData(userid, startDate);
     	DaoGetInfo.DisConnection();
     	request.setAttribute("data", data);
       
