@@ -74,7 +74,7 @@ public class WeekDataGetter {
          
          //날짜와 얻어온 센서 정보 설정
          data[i].setDate(strDate);
-         data[i].setValueList(daoGetInfo.getSensorValue_YearWeek(userSeq,
+         data[i].setValueList(daoGetInfo.getSensorData_ymd(userSeq,
                year, month, day));
          
 

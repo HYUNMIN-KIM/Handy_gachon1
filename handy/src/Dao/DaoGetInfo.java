@@ -35,7 +35,7 @@ public class DaoGetInfo {
    
    
    //SensingData query
-    public ArrayList<SIHMSSensingData> getSensorValue_YearWeek(int user_seq, int year, int month, int day)
+    public ArrayList<SIHMSSensingData> getSensorData_ymd(int user_seq, int year, int month, int day)
      {
        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
        ArrayList<SIHMSSensingData> sensorInfo = new ArrayList<SIHMSSensingData>();
