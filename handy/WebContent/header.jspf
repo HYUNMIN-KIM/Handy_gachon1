@@ -6,7 +6,7 @@
 
 <%
 UserSensingData[] data = (UserSensingData[]) request.getAttribute("data");
-		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("HH:mm:ss");
+SimpleDateFormat hmsDateFormat = new SimpleDateFormat("HH:mm:ss");
 %>
 
 <div id="headerBar"></div>
