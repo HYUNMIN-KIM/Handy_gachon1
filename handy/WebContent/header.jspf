@@ -5,7 +5,7 @@
 <%@ page import="util.*"%>
 
 <%
-		UserWeekData[] data = (UserWeekData[]) request.getAttribute("data");
+UserSensingData[] data = (UserSensingData[]) request.getAttribute("data");
 		SimpleDateFormat hmsDateFormat = new SimpleDateFormat("HH:mm:ss");
 %>
 
