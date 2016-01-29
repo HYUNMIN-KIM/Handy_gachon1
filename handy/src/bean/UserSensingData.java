@@ -9,7 +9,7 @@ public class UserSensingData {
 
 	private String date;
 	private SIHMConditionCalc conditionCalc;
-	private List<SIHMSSensingData> valueList;
+	private List<SIHMSSensingData> sensingDataList;
 	private SIHMCalorieCalc calorieCalc;
 
 	public SIHMCalorieCalc getCalorieCalc(){
@@ -42,12 +42,12 @@ public class UserSensingData {
 	}
 
 	
-	public List<SIHMSSensingData> getValueList() {
-		return this.valueList;
+	public List<SIHMSSensingData> getSensingDataList() {
+		return this.sensingDataList;
 	}
 
-	public void setValueList(List<SIHMSSensingData> valueList) {
-		this.valueList = valueList;
+	public void setSensingDataList(List<SIHMSSensingData> sensingDataList) {
+		this.sensingDataList = sensingDataList;
 	}
 }
 

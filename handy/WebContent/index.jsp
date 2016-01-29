@@ -1,5 +1,5 @@
 <%@page import="java.util.Calendar"%>
-<%@page import="Model.SIHMSSensingData"%>
+<%@page import="model.SIHMSSensingData"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ page import="bean.*"%>
@@ -102,12 +102,12 @@
 	        data[<%=i%>].conditionData.hrRhythmPoint = '<%=data[i].getConditionCalc().getHrRhythmPoint()%>';
 	        data[<%=i%>].conditionData.activityPoint = '<%=data[i].getConditionCalc().getActivityPoint()%>';
 	        data[<%=i%>].sensingData = new Array;
-	        <% for(int j=0 ; j < data[i].getValueList().size(); j++){ %>
+	        <% for(int j=0 ; j < data[i].getSensingDataList().size(); j++){ %>
 	            data[<%=i%>].sensingData[<%=j%>] = new Object;
-	            data[<%=i%>].sensingData[<%=j%>].log_date = '<%=hmsDateFormat.format(data[i].getValueList().get(j).getLog_date())%>';
-	            data[<%=i%>].sensingData[<%=j%>].temperature = '<%=data[i].getValueList().get(j).getTemperature()%>';
-	            data[<%=i%>].sensingData[<%=j%>].heart_rate = '<%=data[i].getValueList().get(j).getHeart_rate()%>';
-	            data[<%=i%>].sensingData[<%=j%>].step = '<%=data[i].getValueList().get(j).getSteps()%>';
+	            data[<%=i%>].sensingData[<%=j%>].log_date = '<%=hmsDateFormat.format(data[i].getSensingDataList().get(j).getLog_date())%>';
+	            data[<%=i%>].sensingData[<%=j%>].temperature = '<%=data[i].getSensingDataList().get(j).getTemperature()%>';
+	            data[<%=i%>].sensingData[<%=j%>].heart_rate = '<%=data[i].getSensingDataList().get(j).getHeart_rate()%>';
+	            data[<%=i%>].sensingData[<%=j%>].step = '<%=data[i].getSensingDataList().get(j).getSteps()%>';
 	        <%}%>
 	    <%}%>
 	    
