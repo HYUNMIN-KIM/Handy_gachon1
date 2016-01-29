@@ -167,7 +167,7 @@ AmCharts.ready(function() {
 				
 				
 								// 데이터가 비었으면
-								if(typeof sensingData[0] == 'undefined'){
+								if(sensingData.length == 0){
 									alert("Empty data");
 									return;
 								
