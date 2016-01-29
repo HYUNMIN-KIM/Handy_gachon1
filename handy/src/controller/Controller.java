@@ -28,6 +28,8 @@ public class Controller extends HttpServlet {
 		process(request, response);
 	}
 
+
+	
 	private void process(HttpServletRequest request,
 			HttpServletResponse response) {
 		
@@ -40,33 +42,32 @@ public class Controller extends HttpServlet {
 
 		if (userid != null) {
 
-			if (request.getParameter("startDate") != null
-					&& !request.getParameter("startDate").equals(""))
+			if (request.getParameter("startDate") != null && !request.getParameter("startDate").equals(""))
 				startDate = request.getParameter("startDate");
 
+			
 			// 데이터 가져오기
-			
-			UserSensingData[] data = CalculatedUserData.getWeekData(userid,
-					startDate);
-			
+			UserSensingData[] data = CalculatedUserData.getWeekData(userid,	startDate);
 			request.setAttribute("data", data);
 
+			
 			try {
-				RequestDispatcher rd = request
-						.getRequestDispatcher("/index.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 				rd.forward(request, response);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 			
 			
 		} else {
+			
 			try {
 				response.getWriter().print("USERID ERROR");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
 		}
 		
 		
