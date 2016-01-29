@@ -1,4 +1,4 @@
-package REST;
+package rest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

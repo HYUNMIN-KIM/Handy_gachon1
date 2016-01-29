@@ -1,4 +1,4 @@
-package Dao;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import Model.SIHMSSensingData;
+
+import model.SIHMSSensingData;
 import bean.UserBean;
 import bean.UserExtraBean;
 

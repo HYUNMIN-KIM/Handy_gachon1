@@ -1,7 +1,5 @@
-package Controller;
+package controller;
 
-import Dao.DaoGetInfo;
-import Model.SensingDataGetter;
 import bean.UserSensingData;
 
 import java.io.IOException;
@@ -13,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.SensingDataGetter;
+import dao.DaoGetInfo;
+
 @WebServlet("/get")
-public class mainController  extends HttpServlet
+public class Controller  extends HttpServlet
 {
   private static final long serialVersionUID = 1L;
   

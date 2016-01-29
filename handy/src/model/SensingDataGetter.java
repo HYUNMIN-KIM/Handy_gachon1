@@ -1,11 +1,11 @@
-package Model;
+package model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import util.FloatFormat;
-import Dao.DaoGetInfo;
+import dao.DaoGetInfo;
 import bean.SIHMCalorieCalc;
 import bean.SIHMConditionCalc;
 import bean.UserExtraBean;

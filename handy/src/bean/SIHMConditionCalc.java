@@ -4,10 +4,10 @@ package bean;
 import java.util.Date;
 import java.util.List;
 
-import Model.SIHMSHeartRate;
-import Model.SIHMSSensingData;
-import Model.SIHMSTemperature;
 import util.SihmsUtils;
+import model.SIHMSHeartRate;
+import model.SIHMSSensingData;
+import model.SIHMSTemperature;
 
 
 public class SIHMConditionCalc {

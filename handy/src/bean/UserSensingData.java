@@ -3,7 +3,7 @@ package bean;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.SIHMSSensingData;
+import model.SIHMSSensingData;
 
 public class UserSensingData {
 
