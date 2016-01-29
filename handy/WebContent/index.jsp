@@ -12,10 +12,9 @@
 	<script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
 	<script type="text/javascript"  src="http://cdn.amcharts.com/lib/3/amcharts.js"></script>
 	<script type="text/javascript"  src="http://cdn.amcharts.com/lib/3/serial.js"></script>
-	<script type="text/javascript" src="js/graphicChart.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.corner/2.13/jquery.corner.js"></script>
-	
+    <script type="text/javascript" src="js/graphicChart.js"></script>	
 	<link type="text/css" rel="stylesheet" href="css/header.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
 	<link type="text/css" rel="stylesheet" href="css/index.css" />

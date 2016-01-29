@@ -161,24 +161,34 @@ AmCharts.ready(function() {
 			
 			
 			chart.addListener("clickGraphItem", function(event) {
-								var button = document.getElementById('backbtn');
-								document.getElementById('backbtn').style.display = 'block';
-								document.getElementById('analysisdiv').style.display = 'block';
-								$("#legendDiv").css("display", "block");
-
-								button.onclick = function() {
-									document.getElementById('backbtn').style.display = 'none';
-									document.getElementById('analysisdiv').style.display = 'none';
-									$("#legendDiv").css("display", "none");
-									resetChart();
-								}
-
 								// 클릭한 데이터
 								clickData = event.item.dataContext;
 								var sensingData = clickData.sensingData;
+				
+				
+								// 데이터가 비었으면
+								if(typeof sensingData[0] == 'undefined'){
+									alert("Empty data");
+									return;
+								
+								
+								
+								}else if (typeof sensingData[0] != 'undefined') { // 센싱데이터가 있을 때만
+									
+									var button = document.getElementById('backbtn');
+									document.getElementById('backbtn').style.display = 'block';
+									document.getElementById('analysisdiv').style.display = 'block';
+									$("#legendDiv").css("display", "block");
 
-								// /최고-최저-평균 계산
-								if (typeof sensingData[0] != 'undefined') { // 센싱데이터가 있을 때만
+									button.onclick = function() {
+										document.getElementById('backbtn').style.display = 'none';
+										document.getElementById('analysisdiv').style.display = 'none';
+										$("#legendDiv").css("display", "none");
+										resetChart();
+									}
+
+									
+									// 최고-최저-평균 계산
 									var sensingDataLength = sensingData.length;
 									var HighTemp = sensingData[0].temperature, LowTemp = sensingData[0].temperature, HighHeart = sensingData[0].heart_rate, LowHeart = sensingData[0].heart_rate, HighStep = sensingData[0].step, LowStep = sensingData[0].step, TotalTemp = 0, TotalHeart = 0, TotalStep = 0;
 									var stepCount = 0;
