@@ -15,6 +15,7 @@
 		
 	    <div style="margin-top:30px;">
 	        <%= exception.getMessage() %>
+	        <% exception.printStackTrace(); %>
 	    </div>
     </div>	
 </body>

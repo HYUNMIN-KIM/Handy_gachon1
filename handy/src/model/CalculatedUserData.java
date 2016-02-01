@@ -81,9 +81,6 @@ public class CalculatedUserData {
 		// 센싱데이터의 평균, 칼로리, 컨디션 계산
 		for (int i = 0; i < data.length; i++) {
 
-			// 센싱값이 0개 이하면 continue
-			if (data[i].getSensingDataList().size() <= 0)
-				continue;
 
 			// 데이터 계산을 위한 유저 정보 설정
 			setExtraUserInfo(data[i], ux, heartAvg);
@@ -95,6 +92,11 @@ public class CalculatedUserData {
 			// 컨디션 계산
 			data[i].getConditionCalc().calcPoints(data[i].getSensingDataList());
 
+			
+			// 센싱값이 0개 이하면 continue
+			if (data[i].getSensingDataList().size() <= 0)
+				continue;
+			
 			// 기존 1분마다의 값 제거 후 5분마다 평균을 낸 값 추가
 			List<SIHMSSensingData> avgList = sensingValueAvg(data[i]
 					.getSensingDataList());
