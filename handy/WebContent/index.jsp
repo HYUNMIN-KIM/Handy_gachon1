@@ -90,7 +90,9 @@
 	        data[<%=i%>].date = '<%=data[i].getDate()%>';
 	        data[<%=i%>].conditionPoint = '<%=ConditionFormat.format(data[i].getConditionCalc().getConditionPoint()) %>';
 	        data[<%=i%>].caloriePoint = '<%=FloatFormat.format(data[i].getCalorieCalc().getcalcConsumedCalorie()) %>';
+	       
 	        data[<%=i%>].conditionData = new Object;
+	        
 	        data[<%=i%>].conditionData.tempPoint = '<%=data[i].getConditionCalc().getTempPoint()%>';
 	        data[<%=i%>].conditionData.hrPoint = '<%=data[i].getConditionCalc().getHrPoint()%>';
 	        data[<%=i%>].conditionData.tempDeductPoint = '<%=data[i].getConditionCalc().getTempChangeDeductPoint()%>';
@@ -109,6 +111,8 @@
 	            data[<%=i%>].sensingData[<%=j%>].heart_rate = '<%=data[i].getSensingDataList().get(j).getHeart_rate()%>';
 	            data[<%=i%>].sensingData[<%=j%>].step = '<%=data[i].getSensingDataList().get(j).getSteps()%>';
 	        <%}%>
+	        if(data[<%=i%>].sensingData==0)
+	        	 data[<%=i%>].conditionPoint ='<%= 0 %>';
 	    <%}%>
 	    
 	    //JSON object »ý¼º
